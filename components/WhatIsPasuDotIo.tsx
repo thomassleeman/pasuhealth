@@ -233,6 +233,14 @@ export default function OurSolutionSection() {
             </div>
           </div>
         </div>
+        <div className="mt-16 text-center">
+          <a
+            className="text-2xl text-gray-800 hover:outline-4 outline-sky-300/50 outline-offset-4 rounded-md px-1"
+            href="https://pasu.io"
+          >
+            Go to PASU.io
+          </a>
+        </div>
       </div>
     </>
   );

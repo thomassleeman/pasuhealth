@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Questrial } from "next/font/google";
+import { Questrial, Red_Hat_Display } from "next/font/google";
 import "./globals.css";
 import Nav from "@/components/Nav";
 
@@ -13,8 +13,8 @@ import Nav from "@/components/Nav";
 //   subsets: ["latin"],
 // });
 
-const questrial = Questrial({
-  weight: "400",
+const red_Hat_Display = Red_Hat_Display({
+  // weight: "400",
   subsets: ["latin"],
 });
 
@@ -31,7 +31,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${questrial.className} antialiased selection:bg-emerald-700/25`}
+        className={`${red_Hat_Display.className} antialiased selection:bg-emerald-700/25`}
       >
         <Nav />
         {children}

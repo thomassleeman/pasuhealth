@@ -14,7 +14,9 @@ export default function Home() {
       </FullWidthContainer>
       <FullWidthContainer bg="bg-amber-50/25">
         <Container>
-          <WhatIsPasuDotIo />
+          <div id="what-is-pasu-dot-io">
+            <WhatIsPasuDotIo />
+          </div>
         </Container>
       </FullWidthContainer>
     </>

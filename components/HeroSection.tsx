@@ -42,7 +42,7 @@ const Card: React.FC<CardProps> = ({
 
 export default function HeroSection() {
   return (
-    <section className=" py-16 px-4 md:px-8 lg:px-16 xl:pr-0 lg:mt-16">
+    <section className=" py-16 px-4 md:px-8 lg:px-16 xl:pr-0 lg:mt-0 2xl:mt-16">
       <div className="max-w-7xl mx-auto xl:max-w-full">
         <div className="flex flex-col xl:flex-row xl:gap-x-6 justify-between items-center">
           <div className="xl:w-2/3 mb-10 xl:mb-0 xl:pr-8">
@@ -51,7 +51,7 @@ export default function HeroSection() {
               <span className="underline underline-offset-4 decoration-4">
                 team
               </span>{" "}
-              effort. Let our tools make it a reality.
+              effort. Let our tools make it a reality for your team.
               {/* <span className="underline decoration-2">products</span> */}
               {/* <br className="hidden md:block" /> that put safety at the */}
             </h1>
@@ -70,7 +70,7 @@ export default function HeroSection() {
                 title="Expert-led learning"
                 description="Workplace mental health training courses."
                 buttonText="Learn more"
-                buttonHref="https://pasu.io"
+                buttonHref="#"
               />
             </div>
           </div>
