@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Questrial, Red_Hat_Display } from "next/font/google";
+import { Red_Hat_Display } from "next/font/google";
 import "./globals.css";
 import Nav from "@/components/Nav";
 
