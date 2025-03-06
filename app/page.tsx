@@ -3,6 +3,7 @@ import HeroSection from "@/components/HeroSection";
 import FullWidthContainer from "@/components/FullWidthContainer";
 import Container from "@/components/Container";
 import WhatIsPasuDotIo from "@/components/WhatIsPasuDotIo";
+import VirtualTrainingCourses from "@/components/VirtualTrainingCourses";
 
 export default function Home() {
   return (
@@ -17,6 +18,11 @@ export default function Home() {
           <div id="what-is-pasu-dot-io">
             <WhatIsPasuDotIo />
           </div>
+        </Container>
+      </FullWidthContainer>
+      <FullWidthContainer bg="bg-amber-50">
+        <Container>
+          <VirtualTrainingCourses />
         </Container>
       </FullWidthContainer>
     </>
