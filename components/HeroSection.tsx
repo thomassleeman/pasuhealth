@@ -60,17 +60,17 @@ export default function HeroSection() {
               <Card
                 label="pasu.io"
                 title="Workplace wellness platform"
-                description="Our comprehensive workplace mental health platform on a mission to promote understanding and prevention of burnout."
-                buttonText="Go to pasu.io"
+                description="Our comprehensive workplace mental health platform. On a mission to promote understanding and prevention of burnout."
+                buttonText="Go to pasu.io ⤴"
                 buttonHref="https://pasu.io"
               />
 
               <Card
-                label="Online training"
+                label="Virtual training"
                 title="Expert-led learning"
                 description="Workplace mental health training courses."
                 buttonText="Learn more"
-                buttonHref="#"
+                buttonHref="/#virtual-training"
               />
             </div>
           </div>

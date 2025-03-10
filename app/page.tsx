@@ -22,7 +22,9 @@ export default function Home() {
       </FullWidthContainer>
       <FullWidthContainer bg="bg-amber-50">
         <Container>
-          <VirtualTrainingCourses />
+          <div id="virtual-training">
+            <VirtualTrainingCourses />
+          </div>
         </Container>
       </FullWidthContainer>
     </>

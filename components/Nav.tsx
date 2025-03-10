@@ -9,8 +9,8 @@ import Link from "next/link";
 
 const navigation = [
   { name: "What is pasu.io?", href: "/#what-is-pasu-dot-io" },
-  { name: "Virtual learning", href: "#" },
-  { name: "In person learning", href: "#" },
+  { name: "Virtual training", href: "/#virtual-training" },
+  { name: "In-person training", href: "#" },
   { name: "Self-guided learning", href: "#" },
 ];
 
