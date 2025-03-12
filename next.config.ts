@@ -10,6 +10,25 @@ const nextConfig: NextConfig = {
       },
     ],
   },
+  async headers() {
+    return [
+      {
+        source: "/:path*",
+        has: [
+          {
+            type: "host",
+            value: "admin.pasuhealth.com",
+          },
+        ],
+        headers: [
+          {
+            key: "x-admin-domain",
+            value: "true",
+          },
+        ],
+      },
+    ];
+  },
 };
 
 export default nextConfig;

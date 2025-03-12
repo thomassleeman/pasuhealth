@@ -8,30 +8,33 @@ import Image from "next/image";
 import Link from "next/link";
 
 const navigation = [
-  { name: "What is pasu.io?", href: "/#what-is-pasu-dot-io" },
+  { name: "Our courses", href: "/#our-training-courses" },
   { name: "Virtual training", href: "/#virtual-training" },
-  { name: "In-person training", href: "#" },
-  { name: "Self-guided learning", href: "#" },
+  { name: "In-person training", href: "/#face-to-face-training" },
+  { name: "Self-guided learning", href: "/#self-guided-learning" },
+  { name: "What is pasu.io?", href: "/#what-is-pasu-dot-io" },
 ];
 
 export default function Example() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   return (
-    <header className="bg-amber-50">
+    <header className="bg-amber-50 h-20 fixed top-0 left-0 right-0 z-20">
       <nav
         aria-label="Global"
         className="mx-auto flex w-full 2xl:max-w-8/10 items-center justify-between p-6 lg:px-8"
       >
-        <div className="flex items-center gap-x-5 lg:flex-1">
-          {/* <a href="#" className="-m-1.5 p-1.5"> */}
-          <Image src={Logo} alt="Pasu Health Logo" className="h-10 w-auto" />
-          <span className="text-lg lg:text-2xl 2xl:text-3xl text-gray-800">
-            PASU Health
-          </span>
+        <Link href="/" className="cursor-pointer">
+          <div className="flex items-center gap-x-5 lg:flex-1 cursor-pointer">
+            {/* <a href="#" className="-m-1.5 p-1.5"> */}
+            <Image src={Logo} alt="Pasu Health Logo" className="h-10 w-auto" />
+            <span className="text-lg lg:text-2xl 2xl:text-3xl text-gray-800">
+              PASU Health
+            </span>
 
-          {/* </a> */}
-        </div>
+            {/* </a> */}
+          </div>
+        </Link>
         <div className="flex lg:hidden">
           <button
             type="button"
@@ -89,6 +92,7 @@ export default function Example() {
                     key={item.name}
                     href={item.href}
                     className="-mx-3 block rounded-lg px-3 py-2 sm:text-2xl text-base/7 font-semibold text-gray-900 hover:bg-gray-50"
+                    onClick={() => setMobileMenuOpen(false)}
                   >
                     {item.name}
                   </Link>

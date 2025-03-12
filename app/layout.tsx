@@ -1,20 +1,10 @@
 import type { Metadata } from "next";
 import { Red_Hat_Display } from "next/font/google";
+import VideoFooter from "@/components/VideoFooter";
 import "./globals.css";
 import Nav from "@/components/Nav";
 
-// const geistSans = Geist({
-//   variable: "--font-geist-sans",
-//   subsets: ["latin"],
-// });
-
-// const geistMono = Geist_Mono({
-//   variable: "--font-geist-mono",
-//   subsets: ["latin"],
-// });
-
 const red_Hat_Display = Red_Hat_Display({
-  // weight: "400",
   subsets: ["latin"],
 });
 
@@ -36,6 +26,7 @@ export default function RootLayout({
       >
         <Nav />
         {children}
+        <VideoFooter />
       </body>
     </html>
   );

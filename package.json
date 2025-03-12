@@ -11,11 +11,12 @@
   "dependencies": {
     "@headlessui/react": "^2.2.0",
     "@heroicons/react": "^2.2.0",
-    "@sanity/client": "^6.28.3",
+    "@sanity/vision": "^3.78.1",
     "next": "15.2.1",
     "next-sanity": "^9.9.0",
     "react": "^19.0.0",
-    "react-dom": "^19.0.0"
+    "react-dom": "^19.0.0",
+    "sanity": "^3.78.1"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",

@@ -1,8 +1,7 @@
 import { notFound } from "next/navigation";
 import Image from "next/image";
-// import FullWidthContainer from "@/components/FullWidthContainer";
 import Container from "@/components/Container";
-import { getVirtualTrainingCourse } from "@/sanity/accessData/getVirtualTrainingCoursesData";
+import { getTrainingCourse } from "@/sanity/accessData/getTrainingCoursesData";
 import { urlForImage } from "@/sanity/lib/image";
 
 export default async function CoursePage({
@@ -11,7 +10,7 @@ export default async function CoursePage({
   params: { slug: string };
 }) {
   const { slug } = await params;
-  const course = await getVirtualTrainingCourse(slug);
+  const course = await getTrainingCourse(slug);
 
   if (!course) {
     notFound();
@@ -21,10 +20,8 @@ export default async function CoursePage({
     ? urlForImage(course.headerImage)
     : null;
 
-  console.log("headerImageUrl: ", headerImageUrl);
-
   return (
-    <main className="min-h-screen">
+    <main className="min-h-screen bg-white">
       {/* Header Image */}
       <div className="relative w-full h-[40vh] md:h-[50vh]">
         {headerImageUrl && (

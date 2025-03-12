@@ -4,11 +4,19 @@ declare global {
     classes: string;
   }
 
-  // Type for the Slug structure in Sanity
   export interface SanitySlug {
     current: string;
     _type: "slug";
   }
+
+  export type SanityImage = {
+    asset: {
+      _ref: string;
+      _type: string;
+    };
+    alt?: string;
+    caption?: string;
+  };
 }
 
 export {};

@@ -1,6 +1,6 @@
 import { client } from "@/sanity/lib/client";
 
-export async function getVirtualTrainingCourse(slug: string) {
+export async function getTrainingCourse(slug: string) {
   const query = `*[_type == "virtualCourse" && slug.current == "${slug}"][0]{
     title,
     slug,
@@ -37,7 +37,7 @@ export async function getVirtualTrainingCourse(slug: string) {
   return course;
 }
 
-export async function getVirtualTrainingCourses() {
+export async function getTrainingCourses() {
   const query = `*[_type == "virtualCourse"]{
     title,
     slug,

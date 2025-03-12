@@ -42,16 +42,16 @@ const Card: React.FC<CardProps> = ({
 
 export default function HeroSection() {
   return (
-    <section className=" py-16 px-4 md:px-8 lg:px-16 xl:pr-0 lg:mt-0 2xl:mt-16">
+    <section className="py-16 mt-20 2xl:mt-36">
       <div className="max-w-7xl mx-auto xl:max-w-full">
         <div className="flex flex-col xl:flex-row xl:gap-x-6 justify-between items-center">
           <div className="xl:w-2/3 mb-10 xl:mb-0 xl:pr-8">
             <h1 className="text-4xl md:text-5xl lg:text-6xl 2xl:text-7xl font-bold mb-12 xl:pl-2">
-              Wellbeing is a{" "}
-              <span className="underline underline-offset-4 decoration-4">
-                team
+              Workplace Mental Health is a{" "}
+              <span className="underline underline-offset-4 decoration-4 text-emerald-700 drop-shadow-2xl">
+                team effort.
               </span>{" "}
-              effort. Let our tools make it a reality for your team.
+              <span>We&apos;re here to make it a reality for your team.</span>
               {/* <span className="underline decoration-2">products</span> */}
               {/* <br className="hidden md:block" /> that put safety at the */}
             </h1>
@@ -66,7 +66,7 @@ export default function HeroSection() {
               />
 
               <Card
-                label="Virtual training"
+                label="Mental Health Training"
                 title="Expert-led learning"
                 description="Workplace mental health training courses."
                 buttonText="Learn more"
