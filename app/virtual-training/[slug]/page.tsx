@@ -4,11 +4,16 @@ import Container from "@/components/Container";
 import { getTrainingCourse } from "@/sanity/accessData/getTrainingCoursesData";
 import { urlForImage } from "@/sanity/lib/image";
 
-export default async function CoursePage({
-  params,
-}: {
-  params: { slug: string };
-}) {
+interface Params {
+  slug: string;
+}
+
+interface Props {
+  params: Promise<Params>;
+  searchParams?: Promise<{ [key: string]: string | string[] | undefined }>;
+}
+
+export default async function CoursePage({ params }: Props) {
   const { slug } = await params;
   const course = await getTrainingCourse(slug);
 
