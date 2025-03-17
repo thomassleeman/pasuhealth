@@ -1,6 +1,6 @@
 import { notFound } from "next/navigation";
 import Image from "next/image";
-import Container from "@/components/Container";
+import Container from "@/components/containers/Container";
 import { getTrainingCourse } from "@/sanity/accessData/getTrainingCoursesData";
 import { urlForImage } from "@/sanity/lib/image";
 
@@ -26,7 +26,7 @@ export default async function CoursePage({ params }: Props) {
     : null;
 
   return (
-    <main className="min-h-screen bg-white">
+    <main className="min-h-screen">
       {/* Header Image */}
       <div className="relative w-full h-[40vh] md:h-[50vh]">
         {headerImageUrl && (

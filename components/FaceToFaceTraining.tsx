@@ -41,6 +41,13 @@ export default function FaceToFaceTraining() {
               <p className="mt-2 text-4xl font-semibold tracking-tight text-pretty text-gray-900 sm:text-5xl">
                 Immersive Mental Health Training at Your Location
               </p>
+              <Image
+                alt="Product screenshot"
+                src={faceToFaceTraining}
+                width={2432}
+                height={1442}
+                className="w-full h-auto mt-6 rounded-xl ring-1 ring-gray-400/10 md:hidden"
+              />
               <p className="mt-6 text-lg/8 text-gray-600">
                 Experience our comprehensive mental health training in person at
                 your workplace. Our facilitators create a supportive environment
@@ -75,7 +82,7 @@ export default function FaceToFaceTraining() {
               src={faceToFaceTraining}
               width={2432}
               height={1442}
-              className="w-[48rem] max-w-none rounded-xl ring-1 shadow-xl ring-gray-400/10 sm:w-[57rem]"
+              className="hidden md:block w-[48rem] max-w-none rounded-xl ring-1 shadow-xl ring-gray-400/10 sm:w-[57rem]"
             />
           </div>
         </div>

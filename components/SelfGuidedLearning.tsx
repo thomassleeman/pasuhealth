@@ -37,6 +37,13 @@ export default function SelfGuidedLearning() {
               <p className="mt-2 text-4xl font-semibold tracking-tight text-pretty text-gray-900 sm:text-5xl">
                 Flexible Mental Health Training on Your Schedule
               </p>
+              <Image
+                alt="Product screenshot"
+                src={selfGuidedTraining}
+                width={2432}
+                height={1442}
+                className="w-full h-auto mt-6 rounded-xl ring-1 ring-gray-400/10 md:hidden"
+              />
               <p className="mt-6 text-lg/8 text-gray-600">
                 Our self-guided courses allow participants to develop mental
                 health skills at their own pace. Professionally designed
@@ -70,7 +77,7 @@ export default function SelfGuidedLearning() {
             src={selfGuidedTraining}
             width={2432}
             height={1442}
-            className="w-[48rem] max-w-none rounded-xl ring-1 shadow-xl ring-gray-400/10 sm:w-[57rem] md:-ml-4 lg:-ml-0"
+            className="hidden md:block w-[48rem] max-w-none rounded-xl ring-1 shadow-xl ring-gray-400/10 sm:w-[57rem] md:-ml-4 lg:-ml-0"
           />
         </div>
       </div>

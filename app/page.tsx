@@ -1,8 +1,9 @@
 // import Image from "next/image";
 import HeroSection from "@/components/HeroSection";
-import FullWidthContainer from "@/components/FullWidthContainer";
-import FullWidthContainerRoundedBottom from "@/components/FullWidthContainerRoundedBottom";
-import Container from "@/components/Container";
+import FullWidthContainer from "@/components/containers/FullWidthContainer";
+import FullWidthContainerRoundedBottom from "@/components/containers/FullWidthContainerRoundedBottom";
+import Container from "@/components/containers/Container";
+import FullWidthContainerTop from "@/components/containers/FullWidthContainerTop";
 import WhatIsPasuDotIo from "@/components/WhatIsPasuDotIo";
 import OurCourses from "@/components/OurCourses";
 import VirtualTraining from "@/components/VirtualTraining";
@@ -12,11 +13,11 @@ import SelfGuidedLearning from "@/components/SelfGuidedLearning";
 export default function Home() {
   return (
     <>
-      <FullWidthContainer bg="bg-amber-50">
+      <FullWidthContainerTop bg="bg-amber-50">
         <Container>
           <HeroSection />
         </Container>
-      </FullWidthContainer>
+      </FullWidthContainerTop>
       <FullWidthContainer bg="bg-white">
         <Container>
           <div id="our-training-courses">
