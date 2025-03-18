@@ -3,6 +3,7 @@ import {
   AcademicCapIcon,
   UserIcon,
 } from "@heroicons/react/24/solid";
+import Link from "next/link";
 
 import Image from "next/image";
 import faceToFaceTraining from "@public/face-to-face-training.jpg";
@@ -72,7 +73,9 @@ export default function FaceToFaceTraining() {
                 type="button"
                 className="hover:outline-2 outline-emerald-600 outline-offset-4 rounded-md mt-12 bg-white px-3.5 py-2.5 text-sm font-semibold text-gray-900 ring-1 shadow-xs ring-gray-300 ring-inset cursor-pointer"
               >
-                Learn more about face to face training
+                <Link href="/face-to-face-training">
+                  Learn more about face to face training
+                </Link>
               </button>
             </div>
           </div>

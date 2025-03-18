@@ -64,10 +64,10 @@ export default function HeroSection() {
               />
 
               <Card
-                label="Mental Health Training"
-                title="Expert-led learning"
-                description="Workplace mental health training courses."
-                buttonText="Learn more"
+                label="Mental Health Training Courses"
+                title="Created by our experts"
+                description="Available as a virtually, in-person or via self-guided learning."
+                buttonText="Take a look at our courses ⤵ "
                 buttonHref="/#our-training-courses"
               />
             </div>

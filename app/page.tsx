@@ -9,6 +9,7 @@ import OurCourses from "@/components/OurCourses";
 import VirtualTraining from "@/components/VirtualTraining";
 import FaceToFaceTraining from "@/components/FaceToFaceTraining";
 import SelfGuidedLearning from "@/components/SelfGuidedLearning";
+import CTASection from "@/components/CTASection";
 
 export default function Home() {
   return (
@@ -39,6 +40,9 @@ export default function Home() {
         <div id="self-guided-learning">
           <SelfGuidedLearning />
         </div>
+      </FullWidthContainer>
+      <FullWidthContainer bg="bg-transparent">
+        <CTASection />
       </FullWidthContainer>
       <FullWidthContainerRoundedBottom bg="bg-white">
         <Container>

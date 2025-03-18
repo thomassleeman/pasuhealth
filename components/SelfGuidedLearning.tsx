@@ -1,6 +1,7 @@
 import { ClockIcon, ChartBarIcon, FilmIcon } from "@heroicons/react/24/solid";
 
 import Image from "next/image";
+import Link from "next/link";
 import selfGuidedTraining from "@public/self-guided-training.jpg";
 
 const features = [
@@ -68,7 +69,9 @@ export default function SelfGuidedLearning() {
                 type="button"
                 className="hover:outline-2 outline-emerald-600 outline-offset-4 rounded-md mt-12 bg-white px-3.5 py-2.5 text-sm font-semibold text-gray-900 ring-1 shadow-xs ring-gray-300 ring-inset cursor-pointer"
               >
-                Learn more about self guided training
+                <Link href="/self-guided-learning">
+                  Learn more about self guided training
+                </Link>
               </button>
             </div>
           </div>

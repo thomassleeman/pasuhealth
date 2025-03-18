@@ -20,7 +20,7 @@ const CourseCard = ({
   slug,
 }: CourseCardProps) => {
   return (
-    <Link href={`/virtual-training/${slug}`} className="block">
+    <Link href={`/our-courses/${slug}`} className="block">
       <div className="bg-white rounded-2xl shadow-lg overflow-hidden transition-all hover:outline-2 hover:outline-emerald-600 hover:outline-offset-4 cursor-pointer group">
         <div className="relative h-48 w-full">
           <Image src={imageUrl} alt={title} fill className="object-cover" />

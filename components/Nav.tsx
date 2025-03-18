@@ -13,16 +13,17 @@ const navigation = [
   { name: "In-person training", href: "/#face-to-face-training" },
   { name: "Self-guided learning", href: "/#self-guided-learning" },
   { name: "What is pasu.io?", href: "/#what-is-pasu-dot-io" },
+  { name: "Get in touch", href: "/contact" },
 ];
 
 export default function Example() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   return (
-    <header className="bg-amber-50 h-20 fixed top-0 left-0 right-0 z-20">
+    <header className="bg-amber-50 h-20 fixed top-0 left-0 right-0 z-20 border-b border-emerald-700/10">
       <nav
         aria-label="Global"
-        className="mx-auto flex w-full 2xl:max-w-8/10 items-center justify-between p-6 lg:px-8"
+        className="mx-auto flex w-full 2xl:max-w-8/10 items-center justify-between p-6 lg:px-8 "
       >
         <Link href="/" className="cursor-pointer">
           <div className="flex items-center gap-x-5 lg:flex-1 cursor-pointer">
@@ -35,7 +36,7 @@ export default function Example() {
             {/* </a> */}
           </div>
         </Link>
-        <div className="flex lg:hidden">
+        <div className="flex xl:hidden">
           <button
             type="button"
             onClick={() => setMobileMenuOpen(true)}
@@ -45,7 +46,7 @@ export default function Example() {
             <Bars3Icon aria-hidden="true" className="size-6" />
           </button>
         </div>
-        <div className="hidden lg:flex lg:gap-x-12">
+        <div className="hidden xl:flex lg:gap-x-12">
           {navigation.map((item) => (
             <Link
               key={item.name}
@@ -66,7 +67,7 @@ export default function Example() {
       <Dialog
         open={mobileMenuOpen}
         onClose={setMobileMenuOpen}
-        className="lg:hidden"
+        className="xl:hidden"
       >
         <div className="fixed inset-0 z-10" />
         <DialogPanel className="fixed inset-y-0 right-0 z-10 w-full overflow-y-auto bg-white px-6 py-6 sm:ring-1 sm:ring-gray-900/10">
@@ -86,7 +87,7 @@ export default function Example() {
           </div>
           <div className="mt-6 flow-root">
             <div className="-my-6 divide-y divide-gray-500/10">
-              <div className="space-y-2 py-6">
+              <div className="space-y-2 py-6 mt-4">
                 {navigation.map((item) => (
                   <Link
                     key={item.name}

@@ -1,3 +1,4 @@
+import Link from "next/link";
 import {
   VideoCameraIcon,
   ChatBubbleLeftRightIcon,
@@ -72,7 +73,9 @@ export default function VirtualTraining() {
                 type="button"
                 className="hover:outline-2 outline-emerald-600 outline-offset-4 rounded-md mt-12 bg-white px-3.5 py-2.5 text-sm font-semibold text-gray-900 ring-1 shadow-xs ring-gray-300 ring-inset cursor-pointer"
               >
-                Learn more about virtual training
+                <Link href="/virtual-training">
+                  Learn more about virtual training
+                </Link>
               </button>
             </div>
           </div>
