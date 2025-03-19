@@ -15,9 +15,9 @@ export default function CTASection() {
           >
             Contact us
           </Link>
-          <a href="#" className="text-sm/6 font-semibold text-gray-900">
+          {/* <a href="#" className="text-sm/6 font-semibold text-gray-900">
             Arrange a demo <span aria-hidden="true">→</span>
-          </a>
+          </a> */}
         </div>
       </div>
     </div>
