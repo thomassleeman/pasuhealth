@@ -13,7 +13,7 @@ const navigation = [
   { name: "In-person training", href: "/#face-to-face-training" },
   { name: "Self-guided learning", href: "/#self-guided-learning" },
   { name: "What is pasu.io?", href: "/#what-is-pasu-dot-io" },
-  { name: "Get in touch", href: "/contact" },
+  { name: "Get in touch", href: "/training-enquiry" },
 ];
 
 export default function Example() {
