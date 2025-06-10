@@ -1,5 +1,4 @@
 import { TrainingEnquiryForm } from "@/components/trainingEnquiryForm/TrainingEnquiryForm";
-import Container from "../../components/containers/Container";
 
 export default async function TrainingEnquiryPage({
   searchParams,
