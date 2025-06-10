@@ -10,6 +10,7 @@ import VirtualTraining from "@/components/VirtualTraining";
 import FaceToFaceTraining from "@/components/FaceToFaceTraining";
 import SelfGuidedLearning from "@/components/SelfGuidedLearning";
 import CTASection from "@/components/CTASection";
+import RiskCheckerCTA from "@/components/RiskCheckerCTA";
 
 export default function Home() {
   return (
@@ -19,6 +20,10 @@ export default function Home() {
           <HeroSection />
         </Container>
       </FullWidthContainerTop>
+      <FullWidthContainer bg="bg-white">
+        <RiskCheckerCTA />
+      </FullWidthContainer>
+
       <FullWidthContainer bg="bg-white">
         <Container>
           <div id="our-training-courses">

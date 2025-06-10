@@ -2,7 +2,6 @@
 import React from "react";
 // import Image from "next/image";
 import MentalHealth from "@/public/MentalHealthPuzzle";
-
 interface CardProps {
   label: string;
   title: string;
@@ -59,7 +58,7 @@ export default function HeroSection() {
                 label="pasu.io"
                 title="Workplace wellness platform"
                 description="Our comprehensive workplace mental health platform. On a mission to promote understanding and prevention of burnout."
-                buttonText="Go to pasu.io ⤴"
+                buttonText="Go to pasu.io"
                 buttonHref="https://pasu.io"
               />
 
