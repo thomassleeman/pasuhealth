@@ -12,6 +12,8 @@ interface CourseCardProps {
   slug: string;
 }
 
+export const revalidate = 3600;
+
 const CourseCard = ({
   title,
   description,
@@ -26,13 +28,14 @@ const CourseCard = ({
           <Image src={imageUrl} alt={title} fill className="object-cover" />
         </div>
         <div className="p-8">
-          <h3 className="text-xl font-semibold text-gray-900">{title}</h3>
+          <h3 className="text-3xl font-semibold text-gray-900">{title}</h3>
           <p className="mt-2 text-gray-600">{description}</p>
           <div className="mt-4 flex items-center justify-between">
             <div className="text-sm text-gray-500">
               {duration && (
-                <span className="inline-block mr-4">
-                  <span className="font-medium">Duration:</span> {duration}
+                <span className="inline-block mr-4 font-bold">
+                  <span className="">Duration:</span>{" "}
+                  <span className="text-sky-500"> {duration}</span>
                 </span>
               )}
             </div>
@@ -48,6 +51,8 @@ const CourseCard = ({
 
 export default async function OurCourses() {
   const courses = await getTrainingCourses();
+
+  console.log("Courses fetched:", courses);
 
   return (
     <div className="py-24 sm:py-32">

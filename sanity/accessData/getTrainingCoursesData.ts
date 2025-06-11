@@ -1,7 +1,7 @@
 import { client } from "@/sanity/lib/client";
 
 export async function getTrainingCourse(slug: string) {
-  const query = `*[_type == "virtualCourse" && slug.current == "${slug}"][0]{
+  const query = `*[_type == "trainingCourse" && slug.current == "${slug}"][0]{
     title,
     slug,
     headerImage,
@@ -38,7 +38,7 @@ export async function getTrainingCourse(slug: string) {
 }
 
 export async function getTrainingCourses() {
-  const query = `*[_type == "virtualCourse"]{
+  const query = `*[_type == "trainingCourse"]{
     title,
     slug,
     headerImage,
