@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { usePathname } from "next/navigation";
 import { Dialog, DialogPanel } from "@headlessui/react";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import Logo from "@/public/brainLogoCompressed.png";
@@ -16,11 +17,15 @@ const navigation = [
   { name: "Get in touch", href: "/training-enquiry" },
 ];
 
-export default function Example() {
+export default function Nav() {
+  const pathname = usePathname();
+  const isFixed = pathname !== "/mental-health-risk-checker";
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   return (
-    <header className="bg-amber-50 h-20 fixed top-0 left-0 right-0 z-20 border-b border-emerald-700/10">
+    <header
+      className={`${isFixed ? "fixed top-0 left-0 right-0 z-20" : "flex"} bg-amber-50 h-20 border-b border-emerald-700/10`}
+    >
       <nav
         aria-label="Global"
         className="mx-auto flex w-full 2xl:max-w-8/10 items-center justify-between p-6 lg:px-8 "

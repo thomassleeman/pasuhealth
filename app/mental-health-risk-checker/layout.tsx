@@ -1,4 +1,4 @@
-import FullWidthContainerTopToBottom from "@/components/containers/FullWidthContainerTopToBottom";
+import FullWidthContainerTopToBottomNoFixedNav from "@/components/containers/FullWidthContainerTopToBottomNoFixedNav";
 
 export default function RiskCheckerLayout({
   children,
@@ -6,8 +6,8 @@ export default function RiskCheckerLayout({
   children: React.ReactNode;
 }) {
   return (
-    <FullWidthContainerTopToBottom bg="bg-amber-50">
+    <FullWidthContainerTopToBottomNoFixedNav bg="bg-amber-50">
       {children}
-    </FullWidthContainerTopToBottom>
+    </FullWidthContainerTopToBottomNoFixedNav>
   );
 }

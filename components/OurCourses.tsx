@@ -52,8 +52,6 @@ const CourseCard = ({
 export default async function OurCourses() {
   const courses = await getTrainingCourses();
 
-  console.log("Courses fetched:", courses);
-
   return (
     <div className="py-24 sm:py-32">
       <div className="text-center mb-16">
