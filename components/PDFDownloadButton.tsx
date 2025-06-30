@@ -44,6 +44,9 @@ export const PDFDownloadButton: React.FC<ServerPDFDownloadButtonProps> = ({
       const a = document.createElement("a");
       a.href = url;
       a.download = fileName;
+      a.target = "_blank";
+      a.style.display = "none"; // Hide the link element
+      a.rel = "noopener noreferrer"; // Security best practice
       document.body.appendChild(a);
       a.click();
 
