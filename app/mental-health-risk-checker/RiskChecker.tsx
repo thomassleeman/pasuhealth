@@ -3,7 +3,7 @@ import { useState } from "react";
 import ContactForm from "./components/ContactForm";
 import { ContactFormData } from "@/types/riskChecker";
 
-import { PDFDownloadButton } from "./components/AssessmentReportPDF";
+import { PDFDownloadButton } from "@components/PDFDownloadButton";
 
 import {
   ChevronRightIcon,
