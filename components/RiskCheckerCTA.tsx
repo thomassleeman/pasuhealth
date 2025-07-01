@@ -49,9 +49,11 @@ export default function RiskCheckerCTA() {
       </div>
       <div className="flex flex-wrap items-center justify-center gap-x-4 gap-y-2 w-full">
         <p className="text-sm/6 text-gray-900">
-          <strong className="mr-2">Are your team at risk of Burnout?</strong>
-          Use our free checker to assess your organisation&apos;s mental health
-          risk level in <em>under 3 minutes</em>.
+          <strong className="mr-2">
+            How exposed is your organisation to mental health-related risks?
+          </strong>
+          Use our free online assessment to get a clearer idea in{" "}
+          <em>just 5 minutes</em>.
         </p>
         <Link
           href="/mental-health-risk-checker"

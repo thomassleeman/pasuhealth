@@ -1,3 +1,5 @@
+import fs from "fs";
+import path from "path";
 import React from "react";
 import {
   Document,
@@ -11,6 +13,19 @@ import {
 } from "@react-pdf/renderer";
 
 import type { AssessmentResults } from "@/types/riskChecker";
+
+const getLogoImageData = () => {
+  const imagePath = path.join(
+    process.cwd(),
+    "public",
+    "brainLogoCompressed.png"
+  );
+  const imageBuffer = fs.readFileSync(imagePath);
+  return {
+    data: imageBuffer,
+    format: "png" as const,
+  };
+};
 
 const getRiskLevelInfo = (level: "low" | "moderate" | "severe") => {
   switch (level) {
@@ -82,7 +97,7 @@ const styles = StyleSheet.create({
   },
   logoImage: {
     height: 40,
-    width: "auto",
+    width: 40,
     objectFit: "contain",
   },
   // TODO working on these styles. This could be causing breakages if they don't compile correctly due to recent changes.
@@ -123,6 +138,29 @@ const styles = StyleSheet.create({
     color: "#1f2937",
     marginBottom: 6,
     marginTop: 12,
+  },
+  priorityTitle: {
+    fontSize: 13,
+    fontWeight: "bold",
+    color: "#dc2626", // Red for urgent
+    marginBottom: 6,
+    marginTop: 12,
+    backgroundColor: "#fef2f2",
+    padding: 6,
+    borderLeft: 3,
+    borderLeftColor: "#dc2626",
+  },
+
+  recommendationTitle: {
+    fontSize: 13,
+    fontWeight: "bold",
+    color: "#1f2937",
+    marginBottom: 6,
+    marginTop: 12,
+    backgroundColor: "#f3f4f6",
+    padding: 6,
+    borderLeft: 3,
+    borderLeftColor: "#6b7280",
   },
   paragraph: {
     fontSize: 10,
@@ -325,11 +363,16 @@ const AssessmentReportPDF: React.FC<{ results: AssessmentResults }> = ({
         </View> */}
         <View style={styles.header}>
           <View style={styles.logoContainer}>
-            <Image style={styles.logoImage} src="brainLogoCompressed.png" />
+            <Image style={styles.logoImage} src={getLogoImageData()} />
             <Text style={styles.logoText}>PASU Health</Text>
           </View>
           <Text style={{ fontSize: 10, color: "#6b7280" }}>
-            Generated: {results.completedAt.toLocaleDateString()}
+            Generated:{" "}
+            {results.completedAt.toLocaleDateString("en-GB", {
+              day: "2-digit",
+              month: "2-digit",
+              year: "numeric",
+            })}
           </Text>
         </View>
 
@@ -542,8 +585,8 @@ const AssessmentReportPDF: React.FC<{ results: AssessmentResults }> = ({
 
           {results.sectionA.hasComplianceGaps && (
             <View style={{ marginBottom: 15 }}>
-              <Text style={styles.subsectionTitle}>
-                🚨 Immediate Legal Compliance Required
+              <Text style={styles.priorityTitle}>
+                Immediate Legal Compliance Required!
               </Text>
               <Text style={styles.paragraph}>
                 Address the following compliance gaps immediately:
@@ -558,11 +601,8 @@ const AssessmentReportPDF: React.FC<{ results: AssessmentResults }> = ({
           )}
 
           <View style={{ marginBottom: 15 }}>
-            <Text style={styles.subsectionTitle}>
-              📊 Risk Reduction Priorities
-            </Text>
+            <Text style={styles.priorityTitle}>Risk Reduction Priorities</Text>
             {Object.entries(results.sectionB.categoryRatings)
-              // .filter(([_, rating]) => rating < 3)
               .filter(([, rating]) => rating < 3)
               .map(([category, rating]) => (
                 <Text key={category} style={styles.bulletPoint}>
@@ -573,8 +613,8 @@ const AssessmentReportPDF: React.FC<{ results: AssessmentResults }> = ({
           </View>
 
           <View style={{ marginBottom: 15 }}>
-            <Text style={styles.subsectionTitle}>
-              🎯 Training Recommendations
+            <Text style={styles.recommendationTitle}>
+              Training Recommendations
             </Text>
             <Text style={styles.bulletPoint}>
               • Mental health awareness training for all staff

@@ -14,10 +14,12 @@ export const PDFDownloadButton: React.FC<ServerPDFDownloadButtonProps> = ({
   className = "px-6 py-3 border border-emerald-600 text-emerald-600 font-medium rounded-md hover:bg-emerald-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-emerald-500",
   children,
 }) => {
+  const [isClicked, setIsClicked] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
   const handleDownload = async () => {
+    setIsClicked(true);
     setIsLoading(true);
     setError(null);
 
@@ -61,8 +63,14 @@ export const PDFDownloadButton: React.FC<ServerPDFDownloadButtonProps> = ({
   };
 
   return (
-    <button onClick={handleDownload} disabled={isLoading} className={className}>
-      {isLoading ? "Generating PDF..." : error ? "Error - Try Again" : children}
+    <button onClick={handleDownload} disabled={isClicked} className={className}>
+      {isLoading
+        ? "Generating PDF..."
+        : error
+          ? "Error - Try Again"
+          : isClicked
+            ? "Working on it..."
+            : children}
     </button>
   );
 };

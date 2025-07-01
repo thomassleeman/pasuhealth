@@ -2,8 +2,10 @@
 import { useState } from "react";
 import ContactForm from "./components/ContactForm";
 import { ContactFormData } from "@/types/riskChecker";
-
+import logo from "@public/brainLogoCompressed.png";
 import { PDFDownloadButton } from "@components/PDFDownloadButton";
+import Image from "next/image";
+import InfoDialogue from "@/components/InfoDialogue";
 
 import {
   ChevronRightIcon,
@@ -81,19 +83,78 @@ export default function EnhancedMentalHealthRiskAssessment() {
     <div className="mx-auto max-w-2xl px-4 py-8">
       <div className="bg-white shadow-lg rounded-lg p-8">
         <div className="text-center mb-8">
-          <div className="mx-auto w-20 h-20 bg-emerald-100 rounded-full flex items-center justify-center mb-6">
-            <ChartBarIcon className="h-10 w-10 text-emerald-600" />
+          <div className="mx-auto flex items-center justify-center mb-6">
+            <Image
+              src={logo}
+              alt="PASU Health Logo"
+              className="h-16 w-16 object-contain drop-shadow-lg"
+            />
           </div>
-          <h1 className="text-3xl font-bold text-gray-900 mb-4">
+          <h1 className="text-3xl text-gray-900 mb-4">
             Workplace Mental Health Risk & Compliance Assessment
           </h1>
           <p className="text-lg text-gray-600 mb-6">
-            Take the first step towards creating a mentally healthy workplace
+            Take the first step towards creating a mentally healthy workplace.
           </p>
         </div>
 
-        <div className="space-y-6 mb-8">
-          <div className="bg-gray-50 rounded-lg p-6">
+        <div className="border border-emerald-200 rounded-lg p-6 mb-6">
+          <h3 className="text-lg font-semibold text-gray-900 mb-3">
+            How It Works
+          </h3>
+          <div className="space-y-3">
+            <div className="flex items-center">
+              <div className="flex-shrink-0 w-8 h-8 bg-emerald-100 rounded-full flex items-center justify-center text-sm font-medium text-emerald-600">
+                1
+              </div>
+              <p className="ml-3 text-gray-700">
+                Select your location (UK or Ireland)
+              </p>
+            </div>
+            <div className="flex items-center">
+              <div className="flex-shrink-0 w-8 h-8 bg-emerald-100 rounded-full flex items-center justify-center text-sm font-medium text-emerald-600">
+                2
+              </div>
+              <p className="ml-3 text-gray-700">
+                Answer questions about your policies & compliance
+              </p>
+            </div>
+            <div className="flex items-center">
+              <div className="flex-shrink-0 w-8 h-8 bg-emerald-100 rounded-full flex items-center justify-center text-sm font-medium text-emerald-600">
+                3
+              </div>
+              <p className="ml-3 text-gray-700">
+                Assess key psychosocial risk factors
+              </p>
+            </div>
+            <div className="flex items-center">
+              <div className="flex-shrink-0 w-8 h-8 bg-emerald-100 rounded-full flex items-center justify-center text-sm font-medium text-emerald-600">
+                4
+              </div>
+              <p className="ml-3 text-gray-700">
+                Receive your organisation&apos;s risk report in PDF format
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div className="bg-sky-50 rounded-lg p-6 mb-6 border border-sky-200">
+          <h3 className="text-lg font-medium text-sky-900 mb-3 ">
+            What you&apos;ll get
+          </h3>
+          <ul className=" text-sky-800 space-y-2">
+            <li>• Initial risk assessment covering 6 key areas</li>
+            <li>• Legal compliance review specific to your location</li>
+            <li>• Overview of recommendations and possible next steps</li>
+            <li>
+              • Option of a <span className="font-bold">free</span> consultation
+              with our workplace wellness experts
+            </li>
+          </ul>
+        </div>
+
+        <div className="space-y-6 ">
+          <div className="bg-gray-50 rounded-lg p-6 border border-gray-200">
             <h2 className="text-xl font-semibold text-gray-900 mb-3">
               Why This Assessment Matters
             </h2>
@@ -125,63 +186,24 @@ export default function EnhancedMentalHealthRiskAssessment() {
             </ul>
           </div>
 
-          <div className="border border-emerald-200 rounded-lg p-6">
-            <h3 className="text-lg font-semibold text-gray-900 mb-3">
-              How It Works
-            </h3>
-            <div className="space-y-3">
-              <div className="flex items-center">
-                <div className="flex-shrink-0 w-8 h-8 bg-emerald-100 rounded-full flex items-center justify-center text-sm font-medium text-emerald-600">
-                  1
-                </div>
-                <p className="ml-3 text-gray-700">
-                  Select your location (UK or Ireland)
-                </p>
-              </div>
-              <div className="flex items-center">
-                <div className="flex-shrink-0 w-8 h-8 bg-emerald-100 rounded-full flex items-center justify-center text-sm font-medium text-emerald-600">
-                  2
-                </div>
-                <p className="ml-3 text-gray-700">
-                  Answer questions about your policies & compliance
-                </p>
-              </div>
-              <div className="flex items-center">
-                <div className="flex-shrink-0 w-8 h-8 bg-emerald-100 rounded-full flex items-center justify-center text-sm font-medium text-emerald-600">
-                  3
-                </div>
-                <p className="ml-3 text-gray-700">
-                  Assess psychosocial risk factors
-                </p>
-              </div>
-              <div className="flex items-center">
-                <div className="flex-shrink-0 w-8 h-8 bg-emerald-100 rounded-full flex items-center justify-center text-sm font-medium text-emerald-600">
-                  4
-                </div>
-                <p className="ml-3 text-gray-700">
-                  Receive your personalised risk report
-                </p>
-              </div>
-            </div>
-          </div>
-
-          <div className="bg-blue-50 rounded-lg p-4">
-            <p className="text-sm text-blue-800">
+          <div className="bg-green-50 rounded-lg p-4">
+            <p className="text-sm text-green-800">
               <strong>Time required:</strong> Approximately 5-7 minutes
             </p>
-            <p className="text-sm text-blue-700 mt-1">
-              Your responses are confidential and will only be used to generate
-              your assessment report.
-            </p>
           </div>
+          <InfoDialogue
+            label="Confidentiality"
+            title="confidentiality"
+            description="Your responses are confidential and will not be shared with any third party, ever. With your permission we will store a copy of your report solely for the purposes of providing additional services, whether free of charge or on a chargeable basis."
+            content="This assessment is designed to help you identify key mental health risks in your workplace and ensure compliance with relevant legislation."
+          />
         </div>
 
         <button
           onClick={handleStartAssessment}
-          className="w-full py-3 px-6 text-white cursor-pointer font-medium bg-emerald-600 hover:bg-emerald-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-emerald-500 transition-colors"
+          className="w-full mt-6 py-3 px-6 text-white cursor-pointer font-medium bg-emerald-600 hover:bg-emerald-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-emerald-500"
         >
-          Start Assessment
-          <ChevronRightIcon className="inline-block ml-2 h-5 w-5" />
+          Start Here
         </button>
       </div>
     </div>
@@ -193,17 +215,15 @@ export default function EnhancedMentalHealthRiskAssessment() {
       <div className="bg-white shadow-lg rounded-lg p-8">
         <div className="text-center mb-8">
           <MapPinIcon className="mx-auto h-16 w-16 text-emerald-600 mb-4" />
-          <h1 className="text-3xl font-bold text-gray-900 mb-2">
+          <h1 className="text-3xl text-gray-900 mb-2">
             Workplace Mental Health Risk & Compliance Assessment
           </h1>
           <p className="text-gray-600">
-            Assess your organisation&apos;s mental health risk factors and
-            compliance with legal requirements. Get personalized recommendations
-            in under 5 minutes.
+            Start by selecting your location below.
           </p>
         </div>
 
-        <div className="mb-8">
+        <div>
           <h2 className="text-xl font-semibold text-gray-900 mb-4">
             Where is your organisation based?
           </h2>
@@ -217,7 +237,7 @@ export default function EnhancedMentalHealthRiskAssessment() {
               <button
                 key={location}
                 onClick={() => handleLocationSelect(location)}
-                className="relative flex cursor-pointer rounded-lg border border-gray-300 bg-white p-6 shadow-sm hover:border-emerald-500 hover:shadow-md focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2 transition-all"
+                className={`${location === state.location ? "border-emerald-600 shadow-md outline-2 outline-emerald-600 bg-emerald-50" : "border-gray-300 border"} relative flex cursor-pointer rounded-lg p-6 shadow-sm hover:shadow-md`}
               >
                 <div className="flex flex-1 items-center">
                   <div className="text-left">
@@ -234,18 +254,14 @@ export default function EnhancedMentalHealthRiskAssessment() {
               </button>
             ))}
           </div>
-        </div>
-
-        <div className="bg-emerald-50 rounded-lg p-4">
-          <h3 className="text-sm font-medium text-emerald-800 mb-2">
-            What you&apos;ll get:
-          </h3>
-          <ul className="text-sm text-emerald-700 space-y-1">
-            <li>• Comprehensive risk assessment across 6 key areas</li>
-            <li>• Legal compliance review specific to your location</li>
-            <li>• Detailed recommendations and next steps</li>
-            <li>• Free consultation with our workplace wellness experts</li>
-          </ul>
+          <button
+            onClick={() => setState((prev) => ({ ...prev, step: "sectionA" }))}
+            className="w-full mt-6 py-3 px-6 text-white cursor-pointer font-medium bg-emerald-600 hover:bg-emerald-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-emerald-500 transition-colors disabled:bg-gray-100 disabled:text-gray-400 disabled:cursor-not-allowed"
+            disabled={!state.location}
+          >
+            Start Assessment
+            <ChevronRightIcon className="inline-block ml-2 h-5 w-5" />
+          </button>
         </div>
       </div>
     </div>
@@ -683,19 +699,17 @@ export default function EnhancedMentalHealthRiskAssessment() {
   };
 
   const handleLocationSelect = (location: Location) => {
-    setTimeout(() => {
-      const questions = getQuestionsForLocation(location);
-      setState((prev) => ({
-        ...prev,
-        location,
-        sectionAQuestions: questions.sectionA,
-        sectionBQuestions: questions.sectionB,
-        step: "sectionA",
-        currentQuestionIndex: 0,
-        selectedAnswer: null,
-        contactDetails: { ...prev.contactDetails, location },
-      }));
-    }, 1000);
+    const questions = getQuestionsForLocation(location);
+    setState((prev) => ({
+      ...prev,
+      location,
+      sectionAQuestions: questions.sectionA,
+      sectionBQuestions: questions.sectionB,
+      // step: "sectionA",
+      currentQuestionIndex: 0,
+      selectedAnswer: null,
+      contactDetails: { ...prev.contactDetails, location },
+    }));
   };
 
   const handleNext = () => {
