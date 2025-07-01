@@ -41,7 +41,7 @@ export const PDFDownloadButton: React.FC<ServerPDFDownloadButtonProps> = ({
       const blob = await response.blob();
       const url = window.URL.createObjectURL(blob);
 
-      const fileName = `Mental_Health_Assessment_${results.contactDetails.company}_${results.completedAt}.pdf`;
+      const fileName = `Mental_Health_Assessment_${results.contactDetails.company}.pdf`;
 
       const a = document.createElement("a");
       a.href = url;
