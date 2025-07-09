@@ -103,8 +103,8 @@ export default function InPersonTraining() {
               </p>
             </blockquote>
             <figcaption className="mt-6 flex gap-x-4">
-              <img
-                alt=""
+              <Image
+                alt="A group participating in an in-person mental health workshop."
                 src="https://images.unsplash.com/photo-1502685104226-ee32379fefbe?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
                 className="size-6 flex-none rounded-full bg-gray-50"
               />

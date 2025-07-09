@@ -1,11 +1,12 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import ContactForm from "./components/ContactForm";
 import { ContactFormData } from "@/types/riskChecker";
 import logo from "@public/brainLogoCompressed.png";
 import { PDFDownloadButton } from "@components/PDFDownloadButton";
 import Image from "next/image";
 import InfoDialogue from "@/components/InfoDialogue";
+import { submitAssessmentResults } from "@actions/assessmentEmail";
 
 import {
   ChevronRightIcon,
@@ -13,6 +14,7 @@ import {
   MapPinIcon,
   DocumentTextIcon,
   ChartBarIcon,
+  ArrowTurnRightDownIcon,
 } from "@heroicons/react/24/outline";
 
 // Import our types and utilities (these would be in separate files)
@@ -57,6 +59,8 @@ interface AssessmentState {
 }
 
 export default function EnhancedMentalHealthRiskAssessment() {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
   const [state, setState] = useState<AssessmentState>({
     step: "introduction",
     location: null,
@@ -77,6 +81,86 @@ export default function EnhancedMentalHealthRiskAssessment() {
     results: null,
     selectedAnswer: null,
   });
+
+  /* ------------ dev section-------------------------- */
+  // Add this useEffect to check for URL parameters
+  useEffect(() => {
+    const urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.get("dev") === "results") {
+      const loadMockData = () => {
+        const MOCK_RESULTS: AssessmentResults = {
+          sectionA: {
+            answers: {
+              safety_statement: true,
+              risk_assessment: false,
+              dignity_policy: true,
+              control_implementation: false,
+              manager_training: true,
+              equality_act_awareness: true,
+            },
+            hasComplianceGaps: true,
+            failedQuestions: ["risk_assessment", "control_implementation"],
+          },
+          sectionB: {
+            answers: {
+              demands_workload: 2,
+              control_autonomy: 1,
+              support_management: 2,
+              support_professional: 3,
+              support_preventative: 1,
+              relationships_conflict: 1,
+              role_clarity: 0,
+              change_management: 2,
+            },
+            categoryScores: {
+              Demands: 2.0,
+              Control: 1.0,
+              Support: 2.0,
+              Relationships: 1.0,
+              Role: 0.0,
+              Change: 2.0,
+            },
+            categoryRatings: {
+              Demands: 1.7,
+              Control: 3.3,
+              Support: 2.5,
+              Relationships: 3.3,
+              Role: 5.0,
+              Change: 1.7,
+            },
+            totalScore: 12,
+          },
+          overallRiskLevel: "severe" as const,
+          contactDetails: {
+            firstName: "John",
+            lastName: "Doe",
+            email: "john.doe@example.com",
+            company: "Example Corp",
+            role: "HR Manager",
+            phone: "123-456-7890",
+            location: "UK" as Location,
+          },
+          completedAt: new Date(),
+        };
+        const questions = getQuestionsForLocation("UK");
+        setState({
+          step: "results",
+          location: "UK",
+          sectionAQuestions: questions.sectionA,
+          sectionBQuestions: questions.sectionB,
+          currentQuestionIndex: 0,
+          sectionAAnswers: MOCK_RESULTS.sectionA.answers,
+          sectionBAnswers: MOCK_RESULTS.sectionB.answers,
+          contactDetails: MOCK_RESULTS.contactDetails,
+          results: MOCK_RESULTS,
+          selectedAnswer: null,
+        });
+      };
+      loadMockData();
+    }
+  }, []);
+
+  /* ------------ dev section-------------------------- */
 
   // Introduction Component
   const Introduction = () => (
@@ -426,7 +510,7 @@ export default function EnhancedMentalHealthRiskAssessment() {
     );
   };
 
-  const handleContactSubmit = (data: ContactFormData) => {
+  const handleContactSubmit = async (data: ContactFormData) => {
     // Update state with the form data
     const updatedContactDetails = {
       ...data,
@@ -450,6 +534,7 @@ export default function EnhancedMentalHealthRiskAssessment() {
       completedAt: new Date(),
     };
 
+    // Update state first to show results to user
     setState((prev) => ({
       ...prev,
       contactDetails: updatedContactDetails,
@@ -457,7 +542,18 @@ export default function EnhancedMentalHealthRiskAssessment() {
       step: "results",
     }));
 
-    // TODO: Send results to backend/email service
+    // Send assessment results via email (async, don't block UI)
+    try {
+      const emailResult = await submitAssessmentResults(results);
+      if (!emailResult.success) {
+        console.error("Failed to send assessment email:", emailResult.error);
+        // You might want to show a non-blocking notification to the user
+        // that the email failed to send, but don't prevent them from seeing results
+      }
+    } catch (error) {
+      console.error("Error sending assessment email:", error);
+      // Handle error silently or show a non-blocking notification
+    }
   };
 
   const ResultsDisplay = () => {
@@ -472,6 +568,10 @@ export default function EnhancedMentalHealthRiskAssessment() {
           <h2 className="text-3xl font-bold text-gray-900 mb-6">
             Your Workplace Mental Health Risk Assessment Results
           </h2>
+          <div className="flex items-center gap-x-2 text-gray-500 mb-4 w-fit border border-gray-400 rounded-md py-1 px-4 ">
+            <p className="">Download a pdf copy below</p>
+            <ArrowTurnRightDownIcon className="h-5 w-5 mt-2.5" />
+          </div>
 
           {/* Overall Risk Level */}
           <div className={`mb-8 p-6 rounded-lg ${riskProps.bgColor}`}>
@@ -595,13 +695,277 @@ export default function EnhancedMentalHealthRiskAssessment() {
           </div>
 
           {/* Next Steps */}
-          <div className="border-t pt-6">
-            <h4 className="text-lg font-semibold mb-3">Next Steps</h4>
+
+          <div className="">
+            <div className="bg-gradient-to-br from-white to-gray-50 ring-1 ring-yellow-200 rounded-lg outline-8 drop-shadow-md outline-yellow-300/15">
+              <div className="mx-auto max-w-7xl px-6 py-12 sm:py-16">
+                {/* Header Section */}
+                <div className="text-center max-w-4xl mx-auto mb-12">
+                  <p className="text-emerald-800 text-lg font-medium mb-3">
+                    Thank you for completing the assessment,{" "}
+                    {state.contactDetails.firstName}...
+                  </p>
+                  <h2 className="text-4xl sm:text-5xl font-bold tracking-tight text-gray-900 mb-10">
+                    We&apos;d like to offer you a{" "}
+                    <span className="text-sky-600">
+                      free 30 min consultation
+                    </span>{" "}
+                    with one of our workplace wellness specialists.
+                    <Image
+                      src={logo}
+                      alt="Logo"
+                      className="w-12 lg:w-14 ml-3 h-auto mx-auto inline-block"
+                    />
+                  </h2>
+
+                  {/* Primary CTA Buttons */}
+                  <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12">
+                    <a
+                      href="https://www.calendly.com/theburnouthub"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="w-full sm:w-auto bg-emerald-600 hover:bg-emerald-700 text-white font-semibold px-8 py-4 rounded-lg shadow-lg hover:shadow-xl transition-all duration-200 transform hover:-translate-y-0.5 focus:outline-none focus:ring-4 focus:ring-emerald-200"
+                    >
+                      Schedule Free Consultation
+                    </a>
+                    <button
+                      onClick={() => setIsModalOpen(true)}
+                      className="w-full sm:w-auto text-gray-700 hover:text-emerald-600 font-semibold px-6 py-4 border-2 border-gray-300 hover:border-emerald-300 rounded-lg transition-all duration-200 focus:outline-none focus:ring-4 focus:ring-gray-200"
+                    >
+                      Learn More
+                      <span className="ml-2" aria-hidden="true">
+                        →
+                      </span>
+                    </button>
+                    {isModalOpen && (
+                      <div className="fixed inset-0 z-50 overflow-y-auto">
+                        <div className="flex min-h-full items-center justify-center p-4 text-center sm:p-0">
+                          <div
+                            className="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity"
+                            onClick={() => setIsModalOpen(false)}
+                          ></div>
+
+                          <div className="relative transform overflow-hidden rounded-2xl bg-white text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-2xl">
+                            <div className="bg-white px-6 pt-6 pb-4 sm:p-8">
+                              <div className="flex items-start justify-between mb-6">
+                                <div className="flex items-center">
+                                  <div className="flex-shrink-0 w-12 h-12 bg-emerald-100 rounded-full flex items-center justify-center">
+                                    <svg
+                                      className="w-6 h-6 text-emerald-600"
+                                      fill="none"
+                                      stroke="currentColor"
+                                      viewBox="0 0 24 24"
+                                    >
+                                      <path
+                                        strokeLinecap="round"
+                                        strokeLinejoin="round"
+                                        strokeWidth={2}
+                                        d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"
+                                      />
+                                    </svg>
+                                  </div>
+                                  <div className="ml-4">
+                                    <h3 className="text-2xl font-bold text-gray-900">
+                                      About Your Free Consultation
+                                    </h3>
+                                    <p className="text-sm text-gray-500 mt-1">
+                                      30-minute video call
+                                    </p>
+                                  </div>
+                                </div>
+                                <button
+                                  onClick={() => setIsModalOpen(false)}
+                                  className="rounded-md text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-emerald-500"
+                                >
+                                  <span className="sr-only">Close</span>
+                                  <svg
+                                    className="h-6 w-6"
+                                    fill="none"
+                                    viewBox="0 0 24 24"
+                                    stroke="currentColor"
+                                  >
+                                    <path
+                                      strokeLinecap="round"
+                                      strokeLinejoin="round"
+                                      strokeWidth={2}
+                                      d="M6 18L18 6M6 6l12 12"
+                                    />
+                                  </svg>
+                                </button>
+                              </div>
+
+                              <div>
+                                <p className="text-gray-600 leading-relaxed">
+                                  Your consultation is a personalized 30-minute
+                                  online video call with one of our workplace
+                                  wellness specialists. We&apos;ll go through
+                                  all of your assessment results in detail,
+                                  adding context and explaining what they mean
+                                  for your business. You&apos;ll receive
+                                  practical recommendations on what you can do
+                                  to improve the wellbeing of your people,
+                                  tailored specifically to your
+                                  organization&apos;s unique needs and
+                                  challenges.
+                                </p>
+                              </div>
+                            </div>
+
+                            <div className="bg-gray-50 px-6 py-4 sm:px-8 sm:flex sm:flex-row-reverse">
+                              <a
+                                href="https://www.calendly.com/theburnouthub"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                onClick={() => setIsModalOpen(false)}
+                                className="w-full inline-flex justify-center rounded-lg border border-transparent bg-emerald-600 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-emerald-700 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2 sm:ml-3 sm:w-auto sm:text-sm transition-colors duration-200"
+                              >
+                                Schedule My Consultation
+                              </a>
+                              <button
+                                type="button"
+                                className="mt-3 w-full inline-flex justify-center rounded-lg border border-gray-300 bg-white px-6 py-3 text-base font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2 sm:mt-0 sm:w-auto sm:text-sm transition-colors duration-200"
+                                onClick={() => setIsModalOpen(false)}
+                              >
+                                Close
+                              </button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                </div>
+
+                {/* Benefits Section */}
+                <div className="bg-white rounded-2xl shadow-lg p-8 sm:p-10 max-w-4xl mx-auto">
+                  <h3 className="text-2xl font-bold text-gray-900 mb-6 text-center">
+                    Your free consultation will cover:
+                  </h3>
+                  <div className="grid sm:grid-cols-2 gap-6">
+                    <div className="flex items-start space-x-3">
+                      <div className="flex-shrink-0 w-6 h-6 bg-emerald-100 rounded-full flex items-center justify-center mt-0.5">
+                        <svg
+                          className="w-3 h-3 text-emerald-600"
+                          fill="currentColor"
+                          viewBox="0 0 20 20"
+                        >
+                          <path
+                            fillRule="evenodd"
+                            d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                            clipRule="evenodd"
+                          />
+                        </svg>
+                      </div>
+                      <p className="text-gray-700">
+                        Detailed analysis of your organisation&apos;s risk
+                        factors
+                      </p>
+                    </div>
+                    <div className="flex items-start space-x-3">
+                      <div className="flex-shrink-0 w-6 h-6 bg-emerald-100 rounded-full flex items-center justify-center mt-0.5">
+                        <svg
+                          className="w-3 h-3 text-emerald-600"
+                          fill="currentColor"
+                          viewBox="0 0 20 20"
+                        >
+                          <path
+                            fillRule="evenodd"
+                            d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                            clipRule="evenodd"
+                          />
+                        </svg>
+                      </div>
+                      <p className="text-gray-700">
+                        Customised mental health training solutions
+                      </p>
+                    </div>
+                    <div className="flex items-start space-x-3">
+                      <div className="flex-shrink-0 w-6 h-6 bg-emerald-100 rounded-full flex items-center justify-center mt-0.5">
+                        <svg
+                          className="w-3 h-3 text-emerald-600"
+                          fill="currentColor"
+                          viewBox="0 0 20 20"
+                        >
+                          <path
+                            fillRule="evenodd"
+                            d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                            clipRule="evenodd"
+                          />
+                        </svg>
+                      </div>
+                      <p className="text-gray-700">
+                        Implementation strategies for employee wellbeing
+                      </p>
+                    </div>
+                    <div className="flex items-start space-x-3">
+                      <div className="flex-shrink-0 w-6 h-6 bg-emerald-100 rounded-full flex items-center justify-center mt-0.5">
+                        <svg
+                          className="w-3 h-3 text-emerald-600"
+                          fill="currentColor"
+                          viewBox="0 0 20 20"
+                        >
+                          <path
+                            fillRule="evenodd"
+                            d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                            clipRule="evenodd"
+                          />
+                        </svg>
+                      </div>
+                      <p className="text-gray-700">
+                        Available resources and support programs
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Secondary Actions */}
+            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mt-10">
+              <button
+                onClick={() => window.location.reload()}
+                className="w-full sm:w-auto bg-gray-100 hover:bg-gray-200 text-gray-800 font-medium px-6 py-3 rounded-lg border border-gray-300 transition-colors duration-200 focus:outline-none focus:ring-4 focus:ring-gray-200"
+              >
+                Start New Assessment
+              </button>
+              <PDFDownloadButton results={state.results}>
+                Download PDF Report
+              </PDFDownloadButton>
+            </div>
+          </div>
+
+          {/* <div className=" border-t">
+            <div className="bg-white">
+              <div className="mx-auto flex-col gap-x-10 max-w-7xl px-6 py-8 sm:py-12">
+                <p className="text-gray-700 text-xl mb-4">
+                  Thank you for completing the assessment,{" "}
+                  {state.contactDetails.firstName}.
+                </p>
+                <h2 className="max-w-2xl text-4xl font-semibold tracking-tight text-gray-900 sm:text-5xl">
+                  We would like to offer you a free consultation with one of our
+                  workplace wellness specialists.
+                </h2>
+                <div className="mt-10 flex items-center gap-x-6 lg:mt-0 lg:shrink-0">
+                  <a
+                    href="https://www.calendly.com/theburnouthub"
+                    className="rounded-md bg-emerald-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                  >
+                    {" "}
+                    Get started{" "}
+                  </a>
+                  <a
+                    href="#"
+                    className="text-sm/6 font-semibold text-gray-900 hover:opacity-80"
+                  >
+                    Learn more
+                    <span aria-hidden="true">→</span>
+                  </a>
+                </div>
+              </div>
+            </div>
+
             <p className="text-gray-700 mb-4">
-              Thank you for completing the assessment,{" "}
-              {state.contactDetails.firstName}. A workplace wellness specialist
-              will contact you at {state.contactDetails.email} within 24-48
-              hours to discuss:
+              This consulation is a completely free service, and will cover:
             </p>
             <ul className="list-disc list-inside space-y-2 text-gray-700 mb-6">
               <li>
@@ -615,7 +979,6 @@ export default function EnhancedMentalHealthRiskAssessment() {
               </li>
               <li>Available resources and support programs</li>
             </ul>
-
             <div className="flex gap-4">
               <button
                 onClick={() => window.location.reload()}
@@ -627,7 +990,7 @@ export default function EnhancedMentalHealthRiskAssessment() {
                 Download PDF Report
               </PDFDownloadButton>
             </div>
-          </div>
+          </div> */}
         </div>
       </div>
     );

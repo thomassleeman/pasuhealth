@@ -24,11 +24,11 @@ const CourseCard = ({
   return (
     <Link href={`/our-courses/${slug}`} className="block">
       <div className="bg-white rounded-2xl shadow-lg overflow-hidden transition-all hover:outline-2 hover:outline-emerald-600 hover:outline-offset-4 cursor-pointer group">
-        <div className="relative h-48 w-full">
+        <div className="relative h-auto aspect-[16/9]">
           <Image src={imageUrl} alt={title} fill className="object-cover" />
         </div>
         <div className="p-8">
-          <h3 className="text-3xl font-semibold text-gray-900">{title}</h3>
+          <h3 className="text-2xl font-semibold text-gray-900">{title}</h3>
           <p className="mt-2 text-gray-600">{description}</p>
           <div className="mt-4 flex items-center justify-between">
             <div className="text-sm text-gray-500">
@@ -85,7 +85,7 @@ export default async function OurCourses() {
           format.
         </p>
       </div>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-y-8 gap-x-24">
         {courses.map((course: VirtualCourseCard) => (
           <CourseCard
             key={course.slug.current}

@@ -19,7 +19,9 @@ const navigation = [
 
 export default function Nav() {
   const pathname = usePathname();
-  const isFixed = pathname !== "/mental-health-risk-checker";
+  const isFixed =
+    pathname !== "/mental-health-risk-checker" &&
+    pathname !== "/training-enquiry";
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   return (
