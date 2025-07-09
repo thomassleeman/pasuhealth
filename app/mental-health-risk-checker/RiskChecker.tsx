@@ -933,64 +933,6 @@ export default function EnhancedMentalHealthRiskAssessment() {
               </PDFDownloadButton>
             </div>
           </div>
-
-          {/* <div className=" border-t">
-            <div className="bg-white">
-              <div className="mx-auto flex-col gap-x-10 max-w-7xl px-6 py-8 sm:py-12">
-                <p className="text-gray-700 text-xl mb-4">
-                  Thank you for completing the assessment,{" "}
-                  {state.contactDetails.firstName}.
-                </p>
-                <h2 className="max-w-2xl text-4xl font-semibold tracking-tight text-gray-900 sm:text-5xl">
-                  We would like to offer you a free consultation with one of our
-                  workplace wellness specialists.
-                </h2>
-                <div className="mt-10 flex items-center gap-x-6 lg:mt-0 lg:shrink-0">
-                  <a
-                    href="https://www.calendly.com/theburnouthub"
-                    className="rounded-md bg-emerald-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-                  >
-                    {" "}
-                    Get started{" "}
-                  </a>
-                  <a
-                    href="#"
-                    className="text-sm/6 font-semibold text-gray-900 hover:opacity-80"
-                  >
-                    Learn more
-                    <span aria-hidden="true">→</span>
-                  </a>
-                </div>
-              </div>
-            </div>
-
-            <p className="text-gray-700 mb-4">
-              This consulation is a completely free service, and will cover:
-            </p>
-            <ul className="list-disc list-inside space-y-2 text-gray-700 mb-6">
-              <li>
-                Detailed analysis of your organisation&apos;s risk factors
-              </li>
-              <li>
-                Customised mental health training solutions for your workplace
-              </li>
-              <li>
-                Implementation strategies for improving employee wellbeing
-              </li>
-              <li>Available resources and support programs</li>
-            </ul>
-            <div className="flex gap-4">
-              <button
-                onClick={() => window.location.reload()}
-                className="px-6 py-3 bg-emerald-600 text-white font-medium rounded-md hover:bg-emerald-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-emerald-500"
-              >
-                Start New Assessment
-              </button>
-              <PDFDownloadButton results={state.results}>
-                Download PDF Report
-              </PDFDownloadButton>
-            </div>
-          </div> */}
         </div>
       </div>
     );
@@ -1075,8 +1017,17 @@ export default function EnhancedMentalHealthRiskAssessment() {
     }));
   };
 
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  };
+
   const handleNext = () => {
     if (state.selectedAnswer === null) return;
+
+    scrollToTop();
 
     if (state.step === "sectionA") {
       const newAnswers = {
