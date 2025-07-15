@@ -5,56 +5,96 @@ import { SubmitButton } from "./SubmitButton";
 import { submitTrainingEnquiryForm } from "@actions/trainingEnquiry";
 import { useRouter } from "next/navigation";
 import CustomSelect from "./CustomSelect";
+import Link from "next/link";
 
 // Define industry options
 const industryOptions = [
   { id: "select", name: "Select an industry" },
-  { id: "accommodation", name: "Accommodation and food services" },
-  {
-    id: "extraterritorial",
-    name: "Activities of extraterritorial organisations and bodies",
-  },
-  {
-    id: "households",
-    name: "Activities of households as employers; undifferentiated goods- and services-producing activities of households for own use",
-  },
+
+  // Core sectors
   { id: "agriculture", name: "Agriculture, forestry and fishing" },
-  { id: "animal_welfare", name: "Animal welfare" },
-  { id: "arts", name: "Arts, entertainment and recreation" },
-  { id: "business", name: "Business administration and support services" },
+  { id: "automotive", name: "Automotive" },
   { id: "construction", name: "Construction" },
   { id: "education", name: "Education" },
-  {
-    id: "electricity",
-    name: "Electricity, gas, steam and air conditioning supply",
-  },
-  { id: "environmental", name: "Environmental" },
-  { id: "finance", name: "Finance and insurance" },
-  { id: "humanitarian", name: "Humanitarian/Human rights" },
-  { id: "health", name: "Human health and social work activities" },
-  { id: "information", name: "Information and communication" },
-  { id: "law", name: "Law" },
-  { id: "local", name: "Local Authorities" },
+  { id: "energy", name: "Energy and utilities" },
+  { id: "financial_services", name: "Financial services" },
+  { id: "healthcare", name: "Healthcare and social care" },
   { id: "manufacturing", name: "Manufacturing" },
-  { id: "medical", name: "Medical" },
   { id: "mining", name: "Mining and quarrying" },
-  { id: "professional", name: "Professional, scientific and technical" },
-  {
-    id: "public",
-    name: "Public administration and defence; compulsory social security",
-  },
-  { id: "real_estate", name: "Real estate activities" },
-  { id: "tech_hardware", name: "Technology (Hardware)" },
-  { id: "tech_software", name: "Technology (Software)" },
-  { id: "transport", name: "Transport and storage (incl. postal)" },
-  {
-    id: "water",
-    name: "Water supply; sewerage, waste management and remediation activities",
-  },
-  {
-    id: "wholesale",
-    name: "Wholesale and retail trade; repair of motor vehicles and motorcycles",
-  },
+
+  // Service sectors
+  { id: "accommodation", name: "Accommodation and hospitality" },
+  { id: "business_services", name: "Business and professional services" },
+  { id: "legal", name: "Legal services" },
+  { id: "real_estate", name: "Property and real estate" },
+  { id: "transport", name: "Transport and logistics" },
+
+  // High-stress service industries
+  { id: "accounting", name: "Accounting and bookkeeping" },
+  { id: "advertising", name: "Advertising and marketing" },
+  { id: "architecture", name: "Architecture and design" },
+  { id: "banking", name: "Banking" },
+  { id: "call_centers", name: "Call centres and customer service" },
+  { id: "consulting", name: "Consulting" },
+  { id: "emergency_services", name: "Emergency services" },
+  { id: "event_management", name: "Event management" },
+  { id: "insurance", name: "Insurance" },
+  { id: "recruitment", name: "Recruitment and HR services" },
+
+  // Technology and media
+  { id: "technology", name: "Technology and software" },
+  { id: "telecommunications", name: "Telecommunications" },
+  { id: "media", name: "Media and creative industries" },
+  { id: "gaming", name: "Gaming and digital entertainment" },
+
+  // Retail and consumer
+  { id: "retail", name: "Retail" },
+  { id: "wholesale", name: "Wholesale and distribution" },
+  { id: "consumer_goods", name: "Consumer goods and services" },
+
+  // Care and wellness sectors
+  { id: "care_homes", name: "Care homes and elderly care" },
+  { id: "childcare", name: "Childcare and nurseries" },
+  { id: "dental", name: "Dental practices" },
+  { id: "pharmacy", name: "Pharmacy" },
+  { id: "social_work", name: "Social work and community services" },
+  { id: "veterinary", name: "Veterinary services" },
+
+  // Specialized sectors
+  { id: "aerospace", name: "Aerospace and defence" },
+  { id: "aviation", name: "Airlines and aviation" },
+  { id: "beauty_wellness", name: "Beauty and wellness services" },
+  { id: "catering", name: "Catering and food service" },
+  { id: "courier", name: "Courier and delivery services" },
+  { id: "facilities", name: "Facilities management" },
+  { id: "fashion", name: "Fashion and textiles" },
+  { id: "food_beverage", name: "Food and beverage manufacturing" },
+  { id: "funeral", name: "Funeral services" },
+  { id: "pharmaceuticals", name: "Pharmaceuticals and life sciences" },
+  { id: "security", name: "Security services" },
+  { id: "sports", name: "Sports and fitness" },
+  { id: "waste", name: "Waste management" },
+
+  // Public and third sector
+  { id: "charity", name: "Charity and non-profit" },
+  { id: "government", name: "Government and public administration" },
+  { id: "local_authority", name: "Local government" },
+  { id: "nhs", name: "NHS" },
+
+  // Other
+  { id: "other", name: "Other" },
+];
+
+// Define hear about us options
+const hearAboutUsOptions = [
+  { id: "select", name: "Select an option" },
+  { id: "event_conference", name: "Event/conference" },
+  { id: "media", name: "Media" },
+  { id: "pasu_website", name: "Pasu Health website" },
+  { id: "search_engine", name: "Search engine" },
+  { id: "social_media", name: "Social media" },
+  { id: "word_of_mouth", name: "Word of mouth" },
+  { id: "worked_before", name: "Worked with Pasu Health before" },
 ];
 
 // Main form component for training enquiries
@@ -72,7 +112,7 @@ export function TrainingEnquiryForm({
     isSubmitted: false,
   });
   const [currentStep, setCurrentStep] = useState(1);
-  const totalSteps = 4;
+  const totalSteps = 3;
 
   // Form data state
   const [formData, setFormData] = useState({
@@ -92,9 +132,6 @@ export function TrainingEnquiryForm({
     trainingDelivery: "",
     trainingRequirements: "",
 
-    // Preferences
-    contactVia: [] as string[],
-
     // Personal details
     firstName: "",
     lastName: "",
@@ -103,8 +140,11 @@ export function TrainingEnquiryForm({
     phone: "",
   });
 
-  // Selected industry for the custom select
+  // Selected options for custom selects
   const [selectedIndustry, setSelectedIndustry] = useState(industryOptions[0]);
+  const [selectedHearAboutUs, setSelectedHearAboutUs] = useState(
+    hearAboutUsOptions[0]
+  );
 
   const handleInputChange = (
     e: React.ChangeEvent<
@@ -114,23 +154,9 @@ export function TrainingEnquiryForm({
     const { name, value, type } = e.target;
 
     if (type === "checkbox") {
+      // Handle single checkboxes (boolean values)
       const checkbox = e.target as HTMLInputElement;
-      if (name === "contactVia") {
-        // Handle multi-select checkboxes
-        const newContactVia = [...formData.contactVia];
-        if (checkbox.checked) {
-          newContactVia.push(value);
-        } else {
-          const index = newContactVia.indexOf(value);
-          if (index > -1) {
-            newContactVia.splice(index, 1);
-          }
-        }
-        setFormData({ ...formData, contactVia: newContactVia });
-      } else {
-        // Handle single checkboxes (boolean values)
-        setFormData({ ...formData, [name]: checkbox.checked });
-      }
+      setFormData({ ...formData, [name]: checkbox.checked });
     } else {
       // Handle text, select, radio inputs
       setFormData({ ...formData, [name]: value });
@@ -177,8 +203,6 @@ export function TrainingEnquiryForm({
       case 2:
         return renderEnquiryDetails();
       case 3:
-        return renderPreferences();
-      case 4:
         return renderPersonalDetails();
       default:
         return null;
@@ -187,7 +211,16 @@ export function TrainingEnquiryForm({
 
   const renderOrganisationDetails = () => (
     <>
-      <h2 className="text-xl font-bold mb-4">1 of 4 - Organisation details</h2>
+      <div className="flex items-center justify-between mb-4">
+        <h2 className="text-xl font-bold">1 of 3 - Organisation details</h2>
+        <Link href="/request-a-callback" className="text-emerald-600 text-sm ">
+          Short on time?
+          <br />{" "}
+          <span className="font-semibold hover:underline">
+            Request a callback
+          </span>
+        </Link>
+      </div>
 
       <div className="mb-4">
         <label htmlFor="organisation" className="block text-sm font-medium">
@@ -199,7 +232,7 @@ export function TrainingEnquiryForm({
           type="text"
           value={formData.organisation}
           onChange={handleInputChange}
-          className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md"
+          className="mt-1 block w-full px-3 py-2 border-gray-300 rounded-md border-0 ring-2 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-emerald-700 outline-none"
           required
         />
       </div>
@@ -214,31 +247,9 @@ export function TrainingEnquiryForm({
           type="text"
           value={formData.postcode}
           onChange={handleInputChange}
-          className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md"
+          className="mt-1 block w-full px-3 py-2 border-gray-300 rounded-md border-0 ring-2 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-emerald-700 outline-none"
           required
         />
-      </div>
-
-      <div className="mb-4">
-        <label className="block text-sm font-medium">
-          Sector <span className="text-red-500">*</span>
-        </label>
-        <div className="flex space-x-4 mt-1">
-          {["Public Sector", "Private Sector", "Third Sector"].map((option) => (
-            <label key={option} className="flex items-center">
-              <input
-                type="radio"
-                name="sector"
-                value={option}
-                checked={formData.sector === option}
-                onChange={() => handleRadioChange("sector", option)}
-                className="mr-2"
-                required
-              />
-              {option}
-            </label>
-          ))}
-        </div>
       </div>
 
       <div className="mb-4">
@@ -253,13 +264,13 @@ export function TrainingEnquiryForm({
               setFormData({ ...formData, industry: option.name });
             }
           }}
-          required={true}
         />
       </div>
 
       <div className="mb-4">
         <label htmlFor="employeeCount" className="block text-sm font-medium">
-          Total number of UK employees <span className="text-red-500">*</span>
+          Approx total number of employees{" "}
+          <span className="text-red-500">*</span>
         </label>
         <input
           id="employeeCount"
@@ -267,121 +278,33 @@ export function TrainingEnquiryForm({
           type="number"
           value={formData.employeeCount}
           onChange={handleInputChange}
-          className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md"
+          className="mt-1 block w-full px-3 py-2 border-gray-300 rounded-md border-0 ring-2 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-emerald-700 outline-none"
           placeholder="Enter a numerical value"
           required
         />
       </div>
 
       <div className="mb-4">
-        <label htmlFor="locationCount" className="block text-sm font-medium">
-          Over how many locations/sites
-        </label>
-        <input
-          id="locationCount"
-          name="locationCount"
-          type="number"
-          value={formData.locationCount}
-          onChange={handleInputChange}
-          className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md"
-          placeholder="Enter a numerical value"
+        <CustomSelect
+          label="How did you hear about us?"
+          options={hearAboutUsOptions}
+          selected={selectedHearAboutUs}
+          onChange={(option) => {
+            setSelectedHearAboutUs(option);
+            // Also update the form data
+            if (option.id !== "select") {
+              setFormData({ ...formData, hearAboutUs: option.name });
+            }
+          }}
         />
       </div>
 
       <div className="mb-4">
-        <label htmlFor="hearAboutUs" className="block text-sm font-medium">
-          How did you hear about us? <span className="text-red-500">*</span>
-        </label>
-        <select
-          id="hearAboutUs"
-          name="hearAboutUs"
-          value={formData.hearAboutUs}
-          onChange={handleInputChange}
-          className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md"
-          required
-        >
-          <option value="">Select an option</option>
-          <option value="Event/ conference">Event/ conference</option>
-          <option value="Media">Media</option>
-          <option value="Mental Health at Work website">
-            Mental Health at Work website
-          </option>
-          <option value="Mind website">Mind website</option>
-          <option value="Search engine">Search engine</option>
-          <option value="Social media">Social media</option>
-          <option value="Word of mouth">Word of mouth</option>
-          <option value="Worked with Mind before">
-            Worked with Mind before
-          </option>
-        </select>
-      </div>
-
-      <div className="mb-4">
-        <label className="block text-sm font-medium">
-          Are you working with a specific budget?
-        </label>
-        <div className="flex space-x-4 mt-1">
-          <label className="flex items-center">
-            <input
-              type="radio"
-              name="hasSpecificBudget"
-              checked={formData.hasSpecificBudget === true}
-              onChange={() => handleRadioChange("hasSpecificBudget", true)}
-              className="mr-2"
-            />
-            Yes
-          </label>
-          <label className="flex items-center">
-            <input
-              type="radio"
-              name="hasSpecificBudget"
-              checked={formData.hasSpecificBudget === false}
-              onChange={() => handleRadioChange("hasSpecificBudget", false)}
-              className="mr-2"
-            />
-            No
-          </label>
-        </div>
-      </div>
-
-      <div className="mb-4">
-        <label className="block text-sm font-medium">
-          Are you the budget holder?
-        </label>
-        <div className="flex space-x-4 mt-1">
-          <label className="flex items-center">
-            <input
-              type="radio"
-              name="isBudgetHolder"
-              checked={formData.isBudgetHolder === true}
-              onChange={() => handleRadioChange("isBudgetHolder", true)}
-              className="mr-2"
-            />
-            Yes
-          </label>
-          <label className="flex items-center">
-            <input
-              type="radio"
-              name="isBudgetHolder"
-              checked={formData.isBudgetHolder === false}
-              onChange={() => handleRadioChange("isBudgetHolder", false)}
-              className="mr-2"
-            />
-            No
-          </label>
-        </div>
-      </div>
-
-      <div className="mb-4">
-        <label className="block text-sm font-medium">
-          Would you like a call to discuss your needs in more detail?
+        <label className="block text-sm font-medium mb-2">
+          How would you prefer us to contact you?
         </label>
         <div className="flex flex-col space-y-2 mt-1">
-          {[
-            "Yes please",
-            "No thanks, I know what services I want",
-            "No thanks, I'd like to receive information over email",
-          ].map((option) => (
+          {["telephone", "email"].map((option) => (
             <label key={option} className="flex items-center">
               <input
                 type="radio"
@@ -389,7 +312,7 @@ export function TrainingEnquiryForm({
                 value={option}
                 checked={formData.contactPreference === option}
                 onChange={() => handleRadioChange("contactPreference", option)}
-                className="mr-2"
+                className="mr-2 accent-emerald-700 w-4 h-4"
               />
               {option}
             </label>
@@ -401,10 +324,10 @@ export function TrainingEnquiryForm({
 
   const renderEnquiryDetails = () => (
     <>
-      <h2 className="text-xl font-bold mb-4">2 of 4 - Enquiry</h2>
+      <h2 className="text-xl font-bold mb-4">2 of 3 - Enquiry</h2>
 
       <div className="mb-4">
-        <label className="block text-sm font-medium">
+        <label className="block text-sm font-medium mb-2">
           Do you know what training delivery you want?
         </label>
         <div className="flex flex-col space-y-2 mt-1">
@@ -417,7 +340,7 @@ export function TrainingEnquiryForm({
                   value={option}
                   checked={formData.trainingDelivery === option}
                   onChange={() => handleRadioChange("trainingDelivery", option)}
-                  className="mr-2"
+                  className="mr-2 accent-emerald-700 w-4 h-4"
                 />
                 {option}
               </label>
@@ -443,57 +366,56 @@ export function TrainingEnquiryForm({
           value={formData.trainingRequirements}
           onChange={handleInputChange}
           rows={5}
-          className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md"
+          className="mt-1 block w-full px-3 py-2 border-gray-300 rounded-md border-0 ring-2 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-emerald-700 outline-none"
         ></textarea>
       </div>
     </>
   );
 
-  const renderPreferences = () => (
-    <>
-      <h2 className="text-xl font-bold mb-4">3 of 4 - Your Preferences</h2>
+  // const renderPreferences = () => (
+  //   <>
+  //     <h2 className="text-xl font-bold mb-4">3 of 4 - Your Preferences</h2>
 
-      <div className="mb-4">
-        <label className="block text-sm font-medium">
-          Please contact me via:
-        </label>
-        <div className="flex flex-col space-y-2 mt-1">
-          {["Email", "SMS", "Phone"].map((option) => (
-            <label key={option} className="flex items-center">
-              <input
-                type="checkbox"
-                name="contactVia"
-                value={option}
-                checked={formData.contactVia.includes(option)}
-                onChange={handleInputChange}
-                className="mr-2"
-              />
-              {option}
-            </label>
-          ))}
-        </div>
-      </div>
+  //     <div className="mb-4">
+  //       <label className="block text-sm font-medium">
+  //         Please contact me via:
+  //       </label>
+  //       <div className="flex flex-col space-y-2 mt-1">
+  //         {["Email", "SMS", "Phone"].map((option) => (
+  //           <label key={option} className="flex items-center">
+  //             <input
+  //               type="checkbox"
+  //               name="contactVia"
+  //               value={option}
+  //               checked={formData.contactVia.includes(option)}
+  //               onChange={handleInputChange}
+  //               className="mr-2"
+  //             />
+  //             {option}
+  //           </label>
+  //         ))}
+  //       </div>
+  //     </div>
 
-      <div className="mb-4">
-        <h3 className="text-md font-medium mb-2">Your privacy</h3>
-        <p className="text-sm mb-2">
-          We take your privacy seriously and promise to never sell your data.
-          You can find out more about your rights, how we use your personal
-          information and how we keep your details safe and secure by reading
-          our Privacy Policy or alternatively the Privacy Policy of the local
-          Mind affiliate who will contact you about your enquiry.
-        </p>
-        <p className="text-sm mb-2">
-          If we have your postal address, we may contact you by post unless you
-          tell us otherwise.
-        </p>
-      </div>
-    </>
-  );
+  //     <div className="mb-4">
+  //       <h3 className="text-md font-medium mb-2">Your privacy</h3>
+  //       <p className="text-sm mb-2">
+  //         We take your privacy seriously and promise to never sell your data.
+  //         You can find out more about your rights, how we use your personal
+  //         information and how we keep your details safe and secure by reading
+  //         our Privacy Policy.
+  //       </p>
+  //       <p className="text-sm mb-2">
+  //         If we have your postal address, we may contact you by post unless you
+  //         tell us otherwise.
+  //       </p>
+  //     </div>
+  //   </>
+  // );
 
   const renderPersonalDetails = () => (
     <>
-      <h2 className="text-xl font-bold mb-4">4 of 4 - Your Details</h2>
+      <h2 className="text-xl font-bold mb-4">3 of 3 - Your Details</h2>
 
       <div className="mb-4">
         <label htmlFor="firstName" className="block text-sm font-medium">
@@ -505,7 +427,7 @@ export function TrainingEnquiryForm({
           type="text"
           value={formData.firstName}
           onChange={handleInputChange}
-          className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md"
+          className="mt-1 block w-full px-3 py-2 border-gray-300 rounded-md border-0 ring-2 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-emerald-700 outline-none"
           required
         />
       </div>
@@ -520,7 +442,7 @@ export function TrainingEnquiryForm({
           type="text"
           value={formData.lastName}
           onChange={handleInputChange}
-          className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md"
+          className="mt-1 block w-full px-3 py-2 border-gray-300 rounded-md border-0 ring-2 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-emerald-700 outline-none"
           required
         />
       </div>
@@ -535,7 +457,7 @@ export function TrainingEnquiryForm({
           type="text"
           value={formData.jobTitle}
           onChange={handleInputChange}
-          className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md"
+          className="mt-1 block w-full px-3 py-2 border-gray-300 rounded-md border-0 ring-2 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-emerald-700 outline-none"
           required
         />
       </div>
@@ -550,7 +472,7 @@ export function TrainingEnquiryForm({
           type="email"
           value={formData.email}
           onChange={handleInputChange}
-          className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md"
+          className="mt-1 block w-full px-3 py-2 border-gray-300 rounded-md border-0 ring-2 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-emerald-700 outline-none"
           required
         />
       </div>
@@ -565,7 +487,7 @@ export function TrainingEnquiryForm({
           type="tel"
           value={formData.phone}
           onChange={handleInputChange}
-          className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md"
+          className="mt-1 block w-full px-3 py-2 border-gray-300 rounded-md border-0 ring-2 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-emerald-700 outline-none"
         />
       </div>
     </>
@@ -576,18 +498,18 @@ export function TrainingEnquiryForm({
 
     // Add all form fields to FormData
     Object.entries(formData).forEach(([key, value]) => {
-      if (Array.isArray(value)) {
-        // Handle arrays (like contactVia)
-        value.forEach((item) => data.append(key, item));
-      } else if (value !== undefined) {
-        // Handle all other values
+      if (value !== undefined) {
         data.append(key, value.toString());
       }
     });
 
-    // Add the industry value from the custom select
+    // Add values from custom selects
     if (selectedIndustry.id !== "select") {
       data.append("industry", selectedIndustry.name);
+    }
+
+    if (selectedHearAboutUs.id !== "select") {
+      data.append("hearAboutUs", selectedHearAboutUs.name);
     }
 
     return data;
@@ -625,7 +547,7 @@ export function TrainingEnquiryForm({
             {currentStep < totalSteps ? (
               <button
                 type="submit"
-                className="px-4 py-2 bg-blue-600 text-white rounded-md"
+                className="px-4 py-2 bg-emerald-700 text-white rounded-md"
               >
                 Next
               </button>

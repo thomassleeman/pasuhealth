@@ -11,17 +11,17 @@ const TrainingEnquirySchema = z.object({
   // Organisation details
   organisation: z.string().min(1, { message: "Organisation is required" }),
   postcode: z.string().min(1, { message: "Postcode is required" }),
-  sector: z.string().min(1, { message: "Sector is required" }),
-  industry: z.string().min(1, { message: "Industry is required" }),
+  // sector: z.string().min(1, { message: "Sector is required" }),
+  industry: z.string().optional(),
   employeeCount: z
     .string()
     .min(1, { message: "Number of employees is required" }),
-  locationCount: z.string().optional(),
+  // locationCount: z.string().optional(),
   hearAboutUs: z
     .string()
     .min(1, { message: "Please tell us how you heard about us" }),
-  hasSpecificBudget: z.boolean().optional(),
-  isBudgetHolder: z.boolean().optional(),
+  // hasSpecificBudget: z.boolean().optional(),
+  // isBudgetHolder: z.boolean().optional(),
   contactPreference: z.string().optional(),
 
   // Enquiry
@@ -97,21 +97,14 @@ export async function submitTrainingEnquiryForm(formData: FormData) {
       <h2>Organisation Details</h2>
       <p><strong>Organisation:</strong> ${validatedFields.organisation}</p>
       <p><strong>Workplace Postcode:</strong> ${validatedFields.postcode}</p>
-      <p><strong>Sector:</strong> ${validatedFields.sector}</p>
       <p><strong>Industry:</strong> ${validatedFields.industry}</p>
       <p><strong>Total UK Employees:</strong> ${validatedFields.employeeCount}</p>
-      <p><strong>Number of Locations:</strong> ${validatedFields.locationCount || "Not specified"}</p>
       <p><strong>How they heard about us:</strong> ${validatedFields.hearAboutUs}</p>
-      <p><strong>Working with specific budget:</strong> ${validatedFields.hasSpecificBudget === true ? "Yes" : "No"}</p>
-      <p><strong>Is budget holder:</strong> ${validatedFields.isBudgetHolder === true ? "Yes" : "No"}</p>
       <p><strong>Contact preference:</strong> ${validatedFields.contactPreference || "Not specified"}</p>
       
       <h2>Enquiry Details</h2>
       <p><strong>Preferred training delivery:</strong> ${validatedFields.trainingDelivery || "Not specified"}</p>
       <p><strong>Training requirements:</strong> ${validatedFields.trainingRequirements || "Not specified"}</p>
-      
-      <h2>Contact Preferences</h2>
-      <p><strong>Contact via:</strong> ${Array.isArray(validatedFields.contactVia) && validatedFields.contactVia.length > 0 ? validatedFields.contactVia.join(", ") : "Not specified"}</p>
       
       <h2>Personal Details</h2>
       <p><strong>Name:</strong> ${validatedFields.firstName} ${validatedFields.lastName}</p>
@@ -126,21 +119,14 @@ export async function submitTrainingEnquiryForm(formData: FormData) {
       ORGANISATION DETAILS
       Organisation: ${validatedFields.organisation}
       Workplace Postcode: ${validatedFields.postcode}
-      Sector: ${validatedFields.sector}
       Industry: ${validatedFields.industry}
       Total UK Employees: ${validatedFields.employeeCount}
-      Number of Locations: ${validatedFields.locationCount || "Not specified"}
       How they heard about us: ${validatedFields.hearAboutUs}
-      Working with specific budget: ${validatedFields.hasSpecificBudget === true ? "Yes" : "No"}
-      Is budget holder: ${validatedFields.isBudgetHolder === true ? "Yes" : "No"}
       Contact preference: ${validatedFields.contactPreference || "Not specified"}
       
       ENQUIRY DETAILS
       Preferred training delivery: ${validatedFields.trainingDelivery || "Not specified"}
       Training requirements: ${validatedFields.trainingRequirements || "Not specified"}
-      
-      CONTACT PREFERENCES
-      Contact via: ${Array.isArray(validatedFields.contactVia) && validatedFields.contactVia.length > 0 ? validatedFields.contactVia.join(", ") : "Not specified"}
       
       PERSONAL DETAILS
       Name: ${validatedFields.firstName} ${validatedFields.lastName}

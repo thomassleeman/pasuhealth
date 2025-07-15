@@ -100,6 +100,11 @@ const styles = StyleSheet.create({
     width: 40,
     objectFit: "contain",
   },
+  logoImageSmall: {
+    height: 30,
+    width: 30,
+    objectFit: "contain",
+  },
   // TODO working on these styles. This could be causing breakages if they don't compile correctly due to recent changes.
   logoText: {
     fontFamily: "Helvetica",
@@ -226,18 +231,18 @@ const styles = StyleSheet.create({
     marginBottom: 15,
   },
   contactTitle: {
-    fontSize: 12,
+    fontSize: 16,
     fontWeight: "bold",
-    marginBottom: 5,
+    marginBottom: 6,
     color: "#1f2937",
   },
   contactDetail: {
-    fontSize: 9,
-    marginBottom: 2,
+    fontSize: 14,
+    marginBottom: 3,
     color: "#4b5563",
   },
   bulletPoint: {
-    fontSize: 9,
+    fontSize: 14,
     marginBottom: 3,
     marginLeft: 10,
     lineHeight: 1.4,
@@ -350,17 +355,6 @@ const AssessmentReportPDF: React.FC<{ results: AssessmentResults }> = ({
     <Document>
       {/* Page 1: Executive Summary */}
       <Page size="A4" style={styles.page}>
-        {/* <View style={styles.header}>
-          <Image
-            src="../public/brainLogoCompressed.png"
-            // style={styles.logoImage}
-            // alt="PASU Health Logo"
-          />
-          <Text style={styles.logo}>PASU Health</Text>
-          <Text style={{ fontSize: 10, color: "#6b7280" }}>
-            Generated: {results.completedAt.toLocaleDateString()}
-          </Text>
-        </View> */}
         <View style={styles.header}>
           <View style={styles.logoContainer}>
             <Image style={styles.logoImage} src={getLogoImageData()} />
@@ -383,7 +377,7 @@ const AssessmentReportPDF: React.FC<{ results: AssessmentResults }> = ({
           Comprehensive Risk Analysis & Compliance Review
         </Text>
 
-        <View style={styles.contactInfo}>
+        <View style={[styles.contactInfo, { marginBottom: 20 }]}>
           <Text style={styles.contactTitle}>Assessment Details</Text>
           <Text style={styles.contactDetail}>
             Company: {results.contactDetails.company}
@@ -403,6 +397,151 @@ const AssessmentReportPDF: React.FC<{ results: AssessmentResults }> = ({
           </Text>
         </View>
 
+        {/* What This Report Is and What It Is Not Section */}
+        <View style={styles.section}>
+          <Text style={styles.sectionTitle}>
+            What This Report Is and What It Is Not
+          </Text>
+          <Text style={styles.paragraph}>
+            Please read this section carefully.
+          </Text>
+
+          <View
+            style={[
+              styles.contactInfo,
+              {
+                backgroundColor: "#f0fdf4",
+                borderLeft: 3,
+                borderLeftColor: "#059669",
+                marginBottom: 15,
+              },
+            ]}
+          >
+            <Text style={[styles.contactTitle, { color: "#059669" }]}>
+              What This Report Is:
+            </Text>
+            <Text style={[styles.paragraph, { fontSize: 9, margin: 0 }]}>
+              This report provides high-level guidance based on your responses
+              to our workplace mental health risk assessment questionnaire. We
+              hope that you will find it useful as a starting point for
+              discussions about mental health in your workplace. With this free
+              report we aim to:
+            </Text>
+          </View>
+
+          <Text style={styles.bulletPoint}>
+            • Offer initial insights into potential areas of concern within your
+            organisation&apos;s approach to workplace mental health
+          </Text>
+          <Text style={styles.bulletPoint}>
+            • Highlight possible compliance gaps that may require attention
+            under relevant health and safety legislation
+          </Text>
+          <Text style={styles.bulletPoint}>
+            • Provide general recommendations for improving workplace mental
+            health practices
+          </Text>
+          <Text style={styles.bulletPoint}>
+            • Suggest potential next steps for developing a more comprehensive
+            mental health strategy
+          </Text>
+          <Text style={styles.bulletPoint}>
+            • Demonstrate how PASU Health&apos;s professional services could
+            support your organisation&apos;s mental health objectives
+          </Text>
+
+          <View
+            style={[
+              styles.contactInfo,
+              {
+                backgroundColor: "#fef2f2",
+                borderLeft: 3,
+                borderLeftColor: "#dc2626",
+                marginTop: 15,
+                marginBottom: 15,
+              },
+            ]}
+          >
+            <Text style={[styles.contactTitle, { color: "#dc2626" }]}>
+              What This Report Is Not:
+            </Text>
+            <Text style={[styles.paragraph, { fontSize: 9, margin: 0 }]}>
+              This is not a comprehensive professional assessment and has
+              important limitations:
+            </Text>
+          </View>
+
+          <Text style={styles.bulletPoint}>
+            • Not a substitute for professional consultation - This automated
+            report cannot replace the nuanced analysis that comes from direct
+            professional evaluation
+          </Text>
+          <Text style={styles.bulletPoint}>
+            • Not legal advice - While we reference relevant legislation, this
+            report does not constitute formal legal or compliance advice
+          </Text>
+          <Text style={styles.bulletPoint}>
+            • Not a detailed risk assessment - Responses are based on
+            self-reported information and cannot capture the full workplace
+            complexity
+          </Text>
+          <Text style={styles.bulletPoint}>
+            • Not a complete solution - Implementing meaningful change requires
+            deeper analysis, stakeholder consultation, and professional guidance
+          </Text>
+
+          <Text style={styles.subsectionTitle}>
+            Important Limitations to Consider:
+          </Text>
+          <Text style={styles.bulletPoint}>
+            • Self-assessment limitations - The accuracy depends entirely on the
+            honesty and accuracy of your responses
+          </Text>
+          <Text style={styles.bulletPoint}>
+            • Snapshot in time - Workplace conditions change frequently; this
+            assessment reflects only the current moment
+          </Text>
+          <Text style={styles.bulletPoint}>
+            • General recommendations - Our suggestions are necessarily broad
+            and may not address your unique circumstances
+          </Text>
+          <Text style={styles.bulletPoint}>
+            • No site-specific analysis - We have not observed your workplace
+            directly or interviewed your employees
+          </Text>
+
+          <View
+            style={[
+              styles.contactInfo,
+              {
+                backgroundColor: "#fffbeb",
+                borderLeft: 3,
+                borderLeftColor: "#d97706",
+                marginTop: 15,
+              },
+            ]}
+          >
+            <Text style={[styles.contactTitle, { color: "#d97706" }]}>
+              Remember:
+            </Text>
+            <Text
+              style={[
+                styles.paragraph,
+                { fontSize: 9, margin: 0, fontStyle: "italic" },
+              ]}
+            >
+              This report is intended as a starting point to facilitate
+              discussion around mental health within your organisation. To move
+              forwards in exploring the contents of the report and gain a more
+              nuanced understanding of mental health within your organisation
+              please see below for details of how to schedule a free initial
+              consultation with one of our workplace wellness specialists.
+            </Text>
+          </View>
+        </View>
+      </Page>
+
+      <Page size="A4" style={styles.page}>
         <View style={styles.section}>
           <Text style={styles.sectionTitle}>Executive Summary</Text>
 
@@ -455,14 +594,17 @@ const AssessmentReportPDF: React.FC<{ results: AssessmentResults }> = ({
         </View>
 
         <Text style={styles.footer}>
-          PASU Health - Workplace Mental Health Assessment Report | Page 1
+          PASU Health - Workplace Mental Health Assessment Report | Section 1
         </Text>
       </Page>
 
       {/* Page 2: Legal Compliance */}
       <Page size="A4" style={styles.page}>
         <View style={styles.header}>
-          <Text style={styles.logoText}>PASU Health</Text>
+          <View style={styles.logoContainer}>
+            <Image style={styles.logoImage} src={getLogoImageData()} />
+            <Text style={styles.logoText}>PASU Health</Text>
+          </View>
           <Text style={{ fontSize: 10, color: "#6b7280" }}>
             {results.contactDetails.company} - Legal Compliance Review
           </Text>
@@ -527,14 +669,17 @@ const AssessmentReportPDF: React.FC<{ results: AssessmentResults }> = ({
         </View>
 
         <Text style={styles.footer}>
-          PASU Health - Workplace Mental Health Assessment Report | Page 2
+          PASU Health - Workplace Mental Health Assessment Report | Section 2
         </Text>
       </Page>
 
       {/* Page 3: Risk Analysis */}
       <Page size="A4" style={styles.page}>
         <View style={styles.header}>
-          <Text style={styles.logoText}>PASU Health</Text>
+          <View style={styles.logoContainer}>
+            <Image style={styles.logoImage} src={getLogoImageData()} />
+            <Text style={styles.logoText}>PASU Health</Text>
+          </View>
           <Text style={{ fontSize: 10, color: "#6b7280" }}>
             {results.contactDetails.company} - Risk Analysis
           </Text>
@@ -567,14 +712,17 @@ const AssessmentReportPDF: React.FC<{ results: AssessmentResults }> = ({
         </View>
 
         <Text style={styles.footer}>
-          PASU Health - Workplace Mental Health Assessment Report | Page 3
+          PASU Health - Workplace Mental Health Assessment Report | Section 3
         </Text>
       </Page>
 
       {/* Page 4: Recommendations */}
       <Page size="A4" style={styles.page}>
         <View style={styles.header}>
-          <Text style={styles.logoText}>PASU Health</Text>
+          <View style={styles.logoContainer}>
+            <Image style={styles.logoImage} src={getLogoImageData()} />
+            <Text style={styles.logoText}>PASU Health</Text>
+          </View>
           <Text style={{ fontSize: 10, color: "#6b7280" }}>
             {results.contactDetails.company} - Recommendations
           </Text>
@@ -655,7 +803,7 @@ const AssessmentReportPDF: React.FC<{ results: AssessmentResults }> = ({
           <View style={[styles.contactInfo, { marginTop: 15 }]}>
             <Text style={styles.contactTitle}>Contact Information</Text>
             <Text style={styles.contactDetail}>
-              Email: training@pasuhealth.com
+              Email: contact@pasuhealth.com
             </Text>
             <Text style={styles.contactDetail}>
               Website: www.pasuhealth.com
@@ -665,7 +813,104 @@ const AssessmentReportPDF: React.FC<{ results: AssessmentResults }> = ({
         </View>
 
         <Text style={styles.footer}>
-          PASU Health - Workplace Mental Health Assessment Report | Page 4
+          PASU Health - Workplace Mental Health Assessment Report | Section 4
+        </Text>
+      </Page>
+      {/* Page 5: Free Consultation Offer */}
+      <Page size="A4" style={styles.page}>
+        <View style={styles.header}>
+          <View style={styles.logoContainer}>
+            <Image style={styles.logoImage} src={getLogoImageData()} />
+            <Text style={styles.logoText}>PASU Health</Text>
+          </View>
+          <Text style={{ fontSize: 10, color: "#6b7280" }}>
+            {results.contactDetails.company} - Next Steps
+          </Text>
+        </View>
+
+        <View style={styles.section}>
+          <Text style={styles.sectionTitle}>
+            Thank You for Completing Your Assessment
+          </Text>
+
+          <View
+            style={[
+              styles.riskCard,
+              {
+                backgroundColor: "#f0f9ff",
+                borderColor: "#258fc1",
+                marginBottom: 20,
+                padding: 15,
+              },
+            ]}
+          >
+            <Text
+              style={[styles.riskLevel, { color: "#0369a1", fontSize: 26 }]}
+            >
+              We&apos;d like to offer you a FREE 30-minute consultation
+            </Text>
+            <Text style={[styles.paragraph, { fontSize: 11, marginTop: 10 }]}>
+              With one of our workplace wellness specialists to discuss your
+              results and next steps.
+            </Text>
+          </View>
+          <Text style={styles.sectionTitle}>
+            What Your Free Consultation Will Cover
+          </Text>
+
+          <View style={{ marginBottom: 10 }}>
+            <Text style={styles.bulletPoint}>
+              • Detailed analysis of your organisation&apos;s specific risk
+              factors
+            </Text>
+            <Text style={styles.bulletPoint}>
+              • Customised mental health training solutions tailored to your
+              needs
+            </Text>
+            <Text style={styles.bulletPoint}>
+              • Implementation strategies for improving employee wellbeing
+            </Text>
+            <Text style={styles.bulletPoint}>
+              • Available resources and support programs
+            </Text>
+            <Text style={styles.bulletPoint}>
+              • Practical recommendations based on your assessment results
+            </Text>
+          </View>
+        </View>
+
+        <View style={styles.section}>
+          <Text style={[styles.paragraph, { fontSize: 11, marginTop: 15 }]}>
+            Your consultation is a personalised 30-minute online video call with
+            one of our workplace wellness specialists. We&apos;ll go through all
+            of your assessment results in detail, adding context and explaining
+            what they mean for your business.
+          </Text>
+        </View>
+
+        <View style={styles.section}>
+          <Text style={styles.sectionTitle}>
+            How to Schedule Your Consultation
+          </Text>
+
+          <Text style={[styles.paragraph, { fontSize: 11, marginBottom: 10 }]}>
+            To book your free consultation, please:
+          </Text>
+
+          <Text style={styles.bulletPoint}>
+            • Visit: www.calendly.com/theburnouthub
+          </Text>
+          <Text style={styles.bulletPoint}>
+            • Email us directly: contact@pasuhealth.com
+          </Text>
+          <Text style={styles.bulletPoint}>
+            • Call us to discuss your needs immediately
+          </Text>
+        </View>
+
+        <Text style={styles.footer}>
+          PASU Health - Workplace Mental Health Assessment Report | Section 5 of
+          5
         </Text>
       </Page>
     </Document>

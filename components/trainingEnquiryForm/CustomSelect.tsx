@@ -32,7 +32,7 @@ export default function CustomSelect({
             {label} {required && <span className="text-red-500">*</span>}
           </Listbox.Label>
           <div className="relative mt-1">
-            <Listbox.Button className="grid w-full cursor-default grid-cols-1 rounded-md bg-transparent py-2 pr-2 pl-3 text-left text-gray-900 border border-gray-300 focus:outline-2 focus:-outline-offset-2 focus:outline-emerald-600 sm:text-sm">
+            <Listbox.Button className="grid w-full cursor-default grid-cols-1 rounded-md bg-transparent py-2 pr-2 pl-3 text-left text-gray-900 border-gray-300 focus:outline-2 focus:-outline-offset-2 focus:outline-emerald-600 sm:text-sm border-0 ring-2 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-emerald-700 outline-none">
               <span className="col-start-1 row-start-1 truncate pr-6">
                 {selected.name}
               </span>

@@ -15,7 +15,7 @@ export default async function TrainingEnquiryPage({
   const success = params.success === "true";
   const error = params.error;
   return (
-    <div className="max-w-2xl container mx-auto py-8">
+    <div className="max-w-2xl container mx-auto py-8 mb-18">
       <h1 className="text-2xl font-bold mb-6">Training Enquiries</h1>
       <TrainingEnquiryForm success={success} error={error} />
     </div>

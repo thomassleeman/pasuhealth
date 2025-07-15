@@ -41,7 +41,7 @@ const Card: React.FC<CardProps> = ({
 
 export default function HeroSection() {
   return (
-    <section className="py-16 2xl:mt-16">
+    <section className="py-12 2xl:mt-16">
       <div className="max-w-7xl mx-auto xl:max-w-full">
         <div className="flex flex-col xl:flex-row xl:gap-x-6 justify-between items-center">
           <div className="xl:w-2/3 mb-10 xl:mb-0 xl:pr-8">

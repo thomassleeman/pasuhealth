@@ -20,11 +20,13 @@ export function SubmitButton({
     <button
       type="submit"
       disabled={isDisabled}
-      className={`px-4 py-2 bg-emerald-700 text-white rounded-md hover:bg-emerald-600 cursor-pointer ${
-        isClient && pending ? "opacity-70 cursor-not-allowed" : ""
+      className={`w-full py-3 px-4 font-medium rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-emerald-500 transition-colors ${
+        isClient && pending
+          ? "bg-emerald-400 text-white cursor-not-allowed"
+          : "bg-emerald-600 hover:bg-emerald-700 text-white cursor-pointer"
       }`}
     >
-      {isClient && pending ? "Submitting..." : "Submit Enquiry"}
+      {isClient && pending ? "Submitting..." : "Request Callback"}
     </button>
   );
 }
