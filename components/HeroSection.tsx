@@ -46,11 +46,10 @@ export default function HeroSection() {
         <div className="flex flex-col xl:flex-row xl:gap-x-6 justify-between items-center">
           <div className="xl:w-2/3 mb-10 xl:mb-0 xl:pr-8">
             <h1 className="text-4xl md:text-5xl lg:text-6xl 2xl:text-7xl font-bold mb-12 xl:pl-2">
-              Workplace Mental Health is a{" "}
+              Let&apos;s make a plan to tackle Burnout in{" "}
               <span className="underline underline-offset-4 decoration-4 text-emerald-700 drop-shadow-2xl">
-                team effort.
+                your team
               </span>{" "}
-              <span>We&apos;re here to make it a reality for your team.</span>
             </h1>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">

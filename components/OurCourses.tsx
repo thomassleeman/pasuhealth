@@ -60,29 +60,8 @@ export default async function OurCourses() {
         </h2>
         <p className="mt-4 text-lg leading-8 text-gray-600 max-w-2xl mx-auto">
           Empower your team to support their own and each other&apos;s mental
-          health. Designed and delivered by our in-house psychologists, our
-          courses are available{" "}
-          <Link
-            className="text-emerald-700 underline underline-offset-2 font-bold"
-            href="/#face-to-face-training"
-          >
-            in-person
-          </Link>{" "}
-          or{" "}
-          <Link
-            className="text-emerald-700 underline underline-offset-2 font-bold"
-            href="/#virtual-training"
-          >
-            virtually
-          </Link>{" "}
-          and can also be taken in a{" "}
-          <Link
-            className="text-emerald-700 underline underline-offset-2 font-bold"
-            href="/#self-guided-learning"
-          >
-            self-guided learning
-          </Link>{" "}
-          format.
+          health. Designed by our in-house psychologists and delivered
+          virtually.
         </p>
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-y-8 gap-x-24">

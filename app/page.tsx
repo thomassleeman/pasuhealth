@@ -1,14 +1,12 @@
 // import Image from "next/image";
-import HeroSection from "@/components/HeroSection";
+import HeroSection from "@/components/HeroSectionNew";
 import FullWidthContainer from "@/components/containers/FullWidthContainer";
 import FullWidthContainerRoundedBottom from "@/components/containers/FullWidthContainerRoundedBottom";
 import Container from "@/components/containers/Container";
 import FullWidthContainerTop from "@/components/containers/FullWidthContainerTop";
 import WhatIsPasuDotIo from "@/components/WhatIsPasuDotIo";
 import OurCourses from "@/components/OurCourses";
-import VirtualTraining from "@/components/VirtualTraining";
-import FaceToFaceTraining from "@/components/FaceToFaceTraining";
-import SelfGuidedLearning from "@/components/SelfGuidedLearning";
+import Consulting from "@/components/Consulting";
 import CTASection from "@/components/CTASection";
 import RiskCheckerCTA from "@/components/RiskCheckerCTA";
 
@@ -32,22 +30,11 @@ export default function Home() {
         </Container>
       </FullWidthContainer>
       <FullWidthContainer bg="bg-amber-50">
-        <div id="virtual-training">
-          <VirtualTraining />
-        </div>
-      </FullWidthContainer>
-      <FullWidthContainer bg="bg-white">
-        <div id="face-to-face-training">
-          <FaceToFaceTraining />
-        </div>
-      </FullWidthContainer>
-      <FullWidthContainer bg="bg-amber-50">
-        <div id="self-guided-learning">
-          <SelfGuidedLearning />
-        </div>
-      </FullWidthContainer>
-      <FullWidthContainer bg="bg-transparent">
-        <CTASection />
+        <Container>
+          <div id="consultancy">
+            <Consulting />
+          </div>
+        </Container>
       </FullWidthContainer>
       <FullWidthContainerRoundedBottom bg="bg-white">
         <Container>
@@ -56,6 +43,9 @@ export default function Home() {
           </div>
         </Container>
       </FullWidthContainerRoundedBottom>
+      <FullWidthContainer bg="bg-transparent">
+        <CTASection />
+      </FullWidthContainer>
     </>
   );
 }
