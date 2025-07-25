@@ -9,9 +9,9 @@ import Image from "next/image";
 import Link from "next/link";
 
 const navigation = [
-  { name: "Our courses", href: "/#our-training-courses" },
-  { name: "Consulting", href: "/#consulting" },
-  { name: "What is pasu.io?", href: "/#what-is-pasu-dot-io" },
+  { name: "Mental health consultancy service", href: "/#consultancy" },
+  { name: "Training courses", href: "/#our-training-courses" },
+  { name: "pasu.io platform", href: "/#what-is-pasu-dot-io" },
   // { name: "Get in touch", href: "/training-enquiry" },
 ];
 
@@ -62,10 +62,10 @@ export default function Nav() {
             </Link>
           ))}
           <Link
-            href={"/training-enquiry"}
-            className=" font-semibold text-white hover:outline-4 outline-sky-300/50 outline-offset-4 rounded-lg bg-emerald-600 px-3 py-2"
+            href={"/request-a-callback"}
+            className=" font-semibold text-white hover:outline-4 outline-sky-300/50 outline-offset-4 rounded-lg bg-emerald-600 px-3 py-2 cursor-pointer"
           >
-            Work with us
+            Request a callback
           </Link>
         </div>
         {/* <div className="hidden lg:flex lg:flex-1 lg:justify-end">

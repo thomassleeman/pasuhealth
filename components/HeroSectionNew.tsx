@@ -58,7 +58,7 @@ const Card: React.FC<CardProps> = ({
             <div className="absolute top-0 left-0 w-full h-0.5 bg-gradient-to-r from-transparent via-amber-600 to-transparent rounded-t-2xl" />
           </>
         );
-      case "platform":
+      case "pasu.io":
         return (
           <>
             {/* Icon with gradient background */}
@@ -205,7 +205,7 @@ export default function HeroSection() {
                 team.
               </p>
               <a
-                href="#"
+                href="/schedule-a-consultation"
                 className="inline-flex items-center gap-3 bg-emerald-600 text-white rounded-xl py-4 px-8 text-lg font-semibold hover:bg-emerald-700 transition-all duration-200 transform hover:scale-105 active:scale-95 shadow-lg hover:shadow-xl"
               >
                 Book a free consultation
@@ -243,10 +243,10 @@ export default function HeroSection() {
               buttonHref="/#consultancy"
             />
             <Card
-              label="Platform"
+              label="pasu.io"
               title="Workplace wellness platform"
               description="Our comprehensive workplace mental health platform. On a mission to promote understanding and prevention of burnout."
-              buttonText="Go to pasu.io"
+              buttonText="Learn more"
               buttonHref="#what-is-pasu-dot-io"
               // variant="primary"
             />

@@ -26,7 +26,7 @@ export function SubmitButton({
           : "bg-emerald-600 hover:bg-emerald-700 text-white cursor-pointer"
       }`}
     >
-      {isClient && pending ? "Submitting..." : "Request Callback"}
+      {isClient && pending ? "Submitting..." : "Call me back"}
     </button>
   );
 }

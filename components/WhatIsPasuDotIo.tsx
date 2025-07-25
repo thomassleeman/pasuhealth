@@ -70,9 +70,14 @@ export default function OurSolutionSection() {
             <h2 className="font-mono text-base font-semibold text-emerald-600">
               What is PASU.io?
             </h2>
-            <p className="mt-16 text-4xl font-bold tracking-tight text-gray-900 sm:text-5xl 2xl:text-6xl">
-              Everything you need to tackle burnout in your team
-            </p>
+            <div className="mt-16">
+              <span className="inline-flex items-center rounded-lg translate-x-24 translate-y-2.5 rotate-[-12deg] bg-red-500 px-3 py-1 text-lg font-medium text-white ring-1 ring-inset ring-amber-600/20">
+                Coming Soon!
+              </span>
+              <p className="text-4xl font-bold tracking-tight text-gray-900 sm:text-5xl 2xl:text-6xl">
+                Everything you need to tackle burnout in your team
+              </p>
+            </div>
             <p className="mt-6 text-lg leading-8 text-gray-600">
               A{" "}
               <span className="underline underline-2 underline-offset-4 font-semibold">
