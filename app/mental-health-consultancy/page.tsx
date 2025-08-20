@@ -373,7 +373,7 @@ export default function MentalHealthConsultancy() {
             <div className="mt-10 flex items-center justify-center gap-x-6">
               <a
                 href="/schedule-a-consultation"
-                className="rounded-md bg-white px-4 py-3 text-sm font-semibold text-gray-900 shadow-sm hover:bg-gray-100 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+                className="rounded-md bg-white px-4 py-3 text-sm font-semibold text-gray-900 shadow-sm hover:bg-gray-100 focus-visible:outline focus-visible:outline-offset-2 focus-visible:outline-white"
               >
                 Schedule Consultation
               </a>

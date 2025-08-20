@@ -1,9 +1,5 @@
 import {
-  ChartBarIcon,
-  LightBulbIcon,
-  ClipboardDocumentCheckIcon,
   ClipboardDocumentListIcon,
-  ArrowPathIcon,
   CheckCircleIcon,
   DocumentCheckIcon,
   UserGroupIcon,
