@@ -9,8 +9,8 @@ import Image from "next/image";
 import Link from "next/link";
 
 const navigation = [
-  { name: "Mental health consultancy service", href: "/#consultancy" },
   { name: "Training courses", href: "/#our-training-courses" },
+  { name: "Mental health consultancy service", href: "/#consultancy" },
   { name: "pasu.io platform", href: "/#what-is-pasu-dot-io" },
   // { name: "Get in touch", href: "/training-enquiry" },
 ];
@@ -18,8 +18,7 @@ const navigation = [
 export default function Nav() {
   const pathname = usePathname();
   const isFixed =
-    pathname !== "/mental-health-risk-checker" &&
-    pathname !== "/training-enquiry";
+    pathname !== "/mental-health-risk-checker" && pathname !== "/contact-us";
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   return (

@@ -2,8 +2,11 @@ import {
   ChartBarIcon,
   LightBulbIcon,
   ClipboardDocumentCheckIcon,
+  ClipboardDocumentListIcon,
   ArrowPathIcon,
   CheckCircleIcon,
+  DocumentCheckIcon,
+  UserGroupIcon,
 } from "@heroicons/react/24/outline";
 import Link from "next/link";
 
@@ -11,22 +14,22 @@ const features = [
   {
     name: "Strategic Assessment",
     description:
-      "Comprehensive evaluation of your organization's current mental health provisions, identifying gaps and opportunities to create a workplace culture that prioritizes wellbeing and psychological safety.",
-    icon: ChartBarIcon,
+      "Comprehensive evaluation of your organization's current mental health provisions, identifying gaps and opportunities.",
+    icon: ClipboardDocumentListIcon,
     color: "emerald",
   },
   {
     name: "Tailored Solutions",
     description:
-      "Bespoke mental health strategies designed specifically for your organization's needs, culture, and objectives, ensuring practical implementation that aligns with your business goals.",
-    icon: LightBulbIcon,
+      "Bespoke mental health strategies designed specifically for your organization's needs, culture, and objectives.",
+    icon: DocumentCheckIcon,
     color: "sky",
   },
   {
     name: "Implementation Support",
     description:
-      "Ongoing guidance through the implementation process, including policy development, training program design, and measurement frameworks to track the impact of your mental health initiatives.",
-    icon: ClipboardDocumentCheckIcon,
+      "Guidance through the implementation process, including policy development, training program design, and measurement frameworks.",
+    icon: UserGroupIcon,
     color: "amber",
   },
 ];
@@ -39,44 +42,18 @@ export default function Consulting() {
           <div className="lg:ml-auto lg:pt-4 lg:pl-4">
             <div className="lg:max-w-lg">
               <h2 className="text-base/7 font-semibold text-emerald-700">
-                Expert Guidance
+                Consultancy Services
               </h2>
-              <p className="mt-2 text-4xl font-semibold tracking-tight text-pretty text-gray-900 sm:text-5xl">
-                Mental Health Consultancy for Progressive Organizations
-              </p>
-
-              {/* Mobile visual element */}
-              <div className="md:hidden mt-8 relative">
-                <div className="absolute inset-0 bg-gradient-to-r from-emerald-50 to-sky-50 rounded-2xl blur-xl opacity-70" />
-                <div className="relative bg-white/50 backdrop-blur-sm rounded-2xl border border-gray-200 p-8">
-                  <div className="flex justify-center space-x-4">
-                    <div className="flex flex-col items-center">
-                      <div className="h-16 w-16 rounded-full bg-emerald-100 flex items-center justify-center">
-                        <ChartBarIcon className="h-8 w-8 text-emerald-600" />
-                      </div>
-                      <ArrowPathIcon className="h-6 w-6 text-gray-400 mt-2" />
-                    </div>
-                    <div className="flex flex-col items-center">
-                      <div className="h-16 w-16 rounded-full bg-sky-100 flex items-center justify-center">
-                        <LightBulbIcon className="h-8 w-8 text-sky-600" />
-                      </div>
-                      <ArrowPathIcon className="h-6 w-6 text-gray-400 mt-2" />
-                    </div>
-                    <div className="flex flex-col items-center">
-                      <div className="h-16 w-16 rounded-full bg-amber-100 flex items-center justify-center">
-                        <ClipboardDocumentCheckIcon className="h-8 w-8 text-amber-600" />
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
+              <h1 className="mt-2 text-4xl font-semibold tracking-tight text-pretty text-gray-900 sm:text-5xl">
+                Workplace wellness review and planning service
+              </h1>
 
               <p className="mt-6 text-lg/8 text-gray-600">
                 Partner with our expert consultants to transform your workplace
                 mental health approach. We provide strategic guidance,
-                evidence-based solutions, and practical tools to create a
-                mentally healthy workplace that drives performance and employee
-                satisfaction.
+                evidence-based solutions, and practical tools to help you create
+                a mentally healthy workplace that drives performance and
+                employee satisfaction.
               </p>
               <dl className="mt-10 max-w-xl space-y-8 text-base/7 text-gray-600 lg:max-w-none">
                 {features.map((feature) => (
@@ -131,7 +108,7 @@ export default function Consulting() {
                           </div>
                         </div>
                       </div>
-                      <ChartBarIcon className="h-5 w-5 text-gray-400" />
+                      <ClipboardDocumentListIcon className="h-5 w-5 text-gray-400" />
                     </div>
 
                     <div className="flex items-center justify-between">
@@ -150,7 +127,7 @@ export default function Consulting() {
                           </div>
                         </div>
                       </div>
-                      <LightBulbIcon className="h-5 w-5 text-gray-400" />
+                      <DocumentCheckIcon className="h-5 w-5 text-gray-400" />
                     </div>
 
                     <div className="flex items-center justify-between">
@@ -169,7 +146,7 @@ export default function Consulting() {
                           </div>
                         </div>
                       </div>
-                      <ClipboardDocumentCheckIcon className="h-5 w-5 text-gray-400" />
+                      <UserGroupIcon className="h-5 w-5 text-gray-400" />
                     </div>
                   </div>
 
@@ -179,7 +156,7 @@ export default function Consulting() {
                       <CheckCircleIcon className="h-8 w-8 text-emerald-600" />
                       <div className="ml-3">
                         <p className="text-sm font-semibold text-gray-900">
-                          Expected Outcomes
+                          A mentally healthy workplace for all
                         </p>
                         <p className="text-xs text-gray-600">
                           Measurable improvements in workplace wellbeing

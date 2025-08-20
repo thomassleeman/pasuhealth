@@ -36,16 +36,16 @@ export default function Home() {
           </div>
         </Container>
       </FullWidthContainer>
-      <FullWidthContainerRoundedBottom bg="bg-white">
+      <FullWidthContainer bg="bg-white">
         <Container>
           <div id="what-is-pasu-dot-io">
             <WhatIsPasuDotIo />
           </div>
         </Container>
-      </FullWidthContainerRoundedBottom>
-      <FullWidthContainer bg="bg-transparent">
-        <CTASection />
       </FullWidthContainer>
+      <FullWidthContainerRoundedBottom bg="bg-transparent">
+        <CTASection />
+      </FullWidthContainerRoundedBottom>
     </>
   );
 }

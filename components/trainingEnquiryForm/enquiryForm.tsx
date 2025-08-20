@@ -2,7 +2,7 @@
 import { useState } from "react";
 import { FormStatus } from "./FormStatus";
 import { SubmitButton } from "./SubmitButton";
-import { submitTrainingEnquiryForm } from "@actions/trainingEnquiry";
+import { submitEnquiryForm } from "@/app/actions/enquiry";
 import { useRouter } from "next/navigation";
 import CustomSelect from "./CustomSelect";
 import Link from "next/link";
@@ -98,7 +98,7 @@ const hearAboutUsOptions = [
 ];
 
 // Main form component for training enquiries
-export function TrainingEnquiryForm({
+export function EnquiryForm({
   success: initialSuccess,
   error: initialError,
 }: {
@@ -129,8 +129,8 @@ export function TrainingEnquiryForm({
     contactPreference: "",
 
     // Enquiry
-    trainingDelivery: "",
-    trainingRequirements: "",
+    services: "",
+    requirements: "",
 
     // Personal details
     firstName: "",
@@ -180,16 +180,16 @@ export function TrainingEnquiryForm({
   };
 
   async function handleSubmit(formDataObj: FormData) {
-    const result = await submitTrainingEnquiryForm(formDataObj);
+    const result = await submitEnquiryForm(formDataObj);
 
     if (result.success) {
       // Update URL to show success
-      router.push("/training-enquiry?success=true");
+      router.push("/contact-us?success=true");
       setFormState({ success: true, error: undefined, isSubmitted: true });
     } else {
       // Update URL to show error
       router.push(
-        `/training-enquiry?error=${encodeURIComponent(result.error || "")}`
+        `/contact-us?error=${encodeURIComponent(result.error || "")}`
       );
       setFormState({ success: false, error: result.error, isSubmitted: false });
     }
@@ -328,42 +328,40 @@ export function TrainingEnquiryForm({
 
       <div className="mb-4">
         <label className="block text-sm font-medium mb-2">
-          Do you know what training delivery you want?
+          Which services are you interested in?
+          <span className="text-red-500">*</span>
         </label>
         <div className="flex flex-col space-y-2 mt-1">
-          {["Virtual training", "Face to face", "Both", "Not sure yet"].map(
-            (option) => (
-              <label key={option} className="flex items-center">
-                <input
-                  type="radio"
-                  name="trainingDelivery"
-                  value={option}
-                  checked={formData.trainingDelivery === option}
-                  onChange={() => handleRadioChange("trainingDelivery", option)}
-                  className="mr-2 accent-emerald-700 w-4 h-4"
-                />
-                {option}
-              </label>
-            )
-          )}
+          {[
+            "Training",
+            "Workplace wellness consutancy",
+            "Both",
+            "Not sure yet",
+          ].map((option) => (
+            <label key={option} className="flex items-center">
+              <input
+                type="radio"
+                name="services"
+                value={option}
+                checked={formData.services === option}
+                onChange={() => handleRadioChange("services", option)}
+                className="mr-2 accent-emerald-700 w-4 h-4"
+                required
+              />
+              {option}
+            </label>
+          ))}
         </div>
       </div>
 
       <div className="mb-4">
-        <label
-          htmlFor="trainingRequirements"
-          className="block text-sm font-medium"
-        >
-          Tell us more about your training requirements.
+        <label htmlFor="requirements" className="block text-sm font-medium">
+          Tell us more about your requirements.
         </label>
-        <p className="text-sm text-gray-500 mb-2">
-          Do you already know which courses you are interested in? How many
-          people are you looking to train? Do you have a specific timeframe?
-        </p>
         <textarea
-          id="trainingRequirements"
-          name="trainingRequirements"
-          value={formData.trainingRequirements}
+          id="requirements"
+          name="requirements"
+          value={formData.requirements}
           onChange={handleInputChange}
           rows={5}
           className="mt-1 block w-full px-3 py-2 border-gray-300 rounded-md border-0 ring-2 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-emerald-700 outline-none"
@@ -371,47 +369,6 @@ export function TrainingEnquiryForm({
       </div>
     </>
   );
-
-  // const renderPreferences = () => (
-  //   <>
-  //     <h2 className="text-xl font-bold mb-4">3 of 4 - Your Preferences</h2>
-
-  //     <div className="mb-4">
-  //       <label className="block text-sm font-medium">
-  //         Please contact me via:
-  //       </label>
-  //       <div className="flex flex-col space-y-2 mt-1">
-  //         {["Email", "SMS", "Phone"].map((option) => (
-  //           <label key={option} className="flex items-center">
-  //             <input
-  //               type="checkbox"
-  //               name="contactVia"
-  //               value={option}
-  //               checked={formData.contactVia.includes(option)}
-  //               onChange={handleInputChange}
-  //               className="mr-2"
-  //             />
-  //             {option}
-  //           </label>
-  //         ))}
-  //       </div>
-  //     </div>
-
-  //     <div className="mb-4">
-  //       <h3 className="text-md font-medium mb-2">Your privacy</h3>
-  //       <p className="text-sm mb-2">
-  //         We take your privacy seriously and promise to never sell your data.
-  //         You can find out more about your rights, how we use your personal
-  //         information and how we keep your details safe and secure by reading
-  //         our Privacy Policy.
-  //       </p>
-  //       <p className="text-sm mb-2">
-  //         If we have your postal address, we may contact you by post unless you
-  //         tell us otherwise.
-  //       </p>
-  //     </div>
-  //   </>
-  // );
 
   const renderPersonalDetails = () => (
     <>
@@ -537,7 +494,7 @@ export function TrainingEnquiryForm({
             <button
               type="button"
               onClick={prevStep}
-              className="px-4 py-2 border border-gray-300 rounded-md"
+              className="px-4 py-2 border border-gray-300 rounded-md cursor-pointer"
             >
               Previous
             </button>
@@ -547,7 +504,7 @@ export function TrainingEnquiryForm({
             {currentStep < totalSteps ? (
               <button
                 type="submit"
-                className="px-4 py-2 bg-emerald-700 text-white rounded-md"
+                className="px-4 py-2 bg-emerald-700 text-white rounded-md cursor-pointer"
               >
                 Next
               </button>

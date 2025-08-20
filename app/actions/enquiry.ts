@@ -17,16 +17,15 @@ const TrainingEnquirySchema = z.object({
     .string()
     .min(1, { message: "Number of employees is required" }),
   // locationCount: z.string().optional(),
-  hearAboutUs: z
-    .string()
-    .min(1, { message: "Please tell us how you heard about us" }),
+  hearAboutUs: z.string(),
+  // .min(1, { message: "Please tell us how you heard about us" }),
   // hasSpecificBudget: z.boolean().optional(),
   // isBudgetHolder: z.boolean().optional(),
   contactPreference: z.string().optional(),
 
   // Enquiry
-  trainingDelivery: z.string().optional(),
-  trainingRequirements: z.string().optional(),
+  services: z.string().optional(),
+  requirements: z.string().optional(),
 
   // Preferences
   contactVia: z.array(z.string()).optional().or(z.string().optional()),
@@ -39,7 +38,7 @@ const TrainingEnquirySchema = z.object({
   phone: z.string().optional(),
 });
 
-export async function submitTrainingEnquiryForm(formData: FormData) {
+export async function submitEnquiryForm(formData: FormData) {
   try {
     // Get contactVia entries and convert to string array
     const contactViaEntries = formData
@@ -58,8 +57,8 @@ export async function submitTrainingEnquiryForm(formData: FormData) {
       hasSpecificBudget?: boolean;
       isBudgetHolder?: boolean;
       contactPreference?: string;
-      trainingDelivery?: string;
-      trainingRequirements?: string;
+      services?: string;
+      requirements?: string;
       contactVia?: string[];
       firstName?: string;
       lastName?: string;
@@ -92,7 +91,7 @@ export async function submitTrainingEnquiryForm(formData: FormData) {
 
     // Prepare email content
     const htmlContent = `
-      <h1>New Training Enquiry Submission</h1>
+      <h1>New Enquiry Submission</h1>
       
       <h2>Organisation Details</h2>
       <p><strong>Organisation:</strong> ${validatedFields.organisation}</p>
@@ -103,8 +102,8 @@ export async function submitTrainingEnquiryForm(formData: FormData) {
       <p><strong>Contact preference:</strong> ${validatedFields.contactPreference || "Not specified"}</p>
       
       <h2>Enquiry Details</h2>
-      <p><strong>Preferred training delivery:</strong> ${validatedFields.trainingDelivery || "Not specified"}</p>
-      <p><strong>Training requirements:</strong> ${validatedFields.trainingRequirements || "Not specified"}</p>
+      <p><strong>Training or consultancy?:</strong> ${validatedFields.services || "Not specified"}</p>
+      <p><strong>Requirement details:</strong> ${validatedFields.requirements || "Not specified"}</p>
       
       <h2>Personal Details</h2>
       <p><strong>Name:</strong> ${validatedFields.firstName} ${validatedFields.lastName}</p>
@@ -114,7 +113,7 @@ export async function submitTrainingEnquiryForm(formData: FormData) {
     `;
 
     const textContent = `
-      New Training Enquiry Submission
+      New Enquiry Submission
       
       ORGANISATION DETAILS
       Organisation: ${validatedFields.organisation}
@@ -125,8 +124,8 @@ export async function submitTrainingEnquiryForm(formData: FormData) {
       Contact preference: ${validatedFields.contactPreference || "Not specified"}
       
       ENQUIRY DETAILS
-      Preferred training delivery: ${validatedFields.trainingDelivery || "Not specified"}
-      Training requirements: ${validatedFields.trainingRequirements || "Not specified"}
+      Training or consultancy?: ${validatedFields.services || "Not specified"}
+      Requirement details: ${validatedFields.requirements || "Not specified"}
       
       PERSONAL DETAILS
       Name: ${validatedFields.firstName} ${validatedFields.lastName}
@@ -137,11 +136,9 @@ export async function submitTrainingEnquiryForm(formData: FormData) {
 
     // Send email with Resend
     const response = await resend.emails.send({
-      from: "Training Enquiry <training@pasuhealth.com>",
-      to:
-        (process.env.TRAINING_EMAIL as string) ||
-        (process.env.CONTACT_EMAIL as string), // Fallback to contact email if training email not set
-      subject: "New Training Enquiry Submission",
+      from: "Pasuhealth.com Enquiry <contactpage@pasuhealth.com>",
+      to: process.env.CONTACT_EMAIL as string,
+      subject: "New Contact Page Submission",
       text: textContent,
       html: htmlContent,
     });
@@ -160,6 +157,7 @@ export async function submitTrainingEnquiryForm(formData: FormData) {
 
     // Handle validation errors
     if (error instanceof z.ZodError) {
+      console.log("Validation errors:", error.errors);
       return {
         success: false,
         error: "Please check your form entries and try again",

@@ -200,7 +200,7 @@ export default function ScheduleConsultationPage() {
 
               {/* Calendly Widget Container */}
               <CalendlyWidget
-                url="https://calendly.com/contact-pasuhealth/30min?background_color=fffbeb&text_color=3f3f46&primary_color=047857"
+                url="https://calendly.com/pasuhealth/30min?background_color=fffbeb&text_color=3f3f46&primary_color=047857"
                 height="700px"
                 minWidth="320px"
               />

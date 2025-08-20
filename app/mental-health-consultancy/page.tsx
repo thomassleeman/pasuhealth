@@ -1,8 +1,8 @@
 import {
   CheckCircleIcon,
   ChartBarIcon,
-  LightBulbIcon,
   ArrowPathIcon,
+  BanknotesIcon,
 } from "@heroicons/react/24/outline";
 
 export default function MentalHealthConsultancy() {
@@ -21,17 +21,16 @@ export default function MentalHealthConsultancy() {
           <div className="mb-8 flex justify-center">
             <div className="relative rounded-full px-4 py-1.5 text-sm leading-6 text-gray-600 ring-1 ring-inset ring-gray-900/10 hover:ring-gray-900/20">
               <span className="font-semibold text-emerald-600">
-                Strategic Partnership
+                Mental Health Consultancy
               </span>
             </div>
           </div>
           <h1 className="text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl">
-            Mental Health Consultancy
+            Workplace wellness review and planning service
           </h1>
-          <p className="mt-6 text-lg leading-8 text-gray-600">
-            Transform your workplace culture with expert guidance. Build
-            comprehensive mental health strategies that drive business
-            performance while prioritizing employee wellbeing.
+          <p className="mt-6 text-xl leading-8 text-gray-600">
+            Transform your workplace culture with expert guidance in how to best
+            prioritise employee wellbeing.
           </p>
         </div>
       </div>
@@ -41,12 +40,10 @@ export default function MentalHealthConsultancy() {
         {/* Introduction */}
         <div className="mx-auto max-w-3xl">
           <p className="text-lg text-gray-700 leading-8">
-            Creating a mentally healthy workplace requires more than good
-            intentions—it demands strategic planning, evidence-based approaches,
-            and sustained commitment. Our consultancy service provides the
-            expertise and framework to develop mental health initiatives that
-            are both impactful and sustainable, tailored to your
-            organization&apos;s unique challenges and opportunities.
+            Our consultancy service provides the expertise and framework to
+            develop mental health initiatives that are both impactful and
+            sustainable, tailored to your organisation&apos;s unique challenges
+            and opportunities.
           </p>
         </div>
 
@@ -72,17 +69,17 @@ export default function MentalHealthConsultancy() {
             <div className="relative bg-gradient-to-br from-sky-50 to-white p-8 rounded-2xl border border-sky-100">
               <div className="flex items-center gap-4 mb-4">
                 <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-sky-600">
-                  <LightBulbIcon className="h-6 w-6 text-white" />
+                  <BanknotesIcon className="h-6 w-6 text-white" />
                 </div>
                 <h3 className="text-lg font-semibold text-gray-900">
                   ROI-Focused Approach
                 </h3>
               </div>
               <p className="text-gray-600">
-                We help build the business case for mental health investment,
-                demonstrating how improved wellbeing translates to reduced
-                absenteeism, increased productivity, and enhanced talent
-                retention.
+                Improved wellbeing translates to reduced absenteeism, increased
+                productivity, and enhanced talent retention. We recognise the
+                importance of ROI and keep it central to our strategy
+                development.
               </p>
             </div>
 
@@ -97,8 +94,8 @@ export default function MentalHealthConsultancy() {
               </div>
               <p className="text-gray-600">
                 Beyond recommendations, we provide practical implementation
-                roadmaps, change management support, and measurement frameworks
-                to ensure lasting positive change.
+                roadmaps, support, and measurement frameworks to ensure lasting
+                positive change.
               </p>
             </div>
           </div>
@@ -108,11 +105,11 @@ export default function MentalHealthConsultancy() {
         <div className="mx-auto mt-32 max-w-7xl">
           <div className="text-center mb-16">
             <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
-              Our Consultancy Approach
+              How does it work?
             </h2>
             <p className="mt-4 text-lg leading-8 text-gray-600 max-w-3xl mx-auto">
               We&apos;ve developed a structured methodology based on established
-              best practices in organizational psychology and change management.
+              best practices in organisational psychology and change management.
             </p>
           </div>
 
@@ -133,7 +130,7 @@ export default function MentalHealthConsultancy() {
                   <p className="mt-2 text-base leading-7 text-gray-600">
                     We begin with a comprehensive evaluation of your current
                     workplace culture, existing mental health provisions, and
-                    organizational readiness for change. This includes
+                    organisational readiness for change. This includes
                     stakeholder interviews, employee surveys, policy reviews,
                     and analysis of relevant metrics like absence rates and
                     engagement scores.
@@ -155,7 +152,7 @@ export default function MentalHealthConsultancy() {
                     strategy aligned with your business objectives. This
                     includes identifying priority areas, setting measurable
                     goals, and creating a phased implementation plan that
-                    considers your resources, timeline, and organizational
+                    considers your resources, timeline, and organisational
                     capacity.
                   </p>
                 </div>
@@ -191,10 +188,10 @@ export default function MentalHealthConsultancy() {
                   </h3>
                   <p className="mt-2 text-base leading-7 text-gray-600">
                     We guide you through the rollout of your mental health
-                    strategy, providing hands-on support for policy development,
-                    training program design, and system implementation. Our
-                    consultants remain available to troubleshoot challenges and
-                    adjust approaches based on real-time feedback.
+                    strategy, providing hands-on support for implementation of
+                    new policies, systems, and training. Our consultants remain
+                    available to troubleshoot challenges and adjust approaches
+                    based on real-time feedback.
                   </p>
                 </div>
               </div>
@@ -206,13 +203,13 @@ export default function MentalHealthConsultancy() {
                 </div>
                 <div className="flex-auto">
                   <h3 className="text-xl font-semibold leading-8 text-gray-900">
-                    Measurement & Optimization
+                    Measurement & Optimisation
                   </h3>
                   <p className="mt-2 text-base leading-7 text-gray-600">
                     We establish metrics and monitoring systems to track the
                     impact of your mental health initiatives. Regular reviews
                     allow us to demonstrate ROI, identify areas for improvement,
-                    and continuously refine your approach to maximize
+                    and continuously refine your approach to maximise
                     effectiveness.
                   </p>
                 </div>
@@ -228,7 +225,7 @@ export default function MentalHealthConsultancy() {
               Why Mental Health Consultancy Matters
             </h3>
             <p className="text-gray-700 mb-8">
-              Research consistently shows that organizations with comprehensive
+              Research consistently shows that organisations with comprehensive
               mental health strategies experience:
             </p>
             <div className="grid gap-6 sm:grid-cols-2">
@@ -264,7 +261,7 @@ export default function MentalHealthConsultancy() {
                     Better resilience
                   </p>
                   <p className="text-gray-600">
-                    during organizational challenges
+                    during organisational challenges
                   </p>
                 </div>
               </div>
@@ -277,39 +274,39 @@ export default function MentalHealthConsultancy() {
         </div>
 
         {/* Industry Expertise */}
-        <div className="mx-auto mt-32 max-w-4xl text-center">
+        <div className="mx-auto mt-32 max-w-4xl text-center outline-1 py-8 px-12 rounded-xl outline-gray-300">
           <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
             Expertise Across Industries
           </h2>
           <p className="mt-6 text-lg leading-8 text-gray-600">
-            Mental health challenges manifest differently across sectors. Our
-            consultants bring together expertise in organizational psychology,
-            workplace wellbeing, and change management to deliver solutions that
-            work for your specific industry context.
+            Mental health challenges manifest differently across different
+            sectors. Our consultants bring together expertise in organisational
+            psychology, workplace wellbeing, and change management to deliver
+            solutions that work for your specific industry context.
           </p>
           <div className="mt-10 flex flex-wrap justify-center gap-8 text-sm font-semibold text-gray-600">
             <span className="flex items-center gap-2">
-              <div className="h-2 w-2 rounded-full bg-emerald-600" />
+              <div className="h-2 w-2 rounded-full bg-emerald-600 animate-pulse" />
               Healthcare
             </span>
             <span className="flex items-center gap-2">
-              <div className="h-2 w-2 rounded-full bg-emerald-600" />
+              <div className="h-2 w-2 rounded-full bg-emerald-600 animate-pulse" />
               Technology
             </span>
             <span className="flex items-center gap-2">
-              <div className="h-2 w-2 rounded-full bg-emerald-600" />
+              <div className="h-2 w-2 rounded-full bg-emerald-600 animate-pulse" />
               Finance
             </span>
             <span className="flex items-center gap-2">
-              <div className="h-2 w-2 rounded-full bg-emerald-600" />
+              <div className="h-2 w-2 rounded-full bg-emerald-600 animate-pulse" />
               Retail
             </span>
             <span className="flex items-center gap-2">
-              <div className="h-2 w-2 rounded-full bg-emerald-600" />
+              <div className="h-2 w-2 rounded-full bg-emerald-600 animate-pulse" />
               Manufacturing
             </span>
             <span className="flex items-center gap-2">
-              <div className="h-2 w-2 rounded-full bg-emerald-600" />
+              <div className="h-2 w-2 rounded-full bg-emerald-600 animate-pulse" />
               Public Services
             </span>
           </div>
@@ -324,7 +321,7 @@ export default function MentalHealthConsultancy() {
           </div>
           <div className="grid gap-8 sm:grid-cols-2">
             <div className="relative pl-9">
-              <div className="absolute left-0 top-0 flex h-6 w-6 items-center justify-center rounded-full bg-emerald-100">
+              <div className="absolute left-0 top-0 flex h-6 w-6 items-center justify-center rounded-full bg-emerald-200/50">
                 <div className="h-2 w-2 rounded-full bg-emerald-600" />
               </div>
               <h3 className="font-semibold text-gray-900">Expert Team</h3>
@@ -333,7 +330,7 @@ export default function MentalHealthConsultancy() {
               </p>
             </div>
             <div className="relative pl-9">
-              <div className="absolute left-0 top-0 flex h-6 w-6 items-center justify-center rounded-full bg-emerald-100">
+              <div className="absolute left-0 top-0 flex h-6 w-6 items-center justify-center rounded-full bg-emerald-200/50">
                 <div className="h-2 w-2 rounded-full bg-emerald-600" />
               </div>
               <h3 className="font-semibold text-gray-900">Evidence-Based</h3>
@@ -342,7 +339,7 @@ export default function MentalHealthConsultancy() {
               </p>
             </div>
             <div className="relative pl-9">
-              <div className="absolute left-0 top-0 flex h-6 w-6 items-center justify-center rounded-full bg-emerald-100">
+              <div className="absolute left-0 top-0 flex h-6 w-6 items-center justify-center rounded-full bg-emerald-200/50">
                 <div className="h-2 w-2 rounded-full bg-emerald-600" />
               </div>
               <h3 className="font-semibold text-gray-900">Collaborative</h3>
@@ -351,7 +348,7 @@ export default function MentalHealthConsultancy() {
               </p>
             </div>
             <div className="relative pl-9">
-              <div className="absolute left-0 top-0 flex h-6 w-6 items-center justify-center rounded-full bg-emerald-100">
+              <div className="absolute left-0 top-0 flex h-6 w-6 items-center justify-center rounded-full bg-emerald-200/50">
                 <div className="h-2 w-2 rounded-full bg-emerald-600" />
               </div>
               <h3 className="font-semibold text-gray-900">Practical</h3>
@@ -364,24 +361,24 @@ export default function MentalHealthConsultancy() {
 
         {/* CTA Section */}
         <div className="mx-auto mt-32 max-w-4xl text-center">
-          <div className="rounded-3xl bg-gray-900 px-6 py-16 sm:px-12 sm:py-20">
+          <div className="rounded-3xl bg-emerald-700 px-6 py-16 sm:px-12 sm:py-20">
             <h2 className="text-3xl font-bold tracking-tight text-white sm:text-4xl">
               Ready to transform your workplace?
             </h2>
             <p className="mx-auto mt-6 max-w-xl text-lg leading-8 text-gray-300">
               Take the first step towards building a mentally healthier
               workplace. Schedule a consultation to explore how our service can
-              support your organization&apos;s goals.
+              support your organisation&apos;s goals.
             </p>
             <div className="mt-10 flex items-center justify-center gap-x-6">
               <a
-                href="/training-enquiry"
+                href="/schedule-a-consultation"
                 className="rounded-md bg-white px-4 py-3 text-sm font-semibold text-gray-900 shadow-sm hover:bg-gray-100 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
               >
                 Schedule Consultation
               </a>
               <a
-                href="/contact"
+                href="/contact-us"
                 className="text-sm font-semibold leading-6 text-white"
               >
                 Contact us <span aria-hidden="true">→</span>

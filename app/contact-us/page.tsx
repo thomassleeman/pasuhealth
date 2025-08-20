@@ -1,4 +1,4 @@
-import { TrainingEnquiryForm } from "@/components/trainingEnquiryForm/TrainingEnquiryForm";
+import { EnquiryForm } from "@/components/trainingEnquiryForm/enquiryForm";
 
 export default async function TrainingEnquiryPage({
   searchParams,
@@ -16,8 +16,8 @@ export default async function TrainingEnquiryPage({
   const error = params.error;
   return (
     <div className="max-w-2xl container mx-auto py-8 mb-18">
-      <h1 className="text-2xl font-bold mb-6">Training Enquiries</h1>
-      <TrainingEnquiryForm success={success} error={error} />
+      <h1 className="text-2xl font-bold mb-6">Contact Us</h1>
+      <EnquiryForm success={success} error={error} />
     </div>
   );
 }
