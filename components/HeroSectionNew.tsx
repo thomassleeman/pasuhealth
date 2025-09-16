@@ -128,7 +128,7 @@ export default function HeroSection() {
         </div>
       </section>
 
-      <section className="flex justify-center items-stretch">
+      {/* <section className="flex justify-center items-stretch">
         <Link
           href="/#our-training-courses"
           className="p-8 flex items-center text-center max-w-md gap-x-4 hover:underline underline-offset-8 decoration-emerald-600 decoration-2"
@@ -156,7 +156,7 @@ export default function HeroSection() {
             Workplace Wellbeing Platform
           </h3>
         </Link>
-      </section>
+      </section> */}
     </div>
   );
 }
