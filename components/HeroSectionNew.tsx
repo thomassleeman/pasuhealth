@@ -3,13 +3,7 @@
 // components/HeroSection.tsx
 import React, { useState } from "react";
 import Image from "next/image";
-import Link from "next/link";
 import { CalendarDaysIcon, PlayCircleIcon } from "@heroicons/react/24/outline";
-import {
-  ChartBarIcon,
-  AcademicCapIcon,
-  ComputerDesktopIcon,
-} from "@heroicons/react/24/outline";
 import AaronGif from "@/public/thumb.gif";
 
 const VideoCard: React.FC = () => {
