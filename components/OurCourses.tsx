@@ -57,11 +57,11 @@ const BentoCourseCard = ({
         </div>
         <div className="px-8 py-4 flex-grow flex flex-col justify-between">
           {course.duration && (
-            <h3 className="text-sm/4 font-semibold text-emerald-600 dark:text-emerald-400">
+            <h3 className="text-md font-extrabold text-emerald-600 dark:text-emerald-400">
               Duration: {course.duration}
             </h3>
           )}
-          <p className="mt-2 text-xl font-medium tracking-tight text-gray-950 dark:text-white line-clamp-3">
+          <p className="mt-2 text-2xl font-medium tracking-tight text-gray-950 dark:text-white line-clamp-2">
             {course.title}
           </p>
           {/* <p className="mt-2 text-sm/6 text-gray-600 dark:text-gray-400 flex-grow">
