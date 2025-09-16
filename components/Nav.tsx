@@ -55,7 +55,7 @@ export default function Nav() {
             <Link
               key={item.name}
               href={item.href}
-              className=" font-semibold text-gray-900 hover:outline-4 outline-sky-300/50 outline-offset-4 rounded-md px-1"
+              className=" font-semibold text-gray-900 hover:outline-2 outline-emerald-600 outline-offset-4 rounded-md px-1"
             >
               {item.name}
             </Link>
