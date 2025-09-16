@@ -74,11 +74,11 @@ export default function HeroSection() {
   return (
     <div className="relative mb-12">
       {/* Main Hero Section */}
-      <section className="py-16 lg:py-20 2xl:py-24">
+      <section className="py-12 sm:py-16 lg:py-20 2xl:py-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col xl:flex-row xl:gap-x-12 items-center">
             <div className="xl:w-3/5 mb-12 xl:mb-0">
-              <h1 className="text-4xl md:text-5xl lg:text-6xl 2xl:text-7xl font-bold text-gray-900 mb-8 leading-tight">
+              <h1 className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl 2xl:text-7xl font-bold text-gray-900 mb-8 leading-tight">
                 Let&apos;s make a plan to tackle Burnout in{" "}
                 <span className="relative">
                   <span className="relative z-10 text-emerald-700">
@@ -100,7 +100,7 @@ export default function HeroSection() {
                   </svg>
                 </span>
               </h1>
-              <p className="text-xl text-gray-600 mb-10 leading-relaxed">
+              <p className="text-md sm:text-xl text-gray-600 mb-10 leading-relaxed">
                 Don&apos;t allow stress and burnout to take a toll on your
                 people. We are a small team passionate about helping businesses
                 like yours to create a healthier work culture and a happier
@@ -108,7 +108,7 @@ export default function HeroSection() {
               </p>
               <a
                 href="/schedule-a-consultation"
-                className="inline-flex items-center gap-3 bg-emerald-600 text-white rounded-xl py-4 px-8 text-lg font-semibold hover:bg-emerald-700 transition-all duration-200 transform hover:scale-105 active:scale-95 shadow-lg hover:shadow-xl"
+                className="inline-flex items-center gap-3 bg-emerald-600 text-white rounded-xl py-4 px-8 sm:text-lg font-semibold hover:bg-emerald-700 transition-all duration-200 transform hover:scale-105 active:scale-95 shadow-lg hover:shadow-xl"
               >
                 Book a free consultation
                 <CalendarDaysIcon className="w-6 h-6" />
