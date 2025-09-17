@@ -41,7 +41,7 @@ const BentoCourseCard = ({
 }: BentoCourseCardProps) => {
   return (
     <div className={`relative ${gridClass}`}>
-      <div className="absolute inset-0 rounded-lg bg-white dark:bg-gray-800" />
+      <div className="absolute inset-0 rounded-lg bg-white" />
       <Link
         href={`/our-courses/${course.slug.current}`}
         className={`relative flex h-full flex-col overflow-hidden rounded-[calc(var(--radius-lg)+1px)] ${roundedClass} group ring-emerald-600 ring-offset-8 hover:ring-2`}
@@ -57,17 +57,17 @@ const BentoCourseCard = ({
         </div>
         <div className="px-8 py-4 flex-grow flex flex-col justify-between">
           {course.duration && (
-            <h3 className="text-md font-extrabold text-emerald-600 dark:text-emerald-400">
+            <h3 className="text-md font-extrabold text-emerald-600">
               Duration: {course.duration}
             </h3>
           )}
-          <p className="mt-2 text-2xl font-medium tracking-tight text-gray-950 dark:text-white line-clamp-2">
+          <p className="mt-2 text-2xl font-medium tracking-tight text-gray-950 line-clamp-2">
             {course.title}
           </p>
-          {/* <p className="mt-2 text-sm/6 text-gray-600 dark:text-gray-400 flex-grow">
+          {/* <p className="mt-2 text-sm/6 text-gray-600 flex-grow">
             {course.outline}
           </p> */}
-          <span className="mt-4 inline-flex items-center text-sm font-medium text-emerald-600 dark:text-emerald-400 group-hover:text-emerald-700 dark:group-hover:text-emerald-300 transition-colors">
+          <span className="mt-4 inline-flex items-center text-sm font-medium text-emerald-600 group-hover:text-emerald-700 transition-colors">
             Learn More
             <svg
               className="ml-1 h-4 w-4 transition-transform group-hover:translate-x-1"
@@ -86,7 +86,7 @@ const BentoCourseCard = ({
         </div>
       </Link>
       <div
-        className={`pointer-events-none absolute inset-0 rounded-lg shadow-sm outline outline-black/5 ${roundedClass} dark:outline-white/15`}
+        className={`pointer-events-none absolute inset-0 rounded-lg shadow-sm outline outline-black/5 ${roundedClass}`}
       />
     </div>
   );
@@ -106,16 +106,16 @@ export default async function OurCourses() {
   const displayCourses = sortedCourses.slice(0, 5);
 
   return (
-    <div className="bg-white py-24 sm:py-32 dark:bg-gray-900">
+    <div className="bg-white py-24 sm:py-32">
       <div className="mx-auto max-w-2xl px-6 lg:max-w-7xl lg:px-8">
         <div className="text-center">
-          <h2 className="text-base/7 font-semibold text-emerald-600 dark:text-emerald-400">
+          <h2 className="text-base/7 font-semibold text-emerald-600">
             Professional Development
           </h2>
-          <p className="mt-2 max-w-3xl mx-auto text-4xl font-semibold tracking-tight text-pretty text-gray-950 sm:text-5xl dark:text-white">
+          <p className="mt-2 max-w-3xl mx-auto text-4xl font-semibold tracking-tight text-pretty text-gray-950 sm:text-5xl">
             Our Mental Health Training Courses
           </p>
-          <p className="mt-4 text-lg leading-8 text-gray-600 dark:text-gray-400 max-w-3xl mx-auto">
+          <p className="mt-4 text-lg leading-8 text-gray-600 max-w-3xl mx-auto">
             Empower your team to support their own and each other&apos;s mental
             health. Designed by our in-house psychologists and delivered
             virtually.
@@ -171,7 +171,7 @@ export default async function OurCourses() {
           <div className="mt-10 text-center">
             <Link
               href="/our-courses/all"
-              className="inline-flex items-center text-base font-semibold text-emerald-600 hover:text-emerald-700 dark:text-emerald-400 dark:hover:text-emerald-300"
+              className="inline-flex items-center text-base font-semibold text-emerald-600 hover:text-emerald-700"
             >
               View all {courses.length} courses
               <svg
