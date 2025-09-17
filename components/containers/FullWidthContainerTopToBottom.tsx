@@ -8,7 +8,7 @@ export default function FullWidthContainerTopToBottom({
   bg: string;
 }) {
   return (
-    <div className={`${bg} w-full overflow-hidden rounded-b-3xl mt-20`}>
+    <div className={`${bg} w-full overflow-hidden rounded-b-3xl`}>
       {children}
     </div>
   );
