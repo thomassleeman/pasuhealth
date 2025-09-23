@@ -1,4 +1,6 @@
 import type { Metadata } from "next";
+import { GoogleTagManager } from "@next/third-parties/google";
+
 import { Red_Hat_Display } from "next/font/google";
 import VideoFooter from "@/components/VideoFooter";
 import "./globals.css";
@@ -21,6 +23,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <GoogleTagManager gtmId="GTM-5TRMLKZQ" />
       <body
         className={`${red_Hat_Display.className} antialiased selection:bg-emerald-700/25`}
       >
