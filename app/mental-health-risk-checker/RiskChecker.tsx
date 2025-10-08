@@ -15,6 +15,7 @@ import {
   DocumentTextIcon,
   ChartBarIcon,
   ArrowTurnRightDownIcon,
+  ArrowTopRightOnSquareIcon,
 } from "@heroicons/react/24/outline";
 
 // Import our types and utilities (these would be in separate files)
@@ -174,12 +175,22 @@ export default function EnhancedMentalHealthRiskAssessment() {
               className="h-16 w-16 object-contain drop-shadow-lg"
             />
           </div>
-          <h1 className="text-3xl text-gray-900 mb-4">
+          <h1 className="text-3xl text-gray-900 mb-6">
             Workplace Mental Health Risk & Compliance Assessment
           </h1>
-          <p className="text-lg text-gray-600 mb-6">
-            Take the first step towards creating a mentally healthy workplace.
-          </p>
+          {/* <p className=" text-gray-600 mb-6 text-left">
+            Welcome to the Pasu Health Workplace Mental Health Risk & Compliance
+            Assessment. <br />
+            <br />
+            The assessment will guide you through a series of questions related
+            to workplace policies, practices and culture. We&apos;ll start with
+            a review of basic duty of care obligations in this area and then
+            move on to some more general questions aimed at getting you thinking
+            about employee wellbeing in the context of your organisation. <br />
+            <br />
+            At the end of the assessment we&apos;ll provide you with a summary
+            and the option to download a report in PDF format.
+          </p> */}
         </div>
 
         <div className="border border-emerald-200 rounded-lg p-6 mb-6">
@@ -200,7 +211,7 @@ export default function EnhancedMentalHealthRiskAssessment() {
                 2
               </div>
               <p className="ml-3 text-gray-700">
-                Answer questions about your policies & compliance
+                Answer questions about your organisation
               </p>
             </div>
             <div className="flex items-center">
@@ -208,15 +219,17 @@ export default function EnhancedMentalHealthRiskAssessment() {
                 3
               </div>
               <p className="ml-3 text-gray-700">
-                Assess key psychosocial risk factors
+                Receive immediate feedback on duty of care compliance and
+                burnout risk levels.
               </p>
             </div>
+
             <div className="flex items-center">
               <div className="flex-shrink-0 w-8 h-8 bg-emerald-100 rounded-full flex items-center justify-center text-sm font-medium text-emerald-600">
                 4
               </div>
               <p className="ml-3 text-gray-700">
-                Receive your organisation&apos;s risk report in PDF format
+                Download your organisation&apos;s report in PDF format
               </p>
             </div>
           </div>
@@ -227,8 +240,8 @@ export default function EnhancedMentalHealthRiskAssessment() {
             What you&apos;ll get
           </h3>
           <ul className=" text-sky-800 space-y-2">
-            <li>• Initial risk assessment covering 6 key areas</li>
-            <li>• Legal compliance review specific to your location</li>
+            <li>• Basic legal compliance review</li>
+            <li>• Initial risk assessment guidance covering 6 key areas</li>
             <li>• Overview of recommendations and possible next steps</li>
             <li>
               • Option of a <span className="font-bold">free</span> consultation
@@ -238,13 +251,13 @@ export default function EnhancedMentalHealthRiskAssessment() {
         </div>
 
         <div className="space-y-6 ">
-          <div className="bg-gray-50 rounded-lg p-6 border border-gray-200">
+          {/* <div className="bg-gray-50 rounded-lg p-6 border border-gray-200">
             <h2 className="text-xl font-semibold text-gray-900 mb-3">
               Why This Assessment Matters
             </h2>
             <p className="text-gray-700 mb-4">
-              Poor mental health costs UK businesses £45 billion annually. This
-              assessment helps you:
+              Poor mental health creates a huge cost to UK and Irish businesses.
+              This assessment helps you:
             </p>
             <ul className="space-y-2 text-gray-600">
               <li className="flex items-start">
@@ -268,7 +281,7 @@ export default function EnhancedMentalHealthRiskAssessment() {
                 <span>Reduce absenteeism and improve productivity</span>
               </li>
             </ul>
-          </div>
+          </div> */}
 
           <div className="bg-green-50 rounded-lg p-4">
             <p className="text-sm text-green-800">
@@ -276,10 +289,10 @@ export default function EnhancedMentalHealthRiskAssessment() {
             </p>
           </div>
           <InfoDialogue
-            label="Confidentiality"
-            title="confidentiality"
-            description="Your responses are confidential and will not be shared with any third party, ever. With your permission we will store a copy of your report solely for the purposes of providing additional services, whether free of charge or on a chargeable basis."
-            content="This assessment is designed to help you identify key mental health risks in your workplace and ensure compliance with relevant legislation."
+            label="Confidentiality and Legal Disclaimer"
+            title="confidentiality and legal disclaimer"
+            description="Your responses are confidential and will not be shared with any third party, ever. We will store a copy of your report for the purposes of discussing our services with you and providing additional services, whether free of charge or on a chargeable basis. You can ask us to delete this copy at any time by contacting us at contact@pasuhealth.com and we will do so."
+            content="This assessment is designed to help you identify key mental health risks in your workplace and to help you in ensuring compliance with relevant legislation. This is, of course, not intended as a replacement for professional legal advice."
           />
         </div>
 
@@ -409,11 +422,6 @@ export default function EnhancedMentalHealthRiskAssessment() {
                       </span>
                     </span>
                   </span>
-                  {/* {state.selectedAnswer === option.value && (
-                    <CheckIcon
-                      className={`h-5 w-5 ${option.color === "emerald" ? "text-emerald-600" : "text-red-600"}`}
-                    />
-                  )} */}
                 </button>
               ))}
             </div>
@@ -721,12 +729,13 @@ export default function EnhancedMentalHealthRiskAssessment() {
                   {/* Primary CTA Buttons */}
                   <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12">
                     <a
-                      href="https://www.calendly.com/theburnouthub"
+                      href="https://www.pasuhealth.com/schedule-a-consultation"
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="w-full sm:w-auto bg-emerald-600 hover:bg-emerald-700 text-white font-semibold px-8 py-4 rounded-lg shadow-lg hover:shadow-xl transition-all duration-200 transform hover:-translate-y-0.5 focus:outline-none focus:ring-4 focus:ring-emerald-200"
+                      className=" flex items-center gap-x-4 w-full sm:w-auto bg-emerald-600 hover:bg-emerald-700 text-white font-semibold px-8 py-4 rounded-lg shadow-lg hover:shadow-xl transition-all duration-200 transform hover:-translate-y-0.5 focus:outline-none focus:ring-4 focus:ring-emerald-200"
                     >
-                      Schedule Free Consultation
+                      <span>Schedule Free Consultation</span>
+                      <ArrowTopRightOnSquareIcon className="inline-block h-4 w-4" />
                     </a>
                     <button
                       onClick={() => setIsModalOpen(true)}
@@ -813,7 +822,7 @@ export default function EnhancedMentalHealthRiskAssessment() {
 
                             <div className="bg-gray-50 px-6 py-4 sm:px-8 sm:flex sm:flex-row-reverse">
                               <a
-                                href="https://www.calendly.com/theburnouthub"
+                                href="https://www.pasuhealth.com/schedule-a-consultation"
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 onClick={() => setIsModalOpen(false)}

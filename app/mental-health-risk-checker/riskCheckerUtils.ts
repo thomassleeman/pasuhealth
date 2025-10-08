@@ -378,13 +378,13 @@ export function calculateProgress(
     case "introduction":
       return 0; // Assuming introduction is the first step
     case "location":
-      return 5;
+      return 0;
     case "sectionA":
-      return 10 + (currentQuestionIndex / totalSectionAQuestions) * 30;
+      return 0 + (currentQuestionIndex / totalSectionAQuestions) * 30;
     case "sectionB":
-      return 40 + (currentQuestionIndex / totalSectionBQuestions) * 40;
+      return 30 + (currentQuestionIndex / totalSectionBQuestions) * 40;
     case "contact":
-      return 85;
+      return 75;
     case "results":
       return 100;
     default:

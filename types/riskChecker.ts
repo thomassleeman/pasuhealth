@@ -84,7 +84,7 @@ export const SECTION_A_QUESTIONS: LegalPolicyQuestion[] = [
   {
     id: "safety_statement",
     question:
-      "Does your organisation's written Safety Statement (Ireland) or Health and Safety Policy (UK) explicitly acknowledge the management of work-related stress and psychosocial risks?",
+      "Does your organisation's risk/safety policy explicitly acknowledge the management of work-related stress and psychosocial risks?",
     legalBasis: {
       ireland:
         "The Safety, Health and Welfare at Work Act 2005 requires your Safety Statement to be based on a full risk assessment, which must include psychosocial hazards like stress.",
@@ -518,7 +518,7 @@ export const CATEGORY_INTERPRETATIONS: Record<
   },
   Change: {
     excellent:
-      "Your organisation manages change Transparently & Inclusively. Treating change as a collaborative process builds the trust and resilience needed to navigate transitions successfully.",
+      "Your organisation manages change transparently & inclusively. Treating change as a collaborative process builds the trust and resilience needed to navigate transitions successfully.",
     average:
       "You indicated that change is Well-Informed but can be Poorly & with Uncertainty. To improve, you must shift from simply informing employees to meaningfully consulting them before decisions are made, giving them a voice in the process.",
     critical:

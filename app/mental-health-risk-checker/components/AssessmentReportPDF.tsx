@@ -27,6 +27,19 @@ const getLogoImageData = () => {
   };
 };
 
+const getMentalHealthRafikiImageData = () => {
+  const imagePath = path.join(
+    process.cwd(),
+    "public",
+    "mental-health-rafiki.png"
+  );
+  const imageBuffer = fs.readFileSync(imagePath);
+  return {
+    data: imageBuffer,
+    format: "png" as const,
+  };
+};
+
 const getRiskLevelInfo = (level: "low" | "moderate" | "severe") => {
   switch (level) {
     case "low":
@@ -247,6 +260,13 @@ const styles = StyleSheet.create({
     marginLeft: 10,
     lineHeight: 1.4,
   },
+  centeredImage: {
+    width: 350,
+    height: 350,
+    objectFit: "contain",
+    alignSelf: "center",
+    marginTop: 40,
+  },
 });
 
 // Simplified questions data
@@ -254,32 +274,32 @@ const SECTION_A_QUESTIONS = [
   {
     id: "safety_statement",
     question:
-      "Does your organisation's Safety Statement/Health & Safety Policy explicitly acknowledge work-related stress?",
+      "Does your organisation's risk/safety policy explicitly acknowledge the management of work-related stress and psychosocial risks?",
   },
   {
     id: "risk_assessment",
     question:
-      "Has your organisation conducted a specific risk assessment for psychosocial hazards?",
+      "Has your organisation conducted and formally recorded a specific risk assessment to identify psychosocial hazards and assess the risk of work-related stress?",
   },
   {
     id: "dignity_policy",
     question:
-      "Do you have a clear Dignity at Work policy on bullying and harassment?",
+      "Does your organisation have a clear, well-communicated policy on Dignity at Work, bullying, and harassment that is actively implemented and understood by all staff?",
   },
   {
     id: "control_implementation",
     question:
-      "Have you implemented control measures to reduce identified psychosocial risks?",
+      "Has your organisation implemented and documented control measures to eliminate or reduce the psychosocial risks identified in the risk assessment?",
   },
   {
     id: "manager_training",
     question:
-      "Have managers received training on identifying and managing chronic stress?",
+      "Have line managers received specific training on identifying the signs of chronic stress and on their role in preventing and managing it within their teams?",
   },
   {
     id: "equality_act_awareness",
     question:
-      "Are UK managers aware of Equality Act 2010 duties for mental health disabilities?",
+      "Are managers aware of their duties under the Equality Act 2010 to consider making reasonable adjustments for an employee whose mental health condition could be defined as a disability?",
   },
 ];
 
@@ -291,49 +311,51 @@ const getCategoryInterpretation = (category: string, score: number) => {
   > = {
     Demands: {
       excellent:
-        "Your organisation's approach to workload is optimised and sustainable.",
+        "Your assessment shows that your organisation's approach to workload is Optimised & Sustainable. This culture of managing peak periods proactively and encouraging breaks is a key strength that protects against burnout.",
       average:
-        "Workloads are busy but achievable, though regular overtime may be expected.",
+        "Your rating suggests workloads are Busy but Achievable or Often Excessive. To improve from a culture where overtime is a default expectation, focus on proactive capacity planning and ensuring managers regularly check in with staff about workload pressures.",
       critical:
-        "Workloads are overwhelming and unsustainable, requiring urgent review.",
+        "You have identified that workloads are Overwhelming & Unsustainable. This is a primary driver of stress and requires an urgent review of job roles, team capacity, and resource allocation to prevent widespread burnout.",
     },
     Control: {
       excellent:
-        "Your organisation fosters high trust and autonomy for employees.",
-      average: "There is moderate flexibility, but work can feel prescribed.",
+        "Your organisation fosters High Trust & Autonomy, empowering employees as trusted professionals. This approach is proven to increase engagement and reduce work-related stress.",
+      average:
+        "You offer Moderate Flexibility, but work can feel Limited & Prescribed. To improve, focus on managing outcomes rather than dictating methods. Empowering teams to decide how they achieve their goals can significantly increase their sense of control.",
       critical:
-        "Work is rigidly controlled with little autonomy - a significant stressor.",
+        "Your rating indicates a culture of Rigid & Monitored work with little autonomy. This style of micromanagement is a significant stressor. To improve, you must actively seek employee input and delegate decision-making where appropriate.",
     },
     Support: {
       excellent:
-        "Excellent all-around support with proactive resources and coaching managers.",
+        "Your organisation provides excellent all-around support. You combine Actively Supportive & Coaching managers with Comprehensive & Well-Promoted professional services and a Holistic & Proactive suite of preventative resources.",
       average:
-        "Foundational support exists but tends to be reactive rather than proactive.",
+        "You have a foundational level of support, but it tends to be reactive (e.g., Generally Available managers or a Basic Provision of support). To move from providing General & Ad-Hoc resources to a truly preventative culture, the next step is to invest in practical training on stress management for all staff and provide access to on-demand digital wellness platforms.",
       critical:
-        "Poor support structures with managers potentially being a source of stress.",
+        "Your rating indicates that support structures are poor, with managers potentially being a Source of Stress and support being Informal Only or non-existent. The immediate priority is to address managerial behaviour through training and implement a formal, confidential support service (like an EAP), followed by introducing proactive educational resources.",
     },
     Relationships: {
       excellent:
-        "Conflict is managed constructively and fairly with transparent procedures.",
-      average: "Conflicts are addressed adequately but processes can be slow.",
+        "Your assessment shows that conflict is managed Constructively & Fairly. This ability to see disagreement as normal and resolve it transparently is the hallmark of a psychologically safe culture.",
+      average:
+        "You indicated that conflicts are handled Adequately, but Slowly or Poorly & Inconsistently. To improve, ensure all staff are regularly reminded of the Dignity at Work policy and provide managers with specific training on fair and timely conflict resolution.",
       critical:
-        "A blame culture exists where conflicts sometimes escalate and negative behaviours are tolerated.",
+        "You identified a Negatively & with Blame culture where conflicts escalate. This is highly damaging and requires urgent senior leadership intervention to reinforce a zero-tolerance policy on negative behaviours.",
     },
     Role: {
       excellent:
-        "High clarity and purpose - everyone understands their responsibilities.",
+        "Your organisation provides High Clarity & Purpose, where everyone understands their duties and how they contribute. This is a key factor in preventing stress from ambiguity.",
       average:
-        "Roles are mostly clear but occasional confusion exists on new projects.",
+        "Your rating suggests that while roles are Mostly Clear, there is Often Ambiguity, especially on new projects. To improve, ensure job descriptions are live documents and use project kick-off meetings to explicitly define roles and responsibilities.",
       critical:
-        "Constant confusion and conflict regarding roles and responsibilities.",
+        "You have identified Constant Confusion & Conflict regarding roles. This requires a fundamental review of your organisational structure to ensure responsibilities are clearly delineated and that conflicting instructions are eliminated.",
     },
     Change: {
       excellent:
-        "Change is managed transparently and inclusively as a collaborative process.",
+        "Your organisation manages change Transparently & Inclusively. Treating change as a collaborative process builds the trust and resilience needed to navigate transitions successfully.",
       average:
-        "Change is well-communicated but consultation before decisions is limited.",
+        "You indicated that change is Well-Informed but can be Poorly & with Uncertainty. To improve, you must shift from simply informing employees to meaningfully consulting them before decisions are made, giving them a voice in the process.",
       critical:
-        "Changes are imposed suddenly without warning, damaging morale and trust.",
+        "Your rating shows that change is perceived as Abrupt & Chaotic. This approach damages morale and trust. To fix this, you must implement a formal change management process built on early communication and genuine consultation.",
     },
   };
 
@@ -374,7 +396,7 @@ const AssessmentReportPDF: React.FC<{ results: AssessmentResults }> = ({
           Workplace Mental Health Risk Assessment Report
         </Text>
         <Text style={styles.subtitle}>
-          Comprehensive Risk Analysis & Compliance Review
+          Basic Risk Analysis & Compliance Review
         </Text>
 
         <View style={[styles.contactInfo, { marginBottom: 20 }]}>
@@ -397,7 +419,14 @@ const AssessmentReportPDF: React.FC<{ results: AssessmentResults }> = ({
           </Text>
         </View>
 
-        {/* What This Report Is and What It Is Not Section */}
+        <Image
+          style={styles.centeredImage}
+          src={getMentalHealthRafikiImageData()}
+        />
+      </Page>
+
+      {/* What This Report Is and What It Is Not Section */}
+      <Page size="A4" style={styles.page}>
         <View style={styles.section}>
           <Text style={styles.sectionTitle}>
             What This Report Is and What It Is Not
@@ -561,9 +590,9 @@ const AssessmentReportPDF: React.FC<{ results: AssessmentResults }> = ({
           </View>
 
           <Text style={styles.paragraph}>
-            This comprehensive assessment evaluated your organisation across
-            multiple critical areas of workplace mental health, including legal
-            compliance requirements and psychosocial risk factors.
+            This assessment evaluated your organisation across multiple critical
+            areas of workplace mental health, including legal compliance
+            requirements and psychosocial risk factors.
           </Text>
 
           <Text style={styles.subsectionTitle}>Key Findings:</Text>
@@ -893,18 +922,11 @@ const AssessmentReportPDF: React.FC<{ results: AssessmentResults }> = ({
             How to Schedule Your Consultation
           </Text>
 
-          <Text style={[styles.paragraph, { fontSize: 11, marginBottom: 10 }]}>
-            To book your free consultation, please:
-          </Text>
-
           <Text style={styles.bulletPoint}>
-            • Visit: www.calendly.com/theburnouthub
+            • Visit: pasuhealth.com/schedule-a-consultation
           </Text>
           <Text style={styles.bulletPoint}>
             • Email us directly: contact@pasuhealth.com
-          </Text>
-          <Text style={styles.bulletPoint}>
-            • Call us to discuss your needs immediately
           </Text>
         </View>
 
