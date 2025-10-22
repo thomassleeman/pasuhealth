@@ -7,6 +7,36 @@ import { isAdmin } from "@/lib/adminAuth";
 import { type OrderStatus } from "@/types/partnerOrder";
 import { revalidatePath } from "next/cache";
 
+// Type for order with joined partner data
+interface OrderWithPartner {
+  id: string;
+  partner_id: string;
+  course_slug: string;
+  course_title: string;
+  customer_organisation: string;
+  customer_first_name: string;
+  customer_last_name: string;
+  customer_email: string;
+  customer_phone: string;
+  customer_job_title: string;
+  participant_count: number;
+  sessions_needed: number;
+  price_per_session: number;
+  total_price: number;
+  partner_commission: number;
+  preferred_start_date: string;
+  special_requirements?: string;
+  status: OrderStatus;
+  status_history?: Array<{ status: OrderStatus; timestamp: string }>;
+  admin_notes?: string;
+  created_at: string;
+  partners?: {
+    first_name: string;
+    last_name: string;
+    email: string;
+  };
+}
+
 // Initialize Resend
 const resend = new Resend(process.env.RESEND_API_KEY);
 
@@ -287,7 +317,7 @@ export async function addAdminNote(formData: FormData) {
 /**
  * Send status update email to partner
  */
-async function sendStatusUpdateEmail(order: any, newStatus: OrderStatus) {
+async function sendStatusUpdateEmail(order: OrderWithPartner, newStatus: OrderStatus) {
   const partner = order.partners;
 
   if (!partner?.email) {

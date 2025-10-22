@@ -4,9 +4,40 @@ import { useState } from "react";
 import { StatusUpdateForm } from "./StatusUpdateForm";
 import { OrderEditForm } from "./OrderEditForm";
 import { AdminNotesSection } from "./AdminNotesSection";
+import { type OrderStatus } from "@/types/partnerOrder";
+
+interface OrderData {
+  id: string;
+  partner_id: string;
+  course_slug: string;
+  course_title: string;
+  customer_organisation: string;
+  customer_first_name: string;
+  customer_last_name: string;
+  customer_email: string;
+  customer_phone: string;
+  customer_job_title: string;
+  participant_count: number;
+  sessions_needed: number;
+  price_per_session: number;
+  total_price: number;
+  partner_commission: number;
+  preferred_start_date: string;
+  special_requirements?: string;
+  status: OrderStatus;
+  status_history?: Array<{ status: OrderStatus; timestamp: string }>;
+  admin_notes?: string;
+  created_at: string;
+  partners?: {
+    user_id: string;
+    first_name: string;
+    last_name: string;
+    email: string;
+  };
+}
 
 interface AdminOrderDetailProps {
-  order: any;
+  order: OrderData;
 }
 
 export function AdminOrderDetail({ order }: AdminOrderDetailProps) {
@@ -191,7 +222,7 @@ export function AdminOrderDetail({ order }: AdminOrderDetailProps) {
                     Partner Name
                   </label>
                   <p className="text-gray-900 mt-1">
-                    {order.partners.first_name} {order.partners.last_name}
+                    {order.partners?.first_name} {order.partners?.last_name}
                   </p>
                 </div>
                 <div>
@@ -200,10 +231,10 @@ export function AdminOrderDetail({ order }: AdminOrderDetailProps) {
                   </label>
                   <p className="text-gray-900 mt-1">
                     <a
-                      href={`mailto:${order.partners.email}`}
+                      href={`mailto:${order.partners?.email}`}
                       className="text-emerald-600 hover:text-emerald-700"
                     >
-                      {order.partners.email}
+                      {order.partners?.email}
                     </a>
                   </p>
                 </div>
@@ -253,7 +284,7 @@ export function AdminOrderDetail({ order }: AdminOrderDetailProps) {
             Status History
           </h2>
           <div className="space-y-3">
-            {order.status_history.map((entry: any, index: number) => (
+            {order.status_history.map((entry, index: number) => (
               <div
                 key={index}
                 className="flex items-center gap-4 text-sm border-l-2 border-emerald-600 pl-4 py-2"

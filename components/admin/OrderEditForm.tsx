@@ -3,9 +3,24 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { updateOrderDetails } from "@/app/actions/adminPartnerOrder";
+import { type OrderStatus } from "@/types/partnerOrder";
+
+interface OrderData {
+  id: string;
+  customer_organisation: string;
+  customer_first_name: string;
+  customer_last_name: string;
+  customer_email: string;
+  customer_phone: string;
+  customer_job_title: string;
+  participant_count: number;
+  preferred_start_date: string;
+  special_requirements?: string;
+  status: OrderStatus;
+}
 
 interface OrderEditFormProps {
-  order: any;
+  order: OrderData;
   onCancel: () => void;
 }
 

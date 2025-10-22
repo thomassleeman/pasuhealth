@@ -23,7 +23,6 @@ export default async function PartnerApplicationPage({
             Become a Partner
           </h1>
           <p className="text-gray-600 mb-8">
-            We're always looking to partner with like-minded organisations.
             Please fill out the form below to apply to become a partner.
           </p>
 

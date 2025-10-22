@@ -23,7 +23,8 @@ export function FormStatus({
   if (success) {
     return (
       <div className="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded mb-4">
-        Your application has been sent successfully! We'll be in touch soon.
+        Your application has been sent successfully! We&apos;ll be in touch
+        soon.
       </div>
     );
   }
