@@ -10,14 +10,14 @@ const features = [
   {
     name: "Strategic Assessment",
     description:
-      "Comprehensive evaluation of your organization's current mental health provisions, identifying gaps and opportunities.",
+      "Comprehensive evaluation of your organisation's current mental health provisions, identifying gaps and opportunities.",
     icon: ClipboardDocumentListIcon,
     color: "emerald",
   },
   {
     name: "Tailored Solutions",
     description:
-      "Bespoke mental health strategies designed specifically for your organization's needs, culture, and objectives.",
+      "Bespoke mental health strategies designed specifically for your organisation's needs, culture, and objectives.",
     icon: DocumentCheckIcon,
     color: "sky",
   },

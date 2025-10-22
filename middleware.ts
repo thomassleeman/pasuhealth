@@ -10,12 +10,28 @@ export async function middleware(request: NextRequest) {
     data: { user },
   } = await supabase.auth.getUser();
 
+  // Protect /admin routes - require admin authorization
+  if (request.nextUrl.pathname.startsWith("/admin")) {
+    if (!user || !user.email) {
+      return NextResponse.redirect(new URL("/partners/login", request.url));
+    }
+
+    // Check if user is an admin
+    const { data: admin } = await supabase
+      .from("admins")
+      .select("email")
+      .eq("email", user.email)
+      .single();
+
+    if (!admin) {
+      return NextResponse.redirect(new URL("/", request.url));
+    }
+  }
+
   // Protect /partners/dashboard routes - require authentication
   if (request.nextUrl.pathname.startsWith("/partners/dashboard")) {
     if (!user) {
-      return NextResponse.redirect(
-        new URL("/partners/login", request.url)
-      );
+      return NextResponse.redirect(new URL("/partners/login", request.url));
     }
   }
 

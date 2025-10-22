@@ -814,7 +814,7 @@ export default function EnhancedMentalHealthRiskAssessment() {
                                   practical recommendations on what you can do
                                   to improve the wellbeing of your people,
                                   tailored specifically to your
-                                  organization&apos;s unique needs and
+                                  organisation&apos;s unique needs and
                                   challenges.
                                 </p>
                               </div>

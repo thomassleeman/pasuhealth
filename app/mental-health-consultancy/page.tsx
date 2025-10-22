@@ -267,7 +267,7 @@ export default function MentalHealthConsultancy() {
               </div>
             </div>
             <p className="text-sm text-gray-500 mt-8 italic">
-              Sources: World Health Organization, Deloitte Mental Health Report
+              Sources: World Health organisation, Deloitte Mental Health Report
               2023, CIPD Health and Wellbeing at Work Survey
             </p>
           </div>
@@ -326,7 +326,7 @@ export default function MentalHealthConsultancy() {
               </div>
               <h3 className="font-semibold text-gray-900">Expert Team</h3>
               <p className="mt-2 text-gray-600">
-                Clinical and organizational psychology backgrounds
+                Clinical and organisational psychology backgrounds
               </p>
             </div>
             <div className="relative pl-9">
@@ -344,7 +344,7 @@ export default function MentalHealthConsultancy() {
               </div>
               <h3 className="font-semibold text-gray-900">Collaborative</h3>
               <p className="mt-2 text-gray-600">
-                Approach that respects your organizational culture
+                Approach that respects your organisational culture
               </p>
             </div>
             <div className="relative pl-9">

@@ -57,7 +57,7 @@ export default function InPersonTraining() {
                 </strong>{" "}
                 Receive individualized attention from our facilitators who can
                 address specific concerns and adapt techniques to your
-                organization&apos;s unique culture and challenges.
+                organisation&apos;s unique culture and challenges.
               </span>
             </li>
             <li className="flex gap-x-3">
@@ -80,7 +80,7 @@ export default function InPersonTraining() {
             participants feel comfortable discussing mental health challenges.
             The physical presence of both facilitator and colleagues creates a
             unique dynamic that encourages authentic sharing and deeper learning
-            that resonates throughout your organization.
+            that resonates throughout your organisation.
           </p>
           <h2 className="mt-16 text-3xl font-semibold tracking-tight text-pretty text-gray-900">
             Create lasting change through shared experience
@@ -142,13 +142,13 @@ export default function InPersonTraining() {
         </figure>
         <div className="mt-16 max-w-2xl">
           <h2 className="text-3xl font-semibold tracking-tight text-pretty text-gray-900">
-            Tailored to your organization&apos;s unique needs
+            Tailored to your organisation&apos;s unique needs
           </h2>
           <p className="mt-6">
             Every workplace has distinct challenges and dynamics. Our in-person
             workshops are customized based on pre-session consultations that
             identify your specific needs. This targeted approach ensures the
-            content directly addresses your organization&apos;s mental health
+            content directly addresses your organisation&apos;s mental health
             priorities.
           </p>
           <p className="mt-8">
@@ -156,7 +156,7 @@ export default function InPersonTraining() {
             resources to reinforce learning. Our facilitators remain available
             for follow-up questions, ensuring the momentum continues after the
             session concludes. This comprehensive approach creates sustainable
-            change in how your organization approaches mental wellbeing.
+            change in how your organisation approaches mental wellbeing.
           </p>
         </div>
       </div>

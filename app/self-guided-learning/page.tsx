@@ -72,7 +72,7 @@ export default function SelfGuidedTraining() {
                 </strong>{" "}
                 Monitor learning progress with built-in tracking tools that help
                 maintain motivation and identify areas for further focus.
-                Optional organizational dashboards provide anonymized completion
+                Optional organisational dashboards provide anonymized completion
                 metrics.
               </span>
             </li>
@@ -82,7 +82,7 @@ export default function SelfGuidedTraining() {
             strategies that can be immediately applied. From quick reference
             guides to comprehensive learning paths, our resources accommodate
             different learning preferences and time constraints, ensuring mental
-            health education is accessible to everyone in your organization.
+            health education is accessible to everyone in your organisation.
           </p>
           <h2 className="mt-16 text-3xl font-semibold tracking-tight text-pretty text-gray-900">
             Learn at your own pace, implement with confidence
@@ -125,7 +125,7 @@ export default function SelfGuidedTraining() {
           <p className="mt-10">
             Our self-guided resources are regularly updated to incorporate the
             latest research and best practices in workplace mental health.
-            Subscribing organizations receive automatic access to new and
+            Subscribing organisations receive automatic access to new and
             updated materials, ensuring your mental health resources remain
             current and effective.
           </p>
@@ -152,14 +152,14 @@ export default function SelfGuidedTraining() {
           <p className="mt-6">
             Our self-guided library covers a wide range of workplace mental
             health topics, from foundational concepts to specialized content for
-            specific roles and industries. Organizations can curate recommended
+            specific roles and industries. organisations can curate recommended
             learning paths or allow employees to explore topics based on
             personal interest and relevance to their role.
           </p>
           <p className="mt-8">
             Self-guided resources complement our virtual and in-person
             workshops, creating a holistic approach to mental health education.
-            Many organizations implement a blended learning strategy, using
+            Many organisations implement a blended learning strategy, using
             self-guided materials to reinforce and extend concepts introduced in
             facilitated sessions. This comprehensive approach accelerates
             cultural change and improves return on investment.

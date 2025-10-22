@@ -9,7 +9,7 @@ CREATE TABLE IF NOT EXISTS partner_orders (
   course_title TEXT NOT NULL,
 
   -- Customer details
-  customer_organization TEXT NOT NULL,
+  customer_organisation TEXT NOT NULL,
   customer_first_name TEXT NOT NULL,
   customer_last_name TEXT NOT NULL,
   customer_email TEXT NOT NULL,

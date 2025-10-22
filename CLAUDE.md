@@ -84,7 +84,7 @@ All server actions in `app/actions/`:
 - All use Resend for email delivery
 - All marked with "use server" directive
 
-### Component Organization
+### Component organisation
 
 - Page-specific components in `components/` (e.g., `HeroSection.tsx`, `OurCourses.tsx`)
 - Form components grouped in subdirectories

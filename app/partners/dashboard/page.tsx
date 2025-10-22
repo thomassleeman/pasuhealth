@@ -31,7 +31,7 @@ export default async function PartnerDashboard() {
   const { data: recentOrders, error: ordersError } = await supabase
     .from("partner_orders")
     .select(
-      "id, course_title, customer_organization, total_price, partner_commission, status, created_at"
+      "id, course_title, customer_organisation, total_price, partner_commission, status, created_at"
     )
     .eq("partner_id", user.id)
     .order("created_at", { ascending: false })
@@ -161,6 +161,7 @@ export default async function PartnerDashboard() {
                       pending: "bg-yellow-100 text-yellow-800",
                       approved: "bg-blue-100 text-blue-800",
                       completed: "bg-green-100 text-green-800",
+                      paid: "bg-purple-100 text-purple-800",
                       cancelled: "bg-red-100 text-red-800",
                     };
 
@@ -170,7 +171,7 @@ export default async function PartnerDashboard() {
                           {order.course_title}
                         </td>
                         <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                          {order.customer_organization}
+                          {order.customer_organisation}
                         </td>
                         <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                           {new Date(order.created_at).toLocaleDateString(

@@ -15,9 +15,9 @@ const PartnerOrderSchema = z.object({
   participantCount: z.coerce
     .number()
     .min(1, { message: "At least 1 participant is required" }),
-  organizationName: z
+  organisationName: z
     .string()
-    .min(1, { message: "Organization name is required" }),
+    .min(1, { message: "organisation name is required" }),
   contactFirstName: z
     .string()
     .min(1, { message: "Contact first name is required" }),
@@ -63,7 +63,7 @@ export async function submitPartnerOrder(formData: FormData) {
         partner_id: validatedFields.partnerId,
         course_slug: validatedFields.courseSlug,
         course_title: validatedFields.courseTitle,
-        customer_organization: validatedFields.organizationName,
+        customer_organisation: validatedFields.organisationName,
         customer_first_name: validatedFields.contactFirstName,
         customer_last_name: validatedFields.contactLastName,
         customer_email: validatedFields.email,
@@ -107,7 +107,7 @@ export async function submitPartnerOrder(formData: FormData) {
       <p><strong>Preferred Start Date:</strong> ${validatedFields.preferredStartDate}</p>
 
       <h2>Customer Details</h2>
-      <p><strong>Organization:</strong> ${validatedFields.organizationName}</p>
+      <p><strong>organisation:</strong> ${validatedFields.organisationName}</p>
       <p><strong>Contact Name:</strong> ${validatedFields.contactFirstName} ${validatedFields.contactLastName}</p>
       <p><strong>Email:</strong> ${validatedFields.email}</p>
       <p><strong>Phone:</strong> ${validatedFields.phone}</p>
@@ -140,7 +140,7 @@ export async function submitPartnerOrder(formData: FormData) {
       Preferred Start Date: ${validatedFields.preferredStartDate}
 
       CUSTOMER DETAILS
-      Organization: ${validatedFields.organizationName}
+      organisation: ${validatedFields.organisationName}
       Contact Name: ${validatedFields.contactFirstName} ${validatedFields.contactLastName}
       Email: ${validatedFields.email}
       Phone: ${validatedFields.phone}
@@ -181,7 +181,7 @@ export async function submitPartnerOrder(formData: FormData) {
       <p><strong>Your Commission:</strong> £${validatedFields.partnerCommission.toFixed(2)}</p>
 
       <h2>Customer</h2>
-      <p><strong>Organization:</strong> ${validatedFields.organizationName}</p>
+      <p><strong>organisation:</strong> ${validatedFields.organisationName}</p>
       <p><strong>Contact:</strong> ${validatedFields.contactFirstName} ${validatedFields.contactLastName}</p>
 
       <p>We'll be in touch soon to confirm the details.</p>

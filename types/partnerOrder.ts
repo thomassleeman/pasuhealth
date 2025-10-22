@@ -14,7 +14,7 @@ export interface TrainingCourse {
 }
 
 export interface CustomerDetails {
-  organizationName: string;
+  organisationName: string;
   contactFirstName: string;
   contactLastName: string;
   email: string;
@@ -36,7 +36,7 @@ export interface PartnerOrderFormData {
   participantCount: number;
 
   // Step 2: Customer Details
-  organizationName: string;
+  organisationName: string;
   contactFirstName: string;
   contactLastName: string;
   email: string;
@@ -47,6 +47,13 @@ export interface PartnerOrderFormData {
   preferredStartDate: string;
   specialRequirements?: string;
 }
+
+export type OrderStatus =
+  | "pending"
+  | "approved"
+  | "completed"
+  | "paid"
+  | "cancelled";
 
 export interface PartnerOrder {
   id?: string;
@@ -61,6 +68,22 @@ export interface PartnerOrder {
   partnerCommission: number;
   preferredStartDate: string;
   specialRequirements?: string;
-  status: 'pending' | 'approved' | 'completed' | 'cancelled';
+  status: OrderStatus;
   createdAt: Date;
+  adminNotes?: string;
+  statusHistory?: StatusHistoryEntry[];
 }
+
+export interface StatusHistoryEntry {
+  status: OrderStatus;
+  timestamp: string;
+  updatedBy?: string;
+}
+
+export const STATUS_TRANSITIONS: Record<OrderStatus, OrderStatus[]> = {
+  pending: ["approved", "cancelled"],
+  approved: ["completed", "cancelled"],
+  completed: ["paid", "cancelled"],
+  paid: [],
+  cancelled: [],
+};

@@ -124,7 +124,7 @@ export default function VirtualTraining() {
             All sessions are facilitated by certified mental health
             professionals with extensive experience in workplace wellbeing. Our
             facilitators understand the unique challenges of different
-            industries and tailor content to address specific organizational
+            industries and tailor content to address specific organisational
             needs.
           </p>
         </div>

@@ -33,7 +33,7 @@ export function PartnerOrderForm({
   const [formData, setFormData] = useState({
     courseSlug: "",
     participantCount: 0,
-    organizationName: "",
+    organisationName: "",
     contactFirstName: "",
     contactLastName: "",
     email: "",
@@ -56,7 +56,9 @@ export function PartnerOrderForm({
 
   useEffect(() => {
     if (formData.courseSlug) {
-      const course = courses.find((c) => c.slug.current === formData.courseSlug);
+      const course = courses.find(
+        (c) => c.slug.current === formData.courseSlug
+      );
       setSelectedCourse(course || null);
     }
   }, [formData.courseSlug, courses]);
@@ -224,16 +226,16 @@ export function PartnerOrderForm({
 
       <div className="mb-4">
         <label
-          htmlFor="organizationName"
+          htmlFor="organisationName"
           className="block text-sm font-medium mb-2"
         >
-          Organization Name <span className="text-red-500">*</span>
+          organisation Name <span className="text-red-500">*</span>
         </label>
         <input
-          id="organizationName"
-          name="organizationName"
+          id="organisationName"
+          name="organisationName"
           type="text"
-          value={formData.organizationName}
+          value={formData.organisationName}
           onChange={handleInputChange}
           className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-emerald-600 focus:border-transparent outline-none"
           required
@@ -412,10 +414,7 @@ export function PartnerOrderForm({
 
     // Add calculation data
     if (orderCalculation) {
-      data.append(
-        "sessionsNeeded",
-        orderCalculation.sessionsNeeded.toString()
-      );
+      data.append("sessionsNeeded", orderCalculation.sessionsNeeded.toString());
       data.append(
         "pricePerSession",
         orderCalculation.pricePerSession.toString()
