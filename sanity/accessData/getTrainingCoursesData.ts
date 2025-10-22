@@ -11,6 +11,7 @@ export async function getTrainingCourse(slug: string) {
     outline,
     platform,
     businessTargeting,
+    maxParticipants,
     pricing{
       pricePerParticipant,
       groupDiscounts,
@@ -48,6 +49,7 @@ export async function getTrainingCourses() {
     outline,
     platform,
     businessTargeting,
+    maxParticipants,
     pricing{
       pricePerParticipant,
       groupDiscounts,
