@@ -2,6 +2,11 @@ import { redirect } from "next/navigation";
 import { createClient } from "@/utils/supabase/server";
 import { LogoutButton } from "@/components/LogoutButton";
 import Link from "next/link";
+import {
+  PlusCircleIcon,
+  ClipboardDocumentListIcon,
+  ChartBarIcon,
+} from "@heroicons/react/24/outline";
 
 export default async function PartnerDashboard() {
   const supabase = await createClient();
@@ -62,65 +67,104 @@ export default async function PartnerDashboard() {
 
       {/* Main Content */}
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        {/* Quick Actions */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
-          <Link
-            href="/partners/dashboard/new-order"
-            className="p-6 bg-emerald-700 text-white rounded-lg text-center"
-          >
-            <h3 className="text-2xl font-semibold mb-2">Create New Order</h3>
-          </Link>
-        </div>
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
+          {/* Main Content Area */}
+          <div className="lg:col-span-2 space-y-6">
+            {/* Quick Actions */}
 
-        {/* Stats Overview */}
-        {/* <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-          <div className="bg-white rounded-lg shadow p-6">
-            <h3 className="text-sm font-medium text-gray-500">Total Sales</h3>
-            <p className="text-3xl font-bold text-gray-900 mt-2">£0</p>
-            <p className="text-sm text-gray-600 mt-1">No sales yet</p>
-          </div>
-          <div className="bg-white rounded-lg shadow p-6">
-            <h3 className="text-sm font-medium text-gray-500">
-              Pending Commission
-            </h3>
-            <p className="text-3xl font-bold text-gray-900 mt-2">£0</p>
-            <p className="text-sm text-gray-600 mt-1">0 pending payments</p>
-          </div>
-          <div className="bg-white rounded-lg shadow p-6">
-            <h3 className="text-sm font-medium text-gray-500">Total Earned</h3>
-            <p className="text-3xl font-bold text-emerald-600 mt-2">£0</p>
-            <p className="text-sm text-gray-600 mt-1">All time commission</p>
-          </div>
-        </div> */}
+            <Link
+              href="/partners/dashboard/new-order"
+              className="group w-fit flex items-center gap-3 py-3 px-5 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg transition-all duration-200 transform hover:scale-105 shadow-md hover:shadow-lg"
+            >
+              <div className="text-center">
+                <div className="flex items-center gap-x-2">
+                  <PlusCircleIcon className="w-5 h-5 flex-shrink-0" />
+                  <h3 className="font-semibold">Create New Order</h3>
+                </div>
+                <p className="text-sm text-emerald-100">
+                  Submit a new booking request
+                </p>
+              </div>
+            </Link>
 
-        {/* Partner Profile */}
-        <div className="bg-white rounded-lg shadow mb-8">
-          <div className="px-6 py-4 border-b border-gray-200">
-            <h2 className="text-lg font-semibold text-gray-900">
-              Your Profile
-            </h2>
-          </div>
-          <div className="px-6 py-4 space-y-4">
-            <div>
-              <label className="text-sm font-medium text-gray-700">Name</label>
-              <p className="text-gray-900 mt-1">
-                {partner?.first_name} {partner?.last_name}
-              </p>
+            {/* Stats Overview */}
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+              <div className="bg-white rounded-lg shadow-sm p-4 border-l-4 border-blue-500">
+                <div className="flex items-center justify-between">
+                  <div>
+                    <p className="text-sm font-medium text-gray-600">
+                      Total Orders
+                    </p>
+                    <p className="text-2xl font-bold text-gray-900 mt-1">
+                      {recentOrders?.length || 0}
+                    </p>
+                  </div>
+                  <ChartBarIcon className="w-8 h-8 text-blue-500 opacity-50" />
+                </div>
+              </div>
+              <div className="bg-white rounded-lg shadow-sm p-4 border-l-4 border-yellow-500">
+                <div className="flex items-center justify-between">
+                  <div>
+                    <p className="text-sm font-medium text-gray-600">Pending</p>
+                    <p className="text-2xl font-bold text-gray-900 mt-1">
+                      {recentOrders?.filter((o) => o.status === "pending")
+                        .length || 0}
+                    </p>
+                  </div>
+                  <ClipboardDocumentListIcon className="w-8 h-8 text-yellow-500 opacity-50" />
+                </div>
+              </div>
+              <div className="bg-white rounded-lg shadow-sm p-4 border-l-4 border-emerald-500">
+                <div className="flex items-center justify-between">
+                  <div>
+                    <p className="text-sm font-medium text-gray-600">
+                      Completed
+                    </p>
+                    <p className="text-2xl font-bold text-gray-900 mt-1">
+                      {recentOrders?.filter(
+                        (o) => o.status === "completed" || o.status === "paid"
+                      ).length || 0}
+                    </p>
+                  </div>
+                  <ChartBarIcon className="w-8 h-8 text-emerald-500 opacity-50" />
+                </div>
+              </div>
             </div>
-            <div>
-              <label className="text-sm font-medium text-gray-700">Email</label>
-              <p className="text-gray-900 mt-1">
-                {partner?.email || user.email}
-              </p>
+          </div>
+
+          {/* Sidebar - Partner Profile */}
+          <div className="lg:col-span-1">
+            <div className="bg-white rounded-lg shadow-sm p-6 sticky top-8">
+              <h2 className="text-lg font-semibold text-gray-900 mb-4">
+                Your Profile
+              </h2>
+              <div className="space-y-4">
+                <div>
+                  <label className="text-xs font-medium text-gray-500 uppercase tracking-wide">
+                    Name
+                  </label>
+                  <p className="text-gray-900 mt-1 font-medium">
+                    {partner?.first_name} {partner?.last_name}
+                  </p>
+                </div>
+                <div>
+                  <label className="text-xs font-medium text-gray-500 uppercase tracking-wide">
+                    Email
+                  </label>
+                  <p className="text-gray-900 mt-1 font-medium break-words">
+                    {partner?.email || user.email}
+                  </p>
+                </div>
+              </div>
             </div>
           </div>
         </div>
 
         {/* Recent Activity */}
-        <div className="bg-white rounded-lg shadow">
+        <div id="recent-activity" className="bg-white rounded-lg shadow-sm">
           <div className="px-6 py-4 border-b border-gray-200">
             <h2 className="text-lg font-semibold text-gray-900">
-              Recent Activity
+              Recent Orders
             </h2>
           </div>
           {!recentOrders || recentOrders.length === 0 ? (

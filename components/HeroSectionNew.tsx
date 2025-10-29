@@ -37,6 +37,7 @@ const VideoCard: React.FC = () => {
                 width={500}
                 height={281} // Adjust based on your GIF's aspect ratio
                 className="w-full h-auto transform transition-transform duration-300 group-hover:scale-105"
+                loading="eager"
                 unoptimized // Important for GIFs to animate
               />
               {/* Play button overlay */}
