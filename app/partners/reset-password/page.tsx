@@ -1,19 +1,21 @@
 "use client";
 
-import { login } from "../actions";
-import Link from "next/link";
+import { resetPassword } from "../actions";
 import { useActionState } from "react";
 
-export default function LoginPage() {
-  const [state, formAction, pending] = useActionState(login, null);
+export default function ResetPasswordPage() {
+  const [state, formAction, pending] = useActionState(resetPassword, null);
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-amber-50 px-4">
       <div className="max-w-md w-full space-y-8">
         <div>
           <h2 className="text-center text-3xl font-bold text-gray-900">
-            Sign in to your account
+            Set new password
           </h2>
+          <p className="mt-2 text-center text-sm text-gray-600">
+            Enter your new password below.
+          </p>
         </div>
         <form
           action={formAction}
@@ -22,32 +24,37 @@ export default function LoginPage() {
           <div className="space-y-4">
             <div>
               <label
-                htmlFor="email"
-                className="block text-sm font-medium text-gray-700 mb-1"
-              >
-                Email address
-              </label>
-              <input
-                id="email"
-                name="email"
-                type="email"
-                required
-                className="appearance-none relative block w-full px-3 py-2 border border-gray-300 rounded-md placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-emerald-500 focus:border-emerald-500 focus:z-10 sm:text-sm"
-                placeholder="you@example.com"
-              />
-            </div>
-            <div>
-              <label
                 htmlFor="password"
                 className="block text-sm font-medium text-gray-700 mb-1"
               >
-                Password
+                New password
               </label>
               <input
                 id="password"
                 name="password"
                 type="password"
                 required
+                minLength={6}
+                className="appearance-none relative block w-full px-3 py-2 border border-gray-300 rounded-md placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-emerald-500 focus:border-emerald-500 focus:z-10 sm:text-sm"
+                placeholder="••••••••"
+              />
+              <p className="mt-1 text-xs text-gray-500">
+                Must be at least 6 characters long
+              </p>
+            </div>
+            <div>
+              <label
+                htmlFor="confirmPassword"
+                className="block text-sm font-medium text-gray-700 mb-1"
+              >
+                Confirm new password
+              </label>
+              <input
+                id="confirmPassword"
+                name="confirmPassword"
+                type="password"
+                required
+                minLength={6}
                 className="appearance-none relative block w-full px-3 py-2 border border-gray-300 rounded-md placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-emerald-500 focus:border-emerald-500 focus:z-10 sm:text-sm"
                 placeholder="••••••••"
               />
@@ -64,26 +71,12 @@ export default function LoginPage() {
             <button
               type="submit"
               disabled={pending}
-              className="w-full flex-1 py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-emerald-600 hover:bg-emerald-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-emerald-500 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+              className="w-full py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-emerald-600 hover:bg-emerald-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-emerald-500 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
             >
-              {pending ? "Logging in..." : "Log in"}
+              {pending ? "Updating password..." : "Update password"}
             </button>
           </div>
-          <div className="flex items-center justify-between">
-            <Link
-              href="/partners/forgot-password"
-              className="text-sm font-medium text-emerald-600 hover:text-emerald-500"
-            >
-              Forgot password?
-            </Link>
-          </div>
         </form>
-        <Link
-          className="text-sm font-medium text-emerald-600 hover:text-emerald-500"
-          href="/partners/apply"
-        >
-          No account? Apply here to become a partner
-        </Link>
       </div>
     </div>
   );

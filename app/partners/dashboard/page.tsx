@@ -7,6 +7,8 @@ import {
   ClipboardDocumentListIcon,
   ChartBarIcon,
 } from "@heroicons/react/24/outline";
+import { getTrainingCourses } from "@/sanity/accessData/getTrainingCoursesData";
+import CoursePricingTable from "@/components/CoursePricingTable";
 
 export default async function PartnerDashboard() {
   const supabase = await createClient();
@@ -45,6 +47,9 @@ export default async function PartnerDashboard() {
   if (ordersError) {
     console.error("Error fetching orders:", ordersError);
   }
+
+  // Fetch all training courses for pricing table
+  const courses = await getTrainingCourses();
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -158,6 +163,11 @@ export default async function PartnerDashboard() {
               </div>
             </div>
           </div>
+        </div>
+
+        {/* Course Pricing Table */}
+        <div className="mb-8">
+          <CoursePricingTable courses={courses} />
         </div>
 
         {/* Recent Activity */}
