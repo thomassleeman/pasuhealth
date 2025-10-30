@@ -78,9 +78,12 @@ export async function submitPartnerApplication(formData: FormData) {
 
     // Handle validation errors
     if (error instanceof z.ZodError) {
+      // Get the first validation error message
+      const firstError = error.errors[0];
       return {
         success: false,
-        error: "Please check your form entries and try again",
+        error: firstError.message,
+        fieldErrors: error.flatten().fieldErrors,
       };
     }
 

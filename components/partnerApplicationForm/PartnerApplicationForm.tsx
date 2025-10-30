@@ -5,6 +5,10 @@ import { SubmitButton } from "./SubmitButton";
 import { submitPartnerApplication } from "@/app/actions/partnerApplication";
 import { useRouter } from "next/navigation";
 
+type FieldErrors = {
+  [key: string]: string[] | undefined;
+};
+
 // Main form component
 export function PartnerApplicationForm({
   success: initialSuccess,
@@ -17,6 +21,7 @@ export function PartnerApplicationForm({
   const [formState, setFormState] = useState({
     success: initialSuccess,
     error: initialError,
+    fieldErrors: {} as FieldErrors,
   });
 
   async function handleSubmit(formData: FormData) {
@@ -25,11 +30,15 @@ export function PartnerApplicationForm({
     if (result.success) {
       // Update URL to show success
       router.push("/partners/apply?success=true");
-      setFormState({ success: true, error: undefined });
+      setFormState({ success: true, error: undefined, fieldErrors: {} });
     } else {
       // Update URL to show error
       router.push(`/partners/apply?error=${encodeURIComponent(result.error || "")}`);
-      setFormState({ success: false, error: result.error });
+      setFormState({
+        success: false,
+        error: result.error,
+        fieldErrors: result.fieldErrors || {},
+      });
     }
   }
 
@@ -46,9 +55,18 @@ export function PartnerApplicationForm({
             id="name"
             name="name"
             type="text"
-            className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md"
+            className={`mt-1 block w-full px-3 py-2 border rounded-md ${
+              formState.fieldErrors.name
+                ? "border-red-500"
+                : "border-gray-300"
+            }`}
             required
           />
+          {formState.fieldErrors.name && (
+            <p className="mt-1 text-sm text-red-600">
+              {formState.fieldErrors.name[0]}
+            </p>
+          )}
         </div>
 
         <div>
@@ -59,9 +77,18 @@ export function PartnerApplicationForm({
             id="email"
             name="email"
             type="email"
-            className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md"
+            className={`mt-1 block w-full px-3 py-2 border rounded-md ${
+              formState.fieldErrors.email
+                ? "border-red-500"
+                : "border-gray-300"
+            }`}
             required
           />
+          {formState.fieldErrors.email && (
+            <p className="mt-1 text-sm text-red-600">
+              {formState.fieldErrors.email[0]}
+            </p>
+          )}
         </div>
 
         <div>
@@ -72,9 +99,18 @@ export function PartnerApplicationForm({
             id="phone"
             name="phone"
             type="tel"
-            className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md"
+            className={`mt-1 block w-full px-3 py-2 border rounded-md ${
+              formState.fieldErrors.phone
+                ? "border-red-500"
+                : "border-gray-300"
+            }`}
             required
           />
+          {formState.fieldErrors.phone && (
+            <p className="mt-1 text-sm text-red-600">
+              {formState.fieldErrors.phone[0]}
+            </p>
+          )}
         </div>
 
         <div>
@@ -85,8 +121,17 @@ export function PartnerApplicationForm({
             id="companyName"
             name="companyName"
             type="text"
-            className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md"
+            className={`mt-1 block w-full px-3 py-2 border rounded-md ${
+              formState.fieldErrors.companyName
+                ? "border-red-500"
+                : "border-gray-300"
+            }`}
           />
+          {formState.fieldErrors.companyName && (
+            <p className="mt-1 text-sm text-red-600">
+              {formState.fieldErrors.companyName[0]}
+            </p>
+          )}
         </div>
 
         <div>
@@ -94,15 +139,24 @@ export function PartnerApplicationForm({
             Description *
           </label>
           <p className="text-sm text-gray-600 mt-1 mb-2">
-            Please provide a short description of what you do
+            Please provide a short description of what you do (minimum 10 characters)
           </p>
           <textarea
             id="description"
             name="description"
             rows={5}
-            className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md"
+            className={`mt-1 block w-full px-3 py-2 border rounded-md ${
+              formState.fieldErrors.description
+                ? "border-red-500"
+                : "border-gray-300"
+            }`}
             required
           ></textarea>
+          {formState.fieldErrors.description && (
+            <p className="mt-1 text-sm text-red-600">
+              {formState.fieldErrors.description[0]}
+            </p>
+          )}
         </div>
 
         <SubmitButton />
