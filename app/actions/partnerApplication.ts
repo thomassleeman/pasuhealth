@@ -2,6 +2,7 @@
 
 import { z } from "zod";
 import { Resend } from "resend";
+import { createClient } from "@/utils/supabase/server";
 
 // Initialize Resend
 const resend = new Resend(process.env.RESEND_API_KEY);
@@ -27,6 +28,54 @@ export async function submitPartnerApplication(formData: FormData) {
       companyName: formData.get("companyName"),
       description: formData.get("description"),
     });
+
+    const supabase = await createClient();
+
+    // Check if email already has an existing partner account
+    const { data: existingUser, error: userCheckError } = await supabase.rpc(
+      'check_email_exists',
+      { email_to_check: validatedFields.email }
+    );
+
+    if (userCheckError) {
+      console.error("Error checking for existing user:", userCheckError);
+      // Continue with application even if check fails - better than blocking legitimate users
+    } else if (existingUser) {
+      return {
+        success: false,
+        error: "An account with this email address already exists. Please log in to your partner account.",
+      };
+    }
+
+    // Check if there's already a pending or approved application with this email
+    const { data: existingApplication, error: appCheckError } = await supabase
+      .from("partner_applications")
+      .select("id, status")
+      .eq("email", validatedFields.email)
+      .in("status", ["pending", "approved"])
+      .maybeSingle();
+
+    if (appCheckError && appCheckError.code !== "PGRST116") {
+      console.error("Error checking for existing application:", appCheckError);
+      return {
+        success: false,
+        error: "Failed to process application. Please try again.",
+      };
+    }
+
+    if (existingApplication) {
+      if (existingApplication.status === "pending") {
+        return {
+          success: false,
+          error: "You already have a pending application. Please wait for admin review.",
+        };
+      } else if (existingApplication.status === "approved") {
+        return {
+          success: false,
+          error: "Your application has been approved. Please check your email for the invite code to create your account.",
+        };
+      }
+    }
 
     // Prepare email content
     const htmlContent = `
@@ -55,7 +104,29 @@ export async function submitPartnerApplication(formData: FormData) {
       ${validatedFields.description}
     `;
 
-    // Send email with Resend
+    // Save application to database
+    const { data: application, error: dbError } = await supabase
+      .from("partner_applications")
+      .insert({
+        name: validatedFields.name,
+        email: validatedFields.email,
+        phone: validatedFields.phone,
+        company_name: validatedFields.companyName || null,
+        description: validatedFields.description,
+        status: "pending",
+      })
+      .select()
+      .single();
+
+    if (dbError) {
+      console.error("Database error:", dbError);
+      return {
+        success: false,
+        error: "Failed to save application. Please try again.",
+      };
+    }
+
+    // Send email notification with Resend
     const response = await resend.emails.send({
       from: "Partner Application <contact@pasuhealth.com>",
       to: process.env.CONTACT_EMAIL as string,
@@ -67,11 +138,15 @@ export async function submitPartnerApplication(formData: FormData) {
     // Check for error in the response
     if (response.error) {
       console.error("Resend error:", response.error);
-      return { success: false, error: response.error.message };
+      // Application is saved, so we still return success but log the email error
+      console.error(
+        "Application saved but email notification failed:",
+        response.error
+      );
     }
 
-    // Return success
-    return { success: true };
+    // Return success with application ID
+    return { success: true, applicationId: application.id };
   } catch (error) {
     // Log the actual error for debugging
     console.error("Partner application form error:", error);

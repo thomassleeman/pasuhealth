@@ -4,6 +4,7 @@ import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 
 import { createClient } from "@/utils/supabase/server";
+import { validateInviteCode } from "@/lib/partnerInviteCode";
 
 export async function login(
   prevState: { error: string } | null,
@@ -51,11 +52,26 @@ export async function signup(
   const password = formData.get("password") as string;
   const firstName = formData.get("first_name") as string;
   const lastName = formData.get("last_name") as string;
+  const inviteCode = formData.get("invite_code") as string;
 
   // Basic validation
   if (!email || !password || !firstName || !lastName) {
     return {
       error: "All fields are required",
+    };
+  }
+
+  if (!inviteCode) {
+    return {
+      error: "Invite code is required",
+    };
+  }
+
+  // Validate invite code
+  const codeValidation = validateInviteCode(inviteCode, email);
+  if (!codeValidation.valid) {
+    return {
+      error: codeValidation.error || "Invalid invite code",
     };
   }
 

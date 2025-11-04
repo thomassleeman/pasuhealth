@@ -81,6 +81,25 @@ export default function SignUpPage() {
                 placeholder="••••••••"
               />
             </div>
+            <div>
+              <label
+                htmlFor="invite-code"
+                className="block text-sm font-medium text-gray-700 mb-1"
+              >
+                Invite Code
+              </label>
+              <input
+                id="invite-code"
+                name="invite_code"
+                type="text"
+                required
+                className="appearance-none relative block w-full px-3 py-2 border border-gray-300 rounded-md placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-emerald-500 focus:border-emerald-500 focus:z-10 sm:text-sm"
+                placeholder="PASU-XXXX-XXXX-XXXX"
+              />
+              <p className="text-xs text-gray-500 mt-1">
+                Enter the invite code sent to your email after approval
+              </p>
+            </div>
           </div>
 
           {state?.error && (

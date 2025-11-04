@@ -148,3 +148,9 @@ The RiskChecker component uses complex state management with multiple assessment
 - Update progress calculation in `calculateProgress()` utility
 - Ensure all question types have corresponding risk calculations
 - Preserve PDF generation compatibility
+
+## Don't make these mistakes!
+
+### Forgetting to escape apostrophes
+
+when writing JSX always use '&apos;' instead of ' to avoid rendering issues in production.
