@@ -71,8 +71,14 @@ export function validateInviteCode(
   providedEmail: string
 ): InviteCodeValidation {
   try {
-    // Remove PASU- prefix and dashes
-    const cleanCode = code.replace(/PASU-/gi, "").replace(/-/g, "");
+    // Remove PASU- prefix
+    const withoutPrefix = code.replace(/PASU-/gi, "");
+
+    // Remove formatting dashes while preserving content dashes
+    // When formatted code has "--", it means one dash is formatting and one is content
+    // Split by dash creates empty strings where there were consecutive dashes
+    const dashParts = withoutPrefix.split("-");
+    const cleanCode = dashParts.map(part => part === "" ? "-" : part).join("");
 
     // Split into payload and signature
     const parts = cleanCode.split(".");
@@ -182,7 +188,13 @@ export function decodeInviteCode(code: string): {
   expiresAt: Date;
 } | null {
   try {
-    const cleanCode = code.replace(/PASU-/gi, "").replace(/-/g, "");
+    // Remove PASU- prefix
+    const withoutPrefix = code.replace(/PASU-/gi, "");
+
+    // Remove formatting dashes while preserving content dashes
+    const dashParts = withoutPrefix.split("-");
+    const cleanCode = dashParts.map(part => part === "" ? "-" : part).join("");
+
     const parts = cleanCode.split(".");
     if (parts.length !== 2) return null;
 
