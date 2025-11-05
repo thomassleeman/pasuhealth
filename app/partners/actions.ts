@@ -38,6 +38,25 @@ export async function login(
     };
   }
 
+  // Check if user is an admin
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+
+  if (user && user.email) {
+    const { data: admin } = await supabase
+      .from("admins")
+      .select("email")
+      .eq("email", user.email)
+      .single();
+
+    // Redirect admins to /admin, others to /partners/dashboard
+    revalidatePath("/", "layout");
+    if (admin) {
+      redirect("/admin");
+    }
+  }
+
   revalidatePath("/", "layout");
   redirect("/partners/dashboard");
 }
@@ -67,11 +86,61 @@ export async function signup(
     };
   }
 
-  // Validate invite code
+  // Validate invite code cryptographically
   const codeValidation = validateInviteCode(inviteCode, email);
   if (!codeValidation.valid) {
+    // Log validation failure details in development
+    if (process.env.NODE_ENV === "development") {
+      console.error("Invite code validation failed:", {
+        inviteCode,
+        email,
+        error: codeValidation.error,
+      });
+    }
     return {
       error: codeValidation.error || "Invalid invite code",
+    };
+  }
+
+  // Check invite code against database
+  const { data: application, error: dbError } = await supabase
+    .from("partner_applications")
+    .select("*")
+    .eq("email", email.toLowerCase().trim())
+    .eq("status", "approved")
+    .single();
+
+  if (dbError || !application) {
+    return {
+      error: "Invalid invite code or application not found",
+    };
+  }
+
+  // Verify the invite code matches (normalize both codes by removing PASU- and dashes)
+  const normalizeCode = (code: string) =>
+    code.replace(/PASU-/gi, "").replace(/-/g, "").toUpperCase();
+
+  if (normalizeCode(application.invite_code) !== normalizeCode(inviteCode)) {
+    return {
+      error: "Invalid invite code",
+    };
+  }
+
+  // Check if code has expired (database check)
+  if (application.code_expires_at) {
+    const expiryDate = new Date(application.code_expires_at);
+    const now = new Date();
+    if (now > expiryDate) {
+      return {
+        error: "This invite code has expired. Please contact PASU Health for a new code",
+      };
+    }
+  }
+
+  // Check if code has already been used
+  if (application.code_used_at) {
+    return {
+      error: "This invite code has already been used",
     };
   }
 
@@ -95,6 +164,20 @@ export async function signup(
     return {
       error: error.message,
     };
+  }
+
+  // Mark invite code as used
+  const { error: updateError } = await supabase
+    .from("partner_applications")
+    .update({
+      code_used_at: new Date().toISOString(),
+    })
+    .eq("id", application.id);
+
+  if (updateError) {
+    console.error("Failed to mark invite code as used:", updateError);
+    // Don't fail the signup if we can't update the application
+    // The user account has been created successfully
   }
 
   // Redirect to a confirmation page instead of partners dashboard

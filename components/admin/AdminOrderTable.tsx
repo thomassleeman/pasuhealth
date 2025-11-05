@@ -38,17 +38,17 @@ export function AdminOrderTable({
   const handleFilterChange = (status: string) => {
     setStatusFilter(status);
     const params = new URLSearchParams();
-    if (status !== "all") params.set("status", status);
-    if (searchQuery) params.set("search", searchQuery);
-    router.push(`/admin/partner-orders?${params.toString()}`);
+    if (status !== "all") params.set("orderStatus", status);
+    if (searchQuery) params.set("orderSearch", searchQuery);
+    router.push(`/admin?${params.toString()}`);
   };
 
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
     const params = new URLSearchParams();
-    if (statusFilter !== "all") params.set("status", statusFilter);
-    if (searchQuery) params.set("search", searchQuery);
-    router.push(`/admin/partner-orders?${params.toString()}`);
+    if (statusFilter !== "all") params.set("orderStatus", statusFilter);
+    if (searchQuery) params.set("orderSearch", searchQuery);
+    router.push(`/admin?${params.toString()}`);
   };
 
   const statusColors = {

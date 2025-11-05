@@ -42,6 +42,18 @@ export async function middleware(request: NextRequest) {
       request.nextUrl.pathname === "/partners/sign-up" ||
       request.nextUrl.pathname === "/partners/apply")
   ) {
+    // Check if user is an admin
+    const { data: admin } = await supabase
+      .from("admins")
+      .select("email")
+      .eq("email", user.email)
+      .single();
+
+    // Redirect admins to /admin, others to /partners/dashboard
+    if (admin) {
+      return NextResponse.redirect(new URL("/admin", request.url));
+    }
+
     return NextResponse.redirect(
       new URL("/partners/dashboard", request.url)
     );

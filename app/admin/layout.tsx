@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { redirect } from "next/navigation";
 import { isAdmin } from "@/lib/adminAuth";
+import { LogoutButton } from "@/components/LogoutButton";
 
 export default async function AdminLayout({
   children,
@@ -21,25 +22,9 @@ export default async function AdminLayout({
           <div className="flex items-center justify-between h-16">
             <div className="flex items-center space-x-8">
               <div className="flex-shrink-0">
-                <Link href="/" className="text-xl font-bold">
+                <Link href="/admin" className="text-xl font-bold">
                   PASU Health Admin
                 </Link>
-              </div>
-              <div className="hidden md:block">
-                <div className="flex items-baseline space-x-4">
-                  <Link
-                    href="/admin/partner-orders"
-                    className="px-3 py-2 rounded-md text-sm font-medium hover:bg-emerald-700 transition-colors"
-                  >
-                    Partner Orders
-                  </Link>
-                  <Link
-                    href="/admin/partner-applications"
-                    className="px-3 py-2 rounded-md text-sm font-medium hover:bg-emerald-700 transition-colors"
-                  >
-                    Partner Applications
-                  </Link>
-                </div>
               </div>
             </div>
             <div className="flex items-center space-x-4">
@@ -49,6 +34,7 @@ export default async function AdminLayout({
               >
                 Back to Site
               </Link>
+              <LogoutButton />
             </div>
           </div>
         </div>

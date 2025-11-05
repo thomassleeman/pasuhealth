@@ -71,8 +71,11 @@ export function validateInviteCode(
   providedEmail: string
 ): InviteCodeValidation {
   try {
-    // Remove PASU- prefix and dashes
-    const cleanCode = code.replace(/PASU-/gi, "").replace(/-/g, "");
+    // Remove PASU- prefix and dashes, then restore the dot separator
+    const cleanCode = code
+      .replace(/PASU-/gi, "")
+      .replace(/-/g, "")
+      .replace("::", ".");
 
     // Split into payload and signature
     const parts = cleanCode.split(".");
@@ -109,6 +112,18 @@ export function validateInviteCode(
       providedSigBuffer.length !== expectedSigBuffer.length ||
       !timingSafeEqual(providedSigBuffer, expectedSigBuffer)
     ) {
+      // Log signature mismatch details in development
+      if (process.env.NODE_ENV === "development") {
+        console.error("Signature verification failed:", {
+          payload,
+          embeddedEmail,
+          providedEmail,
+          expiryTimestamp: expiryTimestampStr,
+          providedSignature,
+          expectedSignature,
+          secretDefined: !!SECRET,
+        });
+      }
       return {
         valid: false,
         error: "Invalid invite code signature",
@@ -153,18 +168,23 @@ export function validateInviteCode(
 
 /**
  * Formats a code string with PASU- prefix and dashes for readability
+ * Uses a special delimiter (::) to separate payload and signature to avoid
+ * conflicts with base64url characters (which can contain hyphens)
  *
- * @param code - Raw code string
+ * @param code - Raw code string (payload.signature)
  * @returns Formatted code (e.g., "PASU-XXXX-XXXX-XXXX")
  */
 function formatInviteCode(code: string): string {
+  // Replace the dot separator with a special delimiter that won't be confused with base64url
+  const codeWithDelimiter = code.replace(".", "::");
+
   // Add PASU- prefix
   let formatted = "PASU-";
 
   // Add dashes every 4 characters
-  for (let i = 0; i < code.length; i += 4) {
+  for (let i = 0; i < codeWithDelimiter.length; i += 4) {
     if (i > 0) formatted += "-";
-    formatted += code.substring(i, i + 4);
+    formatted += codeWithDelimiter.substring(i, i + 4);
   }
 
   return formatted;
@@ -182,7 +202,10 @@ export function decodeInviteCode(code: string): {
   expiresAt: Date;
 } | null {
   try {
-    const cleanCode = code.replace(/PASU-/gi, "").replace(/-/g, "");
+    const cleanCode = code
+      .replace(/PASU-/gi, "")
+      .replace(/-/g, "")
+      .replace("::", ".");
     const parts = cleanCode.split(".");
     if (parts.length !== 2) return null;
 

@@ -154,3 +154,14 @@ The RiskChecker component uses complex state management with multiple assessment
 ### Forgetting to escape apostrophes
 
 when writing JSX always use '&apos;' instead of ' to avoid rendering issues in production.
+
+### Creating duplicate code when existing implementations are available
+
+Before creating new components, actions, or utilities, ALWAYS search for existing implementations first:
+
+- Use Grep or Glob to search for similar components, functions, or patterns
+- Check `components/` for reusable UI components
+- Check `app/actions/` and `app/*/actions.ts` for existing server actions
+- Look for similar functionality in related features (e.g., if adding admin features, check partner features for reusable patterns)
+- Reuse and adapt existing code rather than duplicating functionality
+- This maintains consistency, reduces code duplication, and ensures patterns are followed across the codebase
