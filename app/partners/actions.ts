@@ -69,14 +69,27 @@ export async function signup(
 
   const email = formData.get("email") as string;
   const password = formData.get("password") as string;
+  const confirmPassword = formData.get("confirm_password") as string;
   const firstName = formData.get("first_name") as string;
   const lastName = formData.get("last_name") as string;
   const inviteCode = formData.get("invite_code") as string;
 
   // Basic validation
-  if (!email || !password || !firstName || !lastName) {
+  if (!email || !password || !confirmPassword || !firstName || !lastName) {
     return {
       error: "All fields are required",
+    };
+  }
+
+  if (password !== confirmPassword) {
+    return {
+      error: "Passwords do not match",
+    };
+  }
+
+  if (password.length < 6) {
+    return {
+      error: "Password must be at least 6 characters long",
     };
   }
 
