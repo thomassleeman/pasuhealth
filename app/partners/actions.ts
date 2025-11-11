@@ -83,6 +83,7 @@ export async function signup(
         first_name: firstName,
         last_name: lastName,
       },
+      emailRedirectTo: `${process.env.NEXT_PUBLIC_SITE_URL}/auth/callback?next=/partners/dashboard`,
     },
   });
 
