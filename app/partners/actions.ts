@@ -161,6 +161,7 @@ export async function signup(
     email,
     password,
     options: {
+      emailRedirectTo: `${process.env.NEXT_PUBLIC_SITE_URL}/auth/callback?next=/partners/dashboard`,
       data: {
         first_name: firstName,
         last_name: lastName,
