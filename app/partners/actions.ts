@@ -157,11 +157,27 @@ export async function signup(
     };
   }
 
+  // Construct the redirect URL
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL;
+  const emailRedirectTo = siteUrl
+    ? `${siteUrl}/auth/callback?next=/partners/dashboard`
+    : undefined;
+
+  // Log the configuration in development
+  if (process.env.NODE_ENV === "development") {
+    console.log("Signup configuration:", {
+      email,
+      siteUrl,
+      emailRedirectTo,
+      hasPassword: !!password,
+    });
+  }
+
   const { error } = await supabase.auth.signUp({
     email,
     password,
     options: {
-      emailRedirectTo: `${process.env.NEXT_PUBLIC_SITE_URL}/auth/callback?next=/partners/dashboard`,
+      emailRedirectTo,
       data: {
         first_name: firstName,
         last_name: lastName,
@@ -172,7 +188,13 @@ export async function signup(
   if (error) {
     // Log detailed error in development
     if (process.env.NODE_ENV === "development") {
-      console.error("Signup error:", error);
+      console.error("Signup error:", {
+        message: error.message,
+        status: error.status,
+        name: error.name,
+        emailRedirectTo,
+        siteUrl,
+      });
     }
 
     return {
