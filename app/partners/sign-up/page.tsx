@@ -9,13 +9,16 @@ export default function SignUpPage() {
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-amber-50 px-4">
-      <div className="max-w-md w-full space-y-8">
+      <div className="max-w-md w-full space-y-8 mt-6 mb-18">
         <div>
           <h2 className="text-center text-3xl font-bold text-gray-900">
             Create a new Pasu Health partner account
           </h2>
         </div>
-        <form action={formAction} className="mt-8 space-y-6 bg-white p-8 rounded-lg shadow-md">
+        <form
+          action={formAction}
+          className="mt-8 space-y-6 bg-white p-8 rounded-lg shadow-md"
+        >
           <div className="space-y-4">
             <div>
               <label
