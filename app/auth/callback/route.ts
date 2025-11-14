@@ -10,6 +10,31 @@ export async function GET(request: Request) {
     const supabase = await createClient();
     const { error } = await supabase.auth.exchangeCodeForSession(code);
     if (!error) {
+      // Get the authenticated user
+      const { data: { user } } = await supabase.auth.getUser();
+
+      if (user) {
+        // Check if this is a partner signup by looking at the next parameter
+        if (next.includes('/partners/dashboard')) {
+          // Create partner record if it doesn't exist
+          const { error: partnerError } = await supabase
+            .from("partners")
+            .insert({
+              user_id: user.id,
+              email: user.email,
+              first_name: user.user_metadata?.first_name,
+              last_name: user.user_metadata?.last_name,
+            })
+            .select()
+            .single();
+
+          // Log errors in development but don't block the redirect
+          if (partnerError && process.env.NODE_ENV === "development") {
+            console.error("Error creating partner record:", partnerError);
+          }
+        }
+      }
+
       const forwardedHost = request.headers.get("x-forwarded-host");
       const isLocalEnv = process.env.NODE_ENV === "development";
       if (isLocalEnv) {
